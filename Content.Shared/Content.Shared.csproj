@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Content.Shared</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>15.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="Robust.Shared" />
+    <Reference Include="Robust.Shared.Maths" />
+    <Reference Include="SpaceWizards.Lidgren.Network" />
+    <Reference Include="Content.Shared.Database">
+      <HintPath>..\..\SS14_VFS_Dump_20260624_230444\Content.Shared.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet" />
+  </ItemGroup>
+</Project>

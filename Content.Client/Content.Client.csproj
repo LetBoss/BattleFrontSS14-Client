@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Content.Client</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>15.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Content.Client.Resources.ProfileCache.7c62eb27732d0be0841196aa25bbd40f9a0cc4b3fdfdfff7b5d6268971f945ab.bin" />
+    <EmbeddedResource Include="Content.Client.Resources.ProfileCache.7c62eb27732d0be0841196aa25bbd40f9a0cc4b3fdfdfff7b5d6268971f945ab.bin" LogicalName="Content.Client.Resources.ProfileCache.7c62eb27732d0be0841196aa25bbd40f9a0cc4b3fdfdfff7b5d6268971f945ab.bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Robust.Client" />
+    <Reference Include="Robust.Shared.Maths" />
+    <Reference Include="Robust.Shared" />
+    <Reference Include="Content.Shared">
+      <HintPath>..\SS14_VFS_Dump_20260624_230444\Content.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.ImageSharp" />
+    <Reference Include="Content.Shared.Database">
+      <HintPath>..\SS14_VFS_Dump_20260624_230444\Content.Shared.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Nett" />
+    <Reference Include="Robust.Shared.AuthLib" />
+    <Reference Include="Pidgin" />
+    <Reference Include="YamlDotNet" />
+    <Reference Include="Robust.NetSerializer" />
+  </ItemGroup>
+</Project>

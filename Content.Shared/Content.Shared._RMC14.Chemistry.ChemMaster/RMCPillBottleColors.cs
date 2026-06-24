@@ -1,0 +1,23 @@
+using System;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared._RMC14.Chemistry.ChemMaster;
+
+[Serializable]
+[NetSerializable]
+public enum RMCPillBottleColors
+{
+	Orange,
+	Blue,
+	Yellow,
+	LightPurple,
+	LightGrey,
+	White,
+	LightGreen,
+	Cyan,
+	Pink,
+	Aquamarine,
+	Grey,
+	Red,
+	Black
+}

@@ -1,0 +1,135 @@
+using System;
+using Content.Shared.Chemistry.EntitySystems;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Localization;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+
+namespace Content.Shared.Chemistry.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[Access(new Type[] { typeof(SolutionSpikerSystem) })]
+public sealed class SolutionSpikerComponent : Component, ISerializationGenerated<SolutionSpikerComponent>, ISerializationGenerated
+{
+	[DataField(null, false, 1, true, false, null)]
+	public string SourceSolution = string.Empty;
+
+	[DataField(null, false, 1, false, false, null)]
+	public bool IgnoreEmpty;
+
+	[DataField(null, false, 1, false, false, null)]
+	public bool Delete = true;
+
+	[DataField(null, false, 1, false, false, null)]
+	public LocId Popup = LocId.op_Implicit("spike-solution-generic");
+
+	[DataField(null, false, 1, false, false, null)]
+	public LocId PopupEmpty = LocId.op_Implicit("spike-solution-empty-generic");
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public void InternalCopy(ref SolutionSpikerComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00a5: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00ad: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00d3: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00d5: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00dc: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00e4: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00c1: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00ca: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00cf: Unknown result type (might be due to invalid IL or missing references)
+		//IL_010a: Unknown result type (might be due to invalid IL or missing references)
+		//IL_010c: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00f8: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0101: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0106: Unknown result type (might be due to invalid IL or missing references)
+		Component definitionCast = (Component)(object)target;
+		((Component)this).InternalCopy(ref definitionCast, serialization, hookCtx, context);
+		target = (SolutionSpikerComponent)(object)definitionCast;
+		if (!serialization.TryCustomCopy<SolutionSpikerComponent>(this, ref target, hookCtx, false, context))
+		{
+			string SourceSolutionTemp = null;
+			if (SourceSolution == null)
+			{
+				throw new NullNotAllowedException();
+			}
+			if (!serialization.TryCustomCopy<string>(SourceSolution, ref SourceSolutionTemp, hookCtx, false, context))
+			{
+				SourceSolutionTemp = SourceSolution;
+			}
+			target.SourceSolution = SourceSolutionTemp;
+			bool IgnoreEmptyTemp = false;
+			if (!serialization.TryCustomCopy<bool>(IgnoreEmpty, ref IgnoreEmptyTemp, hookCtx, false, context))
+			{
+				IgnoreEmptyTemp = IgnoreEmpty;
+			}
+			target.IgnoreEmpty = IgnoreEmptyTemp;
+			bool DeleteTemp = false;
+			if (!serialization.TryCustomCopy<bool>(Delete, ref DeleteTemp, hookCtx, false, context))
+			{
+				DeleteTemp = Delete;
+			}
+			target.Delete = DeleteTemp;
+			LocId PopupTemp = default(LocId);
+			if (!serialization.TryCustomCopy<LocId>(Popup, ref PopupTemp, hookCtx, false, context))
+			{
+				PopupTemp = serialization.CreateCopy<LocId>(Popup, hookCtx, context, false);
+			}
+			target.Popup = PopupTemp;
+			LocId PopupEmptyTemp = default(LocId);
+			if (!serialization.TryCustomCopy<LocId>(PopupEmpty, ref PopupEmptyTemp, hookCtx, false, context))
+			{
+				PopupEmptyTemp = serialization.CreateCopy<LocId>(PopupEmpty, hookCtx, context, false);
+			}
+			target.PopupEmpty = PopupEmptyTemp;
+		}
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public void Copy(ref SolutionSpikerComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		InternalCopy(ref target, serialization, hookCtx, context);
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void Copy(ref Component target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		SolutionSpikerComponent cast = (SolutionSpikerComponent)(object)target;
+		Copy(ref cast, serialization, hookCtx, context);
+		target = (Component)(object)cast;
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void Copy(ref object target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		SolutionSpikerComponent cast = (SolutionSpikerComponent)target;
+		Copy(ref cast, serialization, hookCtx, context);
+		target = cast;
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void InternalCopy(ref IComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		SolutionSpikerComponent def = (SolutionSpikerComponent)(object)target;
+		Copy(ref def, serialization, hookCtx, context);
+		target = (IComponent)(object)def;
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void Copy(ref IComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		((Component)this).InternalCopy(ref target, serialization, hookCtx, context);
+	}
+
+	[Obsolete("Use ISerializationManager.CreateCopy instead")]
+	public override SolutionSpikerComponent Instantiate()
+	{
+		return new SolutionSpikerComponent();
+	}
+}

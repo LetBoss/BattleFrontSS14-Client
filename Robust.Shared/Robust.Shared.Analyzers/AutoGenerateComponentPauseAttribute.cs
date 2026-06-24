@@ -1,0 +1,9 @@
+using System;
+
+namespace Robust.Shared.Analyzers;
+
+[AttributeUsage(AttributeTargets.Class, Inherited = false)]
+public sealed class AutoGenerateComponentPauseAttribute : Attribute
+{
+	public bool Dirty;
+}

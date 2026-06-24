@@ -1,0 +1,73 @@
+using System;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+
+namespace Content.Shared.Anomaly.Effects.Components;
+
+[RegisterComponent]
+public sealed class PyroclasticAnomalyComponent : Component, ISerializationGenerated<PyroclasticAnomalyComponent>, ISerializationGenerated
+{
+	[DataField("maximumIgnitionRadius", false, 1, false, false, null)]
+	public float MaximumIgnitionRadius = 5f;
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public void InternalCopy(ref PyroclasticAnomalyComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		Component definitionCast = (Component)(object)target;
+		((Component)this).InternalCopy(ref definitionCast, serialization, hookCtx, context);
+		target = (PyroclasticAnomalyComponent)(object)definitionCast;
+		if (!serialization.TryCustomCopy<PyroclasticAnomalyComponent>(this, ref target, hookCtx, false, context))
+		{
+			float MaximumIgnitionRadiusTemp = 0f;
+			if (!serialization.TryCustomCopy<float>(MaximumIgnitionRadius, ref MaximumIgnitionRadiusTemp, hookCtx, false, context))
+			{
+				MaximumIgnitionRadiusTemp = MaximumIgnitionRadius;
+			}
+			target.MaximumIgnitionRadius = MaximumIgnitionRadiusTemp;
+		}
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public void Copy(ref PyroclasticAnomalyComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		InternalCopy(ref target, serialization, hookCtx, context);
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void Copy(ref Component target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		PyroclasticAnomalyComponent cast = (PyroclasticAnomalyComponent)(object)target;
+		Copy(ref cast, serialization, hookCtx, context);
+		target = (Component)(object)cast;
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void Copy(ref object target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		PyroclasticAnomalyComponent cast = (PyroclasticAnomalyComponent)target;
+		Copy(ref cast, serialization, hookCtx, context);
+		target = cast;
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void InternalCopy(ref IComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		PyroclasticAnomalyComponent def = (PyroclasticAnomalyComponent)(object)target;
+		Copy(ref def, serialization, hookCtx, context);
+		target = (IComponent)(object)def;
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void Copy(ref IComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		((Component)this).InternalCopy(ref target, serialization, hookCtx, context);
+	}
+
+	[Obsolete("Use ISerializationManager.CreateCopy instead")]
+	public override PyroclasticAnomalyComponent Instantiate()
+	{
+		return new PyroclasticAnomalyComponent();
+	}
+}

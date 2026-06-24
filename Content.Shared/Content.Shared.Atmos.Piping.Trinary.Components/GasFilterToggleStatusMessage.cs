@@ -1,0 +1,17 @@
+using System;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared.Atmos.Piping.Trinary.Components;
+
+[Serializable]
+[NetSerializable]
+public sealed class GasFilterToggleStatusMessage : BoundUserInterfaceMessage
+{
+	public bool Enabled { get; }
+
+	public GasFilterToggleStatusMessage(bool enabled)
+	{
+		Enabled = enabled;
+	}
+}

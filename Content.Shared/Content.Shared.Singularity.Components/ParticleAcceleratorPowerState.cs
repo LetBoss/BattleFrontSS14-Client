@@ -1,0 +1,15 @@
+using System;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared.Singularity.Components;
+
+[Serializable]
+[NetSerializable]
+public enum ParticleAcceleratorPowerState : byte
+{
+	Standby = 1,
+	Level0,
+	Level1,
+	Level2,
+	Level3
+}

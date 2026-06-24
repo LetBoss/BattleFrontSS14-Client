@@ -1,0 +1,17 @@
+using System;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared._CIV14merka.Commander;
+
+[Serializable]
+[NetSerializable]
+public sealed class CivCommanderLabelRemovedEvent : EntityEventArgs
+{
+	public int Id { get; }
+
+	public CivCommanderLabelRemovedEvent(int id)
+	{
+		Id = id;
+	}
+}

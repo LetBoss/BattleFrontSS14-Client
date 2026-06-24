@@ -1,0 +1,36 @@
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Utility;
+
+namespace Content.Shared._PUBG;
+
+[Prototype(null, 1)]
+public sealed class PubgGameMapPrototype : IPrototype
+{
+	[DataField(null, false, 1, true, false, null)]
+	public ResPath MapPath;
+
+	[DataField(null, false, 1, false, false, null)]
+	public int MinPlayers = 1;
+
+	[DataField(null, false, 1, false, false, null)]
+	public string Name = string.Empty;
+
+	[DataField(null, false, 1, false, false, null)]
+	public ZoneSettings? ZoneSettings;
+
+	[DataField(null, false, 1, false, false, null)]
+	public RedZoneSettings? RedZoneSettings;
+
+	[DataField(null, false, 1, false, false, null)]
+	public AirdropSettings? AirdropSettings;
+
+	[DataField(null, false, 1, false, false, null)]
+	public RespawnTowerSettings? RespawnTowerSettings;
+
+	[DataField(null, false, 1, false, false, null)]
+	public ChunkedMapSettings? ChunkSettings;
+
+	[IdDataField(1, null)]
+	public string ID { get; private set; }
+}

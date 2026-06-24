@@ -1,0 +1,232 @@
+using System.Numerics;
+
+namespace Robust.Shared.Audio.Effects;
+
+public static class ReverbPresets
+{
+	public static readonly ReverbProperties Generic = new ReverbProperties(1f, 1f, 0.3162f, 0.8913f, 1f, 1.49f, 0.83f, 1f, 0.05f, 0.007f, new Vector3(0f, 0f, 0f), 1.2589f, 0.011f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties PaddedCell = new ReverbProperties(0.1715f, 1f, 0.3162f, 0.001f, 1f, 0.17f, 0.1f, 1f, 0.25f, 0.001f, new Vector3(0f, 0f, 0f), 1.2691f, 0.002f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Room = new ReverbProperties(0.4287f, 1f, 0.3162f, 0.5929f, 1f, 0.4f, 0.83f, 1f, 0.1503f, 0.002f, new Vector3(0f, 0f, 0f), 1.0629f, 0.003f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Bathroom = new ReverbProperties(0.1715f, 1f, 0.3162f, 0.2512f, 1f, 1.49f, 0.54f, 1f, 0.6531f, 0.007f, new Vector3(0f, 0f, 0f), 3.2734f, 0.011f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties LivingRoom = new ReverbProperties(0.9766f, 1f, 0.3162f, 0.001f, 1f, 0.5f, 0.1f, 1f, 0.2051f, 0.003f, new Vector3(0f, 0f, 0f), 0.2805f, 0.004f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties StoneRoom = new ReverbProperties(1f, 1f, 0.3162f, 0.7079f, 1f, 2.31f, 0.64f, 1f, 0.4411f, 0.012f, new Vector3(0f, 0f, 0f), 1.1003f, 0.017f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Auditorium = new ReverbProperties(1f, 1f, 0.3162f, 0.5781f, 1f, 4.32f, 0.59f, 1f, 0.4032f, 0.02f, new Vector3(0f, 0f, 0f), 0.717f, 0.03f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties ConcertHall = new ReverbProperties(1f, 1f, 0.3162f, 0.5623f, 1f, 3.92f, 0.7f, 1f, 0.2427f, 0.02f, new Vector3(0f, 0f, 0f), 0.9977f, 0.029f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Cave = new ReverbProperties(1f, 1f, 0.3162f, 1f, 1f, 2.91f, 1.3f, 1f, 0.5f, 0.015f, new Vector3(0f, 0f, 0f), 0.7063f, 0.022f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties Arena = new ReverbProperties(1f, 1f, 0.3162f, 0.4477f, 1f, 7.24f, 0.33f, 1f, 0.2612f, 0.02f, new Vector3(0f, 0f, 0f), 1.0186f, 0.03f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Hangar = new ReverbProperties(1f, 1f, 0.3162f, 0.3162f, 1f, 10.05f, 0.23f, 1f, 0.5f, 0.02f, new Vector3(0f, 0f, 0f), 1.256f, 0.03f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties CarpetedHallway = new ReverbProperties(0.4287f, 1f, 0.3162f, 0.01f, 1f, 0.3f, 0.1f, 1f, 0.1215f, 0.002f, new Vector3(0f, 0f, 0f), 0.1531f, 0.03f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Hallway = new ReverbProperties(0.3645f, 1f, 0.3162f, 0.7079f, 1f, 1.49f, 0.59f, 1f, 0.2458f, 0.007f, new Vector3(0f, 0f, 0f), 1.6615f, 0.011f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties StoneCorridor = new ReverbProperties(1f, 1f, 0.3162f, 0.7612f, 1f, 2.7f, 0.79f, 1f, 0.2472f, 0.013f, new Vector3(0f, 0f, 0f), 1.5758f, 0.02f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Alley = new ReverbProperties(1f, 0.3f, 0.3162f, 0.7328f, 1f, 1.49f, 0.86f, 1f, 0.25f, 0.007f, new Vector3(0f, 0f, 0f), 0.9954f, 0.011f, new Vector3(0f, 0f, 0f), 0.125f, 0.95f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Forest = new ReverbProperties(1f, 0.3f, 0.3162f, 0.0224f, 1f, 1.49f, 0.54f, 1f, 0.0525f, 0.162f, new Vector3(0f, 0f, 0f), 0.7682f, 0.088f, new Vector3(0f, 0f, 0f), 0.125f, 1f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties City = new ReverbProperties(1f, 0.5f, 0.3162f, 0.3981f, 1f, 1.49f, 0.67f, 1f, 0.073f, 0.007f, new Vector3(0f, 0f, 0f), 0.1427f, 0.011f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Mountains = new ReverbProperties(1f, 0.27f, 0.3162f, 0.0562f, 1f, 1.49f, 0.21f, 1f, 0.0407f, 0.3f, new Vector3(0f, 0f, 0f), 0.1919f, 0.1f, new Vector3(0f, 0f, 0f), 0.25f, 1f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties Quarry = new ReverbProperties(1f, 1f, 0.3162f, 0.3162f, 1f, 1.49f, 0.83f, 1f, 0f, 0.061f, new Vector3(0f, 0f, 0f), 1.7783f, 0.025f, new Vector3(0f, 0f, 0f), 0.125f, 0.7f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Plain = new ReverbProperties(1f, 0.21f, 0.3162f, 0.1f, 1f, 1.49f, 0.5f, 1f, 0.0585f, 0.179f, new Vector3(0f, 0f, 0f), 0.1089f, 0.1f, new Vector3(0f, 0f, 0f), 0.25f, 1f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties ParkingLot = new ReverbProperties(1f, 1f, 0.3162f, 1f, 1f, 1.65f, 1.5f, 1f, 0.2082f, 0.008f, new Vector3(0f, 0f, 0f), 0.2652f, 0.012f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties Sewerpipe = new ReverbProperties(0.3071f, 0.8f, 0.3162f, 0.3162f, 1f, 2.81f, 0.14f, 1f, 1.6387f, 0.014f, new Vector3(0f, 0f, 0f), 3.2471f, 0.021f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Underwater = new ReverbProperties(0.3645f, 1f, 0.3162f, 0.01f, 1f, 1.49f, 0.1f, 1f, 0.5963f, 0.007f, new Vector3(0f, 0f, 0f), 7.0795f, 0.011f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 1.18f, 0.348f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties Drugged = new ReverbProperties(0.4287f, 0.5f, 0.3162f, 1f, 1f, 8.39f, 1.39f, 1f, 0.876f, 0.002f, new Vector3(0f, 0f, 0f), 3.1081f, 0.03f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 1f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties Dizzy = new ReverbProperties(0.3645f, 0.6f, 0.3162f, 0.631f, 1f, 17.23f, 0.56f, 1f, 0.1392f, 0.02f, new Vector3(0f, 0f, 0f), 0.4937f, 0.03f, new Vector3(0f, 0f, 0f), 0.25f, 1f, 0.81f, 0.31f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties Psychotic = new ReverbProperties(0.0625f, 0.5f, 0.3162f, 0.8404f, 1f, 7.56f, 0.91f, 1f, 0.4864f, 0.02f, new Vector3(0f, 0f, 0f), 2.4378f, 0.03f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 4f, 1f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties CastleSmallRoom = new ReverbProperties(1f, 0.89f, 0.3162f, 0.3981f, 0.1f, 1.22f, 0.83f, 0.31f, 0.8913f, 0.022f, new Vector3(0f, 0f, 0f), 1.9953f, 0.011f, new Vector3(0f, 0f, 0f), 0.138f, 0.08f, 0.25f, 0f, 0.9943f, 5168.6f, 139.5f, 0f, 1);
+
+	public static readonly ReverbProperties CastleShortPassage = new ReverbProperties(1f, 0.89f, 0.3162f, 0.3162f, 0.1f, 2.32f, 0.83f, 0.31f, 0.8913f, 0.007f, new Vector3(0f, 0f, 0f), 1.2589f, 0.023f, new Vector3(0f, 0f, 0f), 0.138f, 0.08f, 0.25f, 0f, 0.9943f, 5168.6f, 139.5f, 0f, 1);
+
+	public static readonly ReverbProperties CastleMediumRoom = new ReverbProperties(1f, 0.93f, 0.3162f, 0.2818f, 0.1f, 2.04f, 0.83f, 0.46f, 0.631f, 0.022f, new Vector3(0f, 0f, 0f), 1.5849f, 0.011f, new Vector3(0f, 0f, 0f), 0.155f, 0.03f, 0.25f, 0f, 0.9943f, 5168.6f, 139.5f, 0f, 1);
+
+	public static readonly ReverbProperties CastleLargeRoom = new ReverbProperties(1f, 0.82f, 0.3162f, 0.2818f, 0.1259f, 2.53f, 0.83f, 0.5f, 0.4467f, 0.034f, new Vector3(0f, 0f, 0f), 1.2589f, 0.016f, new Vector3(0f, 0f, 0f), 0.185f, 0.07f, 0.25f, 0f, 0.9943f, 5168.6f, 139.5f, 0f, 1);
+
+	public static readonly ReverbProperties CastleLongPassage = new ReverbProperties(1f, 0.89f, 0.3162f, 0.3981f, 0.1f, 3.42f, 0.83f, 0.31f, 0.8913f, 0.007f, new Vector3(0f, 0f, 0f), 1.4125f, 0.023f, new Vector3(0f, 0f, 0f), 0.138f, 0.08f, 0.25f, 0f, 0.9943f, 5168.6f, 139.5f, 0f, 1);
+
+	public static readonly ReverbProperties CastleHall = new ReverbProperties(1f, 0.81f, 0.3162f, 0.2818f, 0.1778f, 3.14f, 0.79f, 0.62f, 0.1778f, 0.056f, new Vector3(0f, 0f, 0f), 1.122f, 0.024f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5168.6f, 139.5f, 0f, 1);
+
+	public static readonly ReverbProperties CastleCupboard = new ReverbProperties(1f, 0.89f, 0.3162f, 0.2818f, 0.1f, 0.67f, 0.87f, 0.31f, 1.4125f, 0.01f, new Vector3(0f, 0f, 0f), 3.5481f, 0.007f, new Vector3(0f, 0f, 0f), 0.138f, 0.08f, 0.25f, 0f, 0.9943f, 5168.6f, 139.5f, 0f, 1);
+
+	public static readonly ReverbProperties CastleCourtyard = new ReverbProperties(1f, 0.42f, 0.3162f, 0.4467f, 0.1995f, 2.13f, 0.61f, 0.23f, 0.2239f, 0.16f, new Vector3(0f, 0f, 0f), 0.7079f, 0.036f, new Vector3(0f, 0f, 0f), 0.25f, 0.37f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties CastleAlcove = new ReverbProperties(1f, 0.89f, 0.3162f, 0.5012f, 0.1f, 1.64f, 0.87f, 0.31f, 1f, 0.007f, new Vector3(0f, 0f, 0f), 1.4125f, 0.034f, new Vector3(0f, 0f, 0f), 0.138f, 0.08f, 0.25f, 0f, 0.9943f, 5168.6f, 139.5f, 0f, 1);
+
+	public static readonly ReverbProperties FactorySmallRoom = new ReverbProperties(0.3645f, 0.82f, 0.3162f, 0.7943f, 0.5012f, 1.72f, 0.65f, 1.31f, 0.7079f, 0.01f, new Vector3(0f, 0f, 0f), 1.7783f, 0.024f, new Vector3(0f, 0f, 0f), 0.119f, 0.07f, 0.25f, 0f, 0.9943f, 3762.6f, 362.5f, 0f, 1);
+
+	public static readonly ReverbProperties FactoryShortPassage = new ReverbProperties(0.3645f, 0.64f, 0.2512f, 0.7943f, 0.5012f, 2.53f, 0.65f, 1.31f, 1f, 0.01f, new Vector3(0f, 0f, 0f), 1.2589f, 0.038f, new Vector3(0f, 0f, 0f), 0.135f, 0.23f, 0.25f, 0f, 0.9943f, 3762.6f, 362.5f, 0f, 1);
+
+	public static readonly ReverbProperties FactoryMediumRoom = new ReverbProperties(0.4287f, 0.82f, 0.2512f, 0.7943f, 0.5012f, 2.76f, 0.65f, 1.31f, 0.2818f, 0.022f, new Vector3(0f, 0f, 0f), 1.4125f, 0.023f, new Vector3(0f, 0f, 0f), 0.174f, 0.07f, 0.25f, 0f, 0.9943f, 3762.6f, 362.5f, 0f, 1);
+
+	public static readonly ReverbProperties FactoryLargeRoom = new ReverbProperties(0.4287f, 0.75f, 0.2512f, 0.7079f, 0.631f, 4.24f, 0.51f, 1.31f, 0.1778f, 0.039f, new Vector3(0f, 0f, 0f), 1.122f, 0.023f, new Vector3(0f, 0f, 0f), 0.231f, 0.07f, 0.25f, 0f, 0.9943f, 3762.6f, 362.5f, 0f, 1);
+
+	public static readonly ReverbProperties FactoryLongPassage = new ReverbProperties(0.3645f, 0.64f, 0.2512f, 0.7943f, 0.5012f, 4.06f, 0.65f, 1.31f, 1f, 0.02f, new Vector3(0f, 0f, 0f), 1.2589f, 0.037f, new Vector3(0f, 0f, 0f), 0.135f, 0.23f, 0.25f, 0f, 0.9943f, 3762.6f, 362.5f, 0f, 1);
+
+	public static readonly ReverbProperties FactoryHall = new ReverbProperties(0.4287f, 0.75f, 0.3162f, 0.7079f, 0.631f, 7.43f, 0.51f, 1.31f, 0.0631f, 0.073f, new Vector3(0f, 0f, 0f), 0.8913f, 0.027f, new Vector3(0f, 0f, 0f), 0.25f, 0.07f, 0.25f, 0f, 0.9943f, 3762.6f, 362.5f, 0f, 1);
+
+	public static readonly ReverbProperties FactoryCupboard = new ReverbProperties(0.3071f, 0.63f, 0.2512f, 0.7943f, 0.5012f, 0.49f, 0.65f, 1.31f, 1.2589f, 0.01f, new Vector3(0f, 0f, 0f), 1.9953f, 0.032f, new Vector3(0f, 0f, 0f), 0.107f, 0.07f, 0.25f, 0f, 0.9943f, 3762.6f, 362.5f, 0f, 1);
+
+	public static readonly ReverbProperties FactoryCourtyard = new ReverbProperties(0.3071f, 0.57f, 0.3162f, 0.3162f, 0.631f, 2.32f, 0.29f, 0.56f, 0.2239f, 0.14f, new Vector3(0f, 0f, 0f), 0.3981f, 0.039f, new Vector3(0f, 0f, 0f), 0.25f, 0.29f, 0.25f, 0f, 0.9943f, 3762.6f, 362.5f, 0f, 1);
+
+	public static readonly ReverbProperties FactoryAlcove = new ReverbProperties(0.3645f, 0.59f, 0.2512f, 0.7943f, 0.5012f, 3.14f, 0.65f, 1.31f, 1.4125f, 0.01f, new Vector3(0f, 0f, 0f), 1f, 0.038f, new Vector3(0f, 0f, 0f), 0.114f, 0.1f, 0.25f, 0f, 0.9943f, 3762.6f, 362.5f, 0f, 1);
+
+	public static readonly ReverbProperties IcePalaceSmallRoom = new ReverbProperties(1f, 0.84f, 0.3162f, 0.5623f, 0.2818f, 1.51f, 1.53f, 0.27f, 0.8913f, 0.01f, new Vector3(0f, 0f, 0f), 1.4125f, 0.011f, new Vector3(0f, 0f, 0f), 0.164f, 0.14f, 0.25f, 0f, 0.9943f, 12428.5f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties IcePalaceShortPassage = new ReverbProperties(1f, 0.75f, 0.3162f, 0.5623f, 0.2818f, 1.79f, 1.46f, 0.28f, 0.5012f, 0.01f, new Vector3(0f, 0f, 0f), 1.122f, 0.019f, new Vector3(0f, 0f, 0f), 0.177f, 0.09f, 0.25f, 0f, 0.9943f, 12428.5f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties IcePalaceMediumRoom = new ReverbProperties(1f, 0.87f, 0.3162f, 0.5623f, 0.4467f, 2.22f, 1.53f, 0.32f, 0.3981f, 0.039f, new Vector3(0f, 0f, 0f), 1.122f, 0.027f, new Vector3(0f, 0f, 0f), 0.186f, 0.12f, 0.25f, 0f, 0.9943f, 12428.5f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties IcePalaceLargeRoom = new ReverbProperties(1f, 0.81f, 0.3162f, 0.5623f, 0.4467f, 3.14f, 1.53f, 0.32f, 0.2512f, 0.039f, new Vector3(0f, 0f, 0f), 1f, 0.027f, new Vector3(0f, 0f, 0f), 0.214f, 0.11f, 0.25f, 0f, 0.9943f, 12428.5f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties IcePalaceLongPassage = new ReverbProperties(1f, 0.77f, 0.3162f, 0.5623f, 0.3981f, 3.01f, 1.46f, 0.28f, 0.7943f, 0.012f, new Vector3(0f, 0f, 0f), 1.2589f, 0.025f, new Vector3(0f, 0f, 0f), 0.186f, 0.04f, 0.25f, 0f, 0.9943f, 12428.5f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties IcePalaceHall = new ReverbProperties(1f, 0.76f, 0.3162f, 0.4467f, 0.5623f, 5.49f, 1.53f, 0.38f, 0.1122f, 0.054f, new Vector3(0f, 0f, 0f), 0.631f, 0.052f, new Vector3(0f, 0f, 0f), 0.226f, 0.11f, 0.25f, 0f, 0.9943f, 12428.5f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties IcePalaceCupboard = new ReverbProperties(1f, 0.83f, 0.3162f, 0.5012f, 0.2239f, 0.76f, 1.53f, 0.26f, 1.122f, 0.012f, new Vector3(0f, 0f, 0f), 1.9953f, 0.016f, new Vector3(0f, 0f, 0f), 0.143f, 0.08f, 0.25f, 0f, 0.9943f, 12428.5f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties IcePalaceCourtyard = new ReverbProperties(1f, 0.59f, 0.3162f, 0.2818f, 0.3162f, 2.04f, 1.2f, 0.38f, 0.3162f, 0.173f, new Vector3(0f, 0f, 0f), 0.3162f, 0.043f, new Vector3(0f, 0f, 0f), 0.235f, 0.48f, 0.25f, 0f, 0.9943f, 12428.5f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties IcePalaceAlcove = new ReverbProperties(1f, 0.84f, 0.3162f, 0.5623f, 0.2818f, 2.76f, 1.46f, 0.28f, 1.122f, 0.01f, new Vector3(0f, 0f, 0f), 0.8913f, 0.03f, new Vector3(0f, 0f, 0f), 0.161f, 0.09f, 0.25f, 0f, 0.9943f, 12428.5f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties SpaceStationSmallRoom = new ReverbProperties(0.2109f, 0.7f, 0.3162f, 0.7079f, 0.8913f, 1.72f, 0.82f, 0.55f, 0.7943f, 0.007f, new Vector3(0f, 0f, 0f), 1.4125f, 0.013f, new Vector3(0f, 0f, 0f), 0.188f, 0.26f, 0.25f, 0f, 0.9943f, 3316.1f, 458.2f, 0f, 1);
+
+	public static readonly ReverbProperties SpaceStationShortPassage = new ReverbProperties(0.2109f, 0.87f, 0.3162f, 0.631f, 0.8913f, 3.57f, 0.5f, 0.55f, 1f, 0.012f, new Vector3(0f, 0f, 0f), 1.122f, 0.016f, new Vector3(0f, 0f, 0f), 0.172f, 0.2f, 0.25f, 0f, 0.9943f, 3316.1f, 458.2f, 0f, 1);
+
+	public static readonly ReverbProperties SpaceStationMediumRoom = new ReverbProperties(0.2109f, 0.75f, 0.3162f, 0.631f, 0.8913f, 3.01f, 0.5f, 0.55f, 0.3981f, 0.034f, new Vector3(0f, 0f, 0f), 1.122f, 0.035f, new Vector3(0f, 0f, 0f), 0.209f, 0.31f, 0.25f, 0f, 0.9943f, 3316.1f, 458.2f, 0f, 1);
+
+	public static readonly ReverbProperties SpaceStationLargeRoom = new ReverbProperties(0.3645f, 0.81f, 0.3162f, 0.631f, 0.8913f, 3.89f, 0.38f, 0.61f, 0.3162f, 0.056f, new Vector3(0f, 0f, 0f), 0.8913f, 0.035f, new Vector3(0f, 0f, 0f), 0.233f, 0.28f, 0.25f, 0f, 0.9943f, 3316.1f, 458.2f, 0f, 1);
+
+	public static readonly ReverbProperties SpaceStationLongPassage = new ReverbProperties(0.4287f, 0.82f, 0.3162f, 0.631f, 0.8913f, 4.62f, 0.62f, 0.55f, 1f, 0.012f, new Vector3(0f, 0f, 0f), 1.2589f, 0.031f, new Vector3(0f, 0f, 0f), 0.25f, 0.23f, 0.25f, 0f, 0.9943f, 3316.1f, 458.2f, 0f, 1);
+
+	public static readonly ReverbProperties SpaceStationHall = new ReverbProperties(0.4287f, 0.87f, 0.3162f, 0.631f, 0.8913f, 7.11f, 0.38f, 0.61f, 0.1778f, 0.1f, new Vector3(0f, 0f, 0f), 0.631f, 0.047f, new Vector3(0f, 0f, 0f), 0.25f, 0.25f, 0.25f, 0f, 0.9943f, 3316.1f, 458.2f, 0f, 1);
+
+	public static readonly ReverbProperties SpaceStationCupboard = new ReverbProperties(0.1715f, 0.56f, 0.3162f, 0.7079f, 0.8913f, 0.79f, 0.81f, 0.55f, 1.4125f, 0.007f, new Vector3(0f, 0f, 0f), 1.7783f, 0.018f, new Vector3(0f, 0f, 0f), 0.181f, 0.31f, 0.25f, 0f, 0.9943f, 3316.1f, 458.2f, 0f, 1);
+
+	public static readonly ReverbProperties SpaceStationAlcove = new ReverbProperties(0.2109f, 0.78f, 0.3162f, 0.7079f, 0.8913f, 1.16f, 0.81f, 0.55f, 1.4125f, 0.007f, new Vector3(0f, 0f, 0f), 1f, 0.018f, new Vector3(0f, 0f, 0f), 0.192f, 0.21f, 0.25f, 0f, 0.9943f, 3316.1f, 458.2f, 0f, 1);
+
+	public static readonly ReverbProperties WoodenGalleonSmallRoom = new ReverbProperties(1f, 1f, 0.3162f, 0.1122f, 0.3162f, 0.79f, 0.32f, 0.87f, 1f, 0.032f, new Vector3(0f, 0f, 0f), 0.8913f, 0.029f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 4705f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties WoodenGalleonShortPassage = new ReverbProperties(1f, 1f, 0.3162f, 0.1259f, 0.3162f, 1.75f, 0.5f, 0.87f, 0.8913f, 0.012f, new Vector3(0f, 0f, 0f), 0.631f, 0.024f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 4705f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties WoodenGalleonMediumRoom = new ReverbProperties(1f, 1f, 0.3162f, 0.1f, 0.2818f, 1.47f, 0.42f, 0.82f, 0.8913f, 0.049f, new Vector3(0f, 0f, 0f), 0.8913f, 0.029f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 4705f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties WoodenGalleonLargeRoom = new ReverbProperties(1f, 1f, 0.3162f, 0.0891f, 0.2818f, 2.65f, 0.33f, 0.82f, 0.8913f, 0.066f, new Vector3(0f, 0f, 0f), 0.7943f, 0.049f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 4705f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties WoodenGalleonLongPassage = new ReverbProperties(1f, 1f, 0.3162f, 0.1f, 0.3162f, 1.99f, 0.4f, 0.79f, 1f, 0.02f, new Vector3(0f, 0f, 0f), 0.4467f, 0.036f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 4705f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties WoodenGalleonHall = new ReverbProperties(1f, 1f, 0.3162f, 0.0794f, 0.2818f, 3.45f, 0.3f, 0.82f, 0.8913f, 0.088f, new Vector3(0f, 0f, 0f), 0.7943f, 0.063f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 4705f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties WoodenGalleonCupboard = new ReverbProperties(1f, 1f, 0.3162f, 0.1413f, 0.3162f, 0.56f, 0.46f, 0.91f, 1.122f, 0.012f, new Vector3(0f, 0f, 0f), 1.122f, 0.028f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 4705f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties WoodenGalleonCourtyard = new ReverbProperties(1f, 0.65f, 0.3162f, 0.0794f, 0.3162f, 1.79f, 0.35f, 0.79f, 0.5623f, 0.123f, new Vector3(0f, 0f, 0f), 0.1f, 0.032f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 4705f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties WoodenGalleonAlcove = new ReverbProperties(1f, 1f, 0.3162f, 0.1259f, 0.3162f, 1.22f, 0.62f, 0.91f, 1.122f, 0.012f, new Vector3(0f, 0f, 0f), 0.7079f, 0.024f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 4705f, 99.6f, 0f, 1);
+
+	public static readonly ReverbProperties SportEmptyStadium = new ReverbProperties(1f, 1f, 0.3162f, 0.4467f, 0.7943f, 6.26f, 0.51f, 1.1f, 0.0631f, 0.183f, new Vector3(0f, 0f, 0f), 0.3981f, 0.038f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties SportSquashCourt = new ReverbProperties(1f, 0.75f, 0.3162f, 0.3162f, 0.7943f, 2.22f, 0.91f, 1.16f, 0.4467f, 0.007f, new Vector3(0f, 0f, 0f), 0.7943f, 0.011f, new Vector3(0f, 0f, 0f), 0.126f, 0.19f, 0.25f, 0f, 0.9943f, 7176.9f, 211.2f, 0f, 1);
+
+	public static readonly ReverbProperties SportSmallSwimmingPool = new ReverbProperties(1f, 0.7f, 0.3162f, 0.7943f, 0.8913f, 2.76f, 1.25f, 1.14f, 0.631f, 0.02f, new Vector3(0f, 0f, 0f), 0.7943f, 0.03f, new Vector3(0f, 0f, 0f), 0.179f, 0.15f, 0.895f, 0.19f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties SportLargeSwimmingPool = new ReverbProperties(1f, 0.82f, 0.3162f, 0.7943f, 1f, 5.49f, 1.31f, 1.14f, 0.4467f, 0.039f, new Vector3(0f, 0f, 0f), 0.5012f, 0.049f, new Vector3(0f, 0f, 0f), 0.222f, 0.55f, 1.159f, 0.21f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties SportGymnasium = new ReverbProperties(1f, 0.81f, 0.3162f, 0.4467f, 0.8913f, 3.14f, 1.06f, 1.35f, 0.3981f, 0.029f, new Vector3(0f, 0f, 0f), 0.5623f, 0.045f, new Vector3(0f, 0f, 0f), 0.146f, 0.14f, 0.25f, 0f, 0.9943f, 7176.9f, 211.2f, 0f, 1);
+
+	public static readonly ReverbProperties SportFullStadium = new ReverbProperties(1f, 1f, 0.3162f, 0.0708f, 0.7943f, 5.25f, 0.17f, 0.8f, 0.1f, 0.188f, new Vector3(0f, 0f, 0f), 0.2818f, 0.038f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties SportStadiumTannoy = new ReverbProperties(1f, 0.78f, 0.3162f, 0.5623f, 0.5012f, 2.53f, 0.88f, 0.68f, 0.2818f, 0.23f, new Vector3(0f, 0f, 0f), 0.5012f, 0.063f, new Vector3(0f, 0f, 0f), 0.25f, 0.2f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties PrefabWorkshop = new ReverbProperties(0.4287f, 1f, 0.3162f, 0.1413f, 0.3981f, 0.76f, 1f, 1f, 1f, 0.012f, new Vector3(0f, 0f, 0f), 1.122f, 0.012f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties PrefabSchoolRoom = new ReverbProperties(0.4022f, 0.69f, 0.3162f, 0.631f, 0.5012f, 0.98f, 0.45f, 0.18f, 1.4125f, 0.017f, new Vector3(0f, 0f, 0f), 1.4125f, 0.015f, new Vector3(0f, 0f, 0f), 0.095f, 0.14f, 0.25f, 0f, 0.9943f, 7176.9f, 211.2f, 0f, 1);
+
+	public static readonly ReverbProperties PrefabPractiseRoom = new ReverbProperties(0.4022f, 0.87f, 0.3162f, 0.3981f, 0.5012f, 1.12f, 0.56f, 0.18f, 1.2589f, 0.01f, new Vector3(0f, 0f, 0f), 1.4125f, 0.011f, new Vector3(0f, 0f, 0f), 0.095f, 0.14f, 0.25f, 0f, 0.9943f, 7176.9f, 211.2f, 0f, 1);
+
+	public static readonly ReverbProperties PrefabOuthouse = new ReverbProperties(1f, 0.82f, 0.3162f, 0.1122f, 0.1585f, 1.38f, 0.38f, 0.35f, 0.8913f, 0.024f, new Vector3(0f, 0f, -0f), 0.631f, 0.044f, new Vector3(0f, 0f, 0f), 0.121f, 0.17f, 0.25f, 0f, 0.9943f, 2854.4f, 107.5f, 0f, 0);
+
+	public static readonly ReverbProperties PrefabCaravan = new ReverbProperties(1f, 1f, 0.3162f, 0.0891f, 0.1259f, 0.43f, 1.5f, 1f, 1f, 0.012f, new Vector3(0f, 0f, 0f), 1.9953f, 0.012f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties DomeTomb = new ReverbProperties(1f, 0.79f, 0.3162f, 0.3548f, 0.2239f, 4.18f, 0.21f, 0.1f, 0.3868f, 0.03f, new Vector3(0f, 0f, 0f), 1.6788f, 0.022f, new Vector3(0f, 0f, 0f), 0.177f, 0.19f, 0.25f, 0f, 0.9943f, 2854.4f, 20f, 0f, 0);
+
+	public static readonly ReverbProperties PipeSmall = new ReverbProperties(1f, 1f, 0.3162f, 0.3548f, 0.2239f, 5.04f, 0.1f, 0.1f, 0.5012f, 0.032f, new Vector3(0f, 0f, 0f), 2.5119f, 0.015f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 2854.4f, 20f, 0f, 1);
+
+	public static readonly ReverbProperties DomeSaintPauls = new ReverbProperties(1f, 0.87f, 0.3162f, 0.3548f, 0.2239f, 10.48f, 0.19f, 0.1f, 0.1778f, 0.09f, new Vector3(0f, 0f, 0f), 1.2589f, 0.042f, new Vector3(0f, 0f, 0f), 0.25f, 0.12f, 0.25f, 0f, 0.9943f, 2854.4f, 20f, 0f, 1);
+
+	public static readonly ReverbProperties PipeLongThin = new ReverbProperties(0.256f, 0.91f, 0.3162f, 0.4467f, 0.2818f, 9.21f, 0.18f, 0.1f, 0.7079f, 0.01f, new Vector3(0f, 0f, 0f), 0.7079f, 0.022f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 2854.4f, 20f, 0f, 0);
+
+	public static readonly ReverbProperties PipeLarge = new ReverbProperties(1f, 1f, 0.3162f, 0.3548f, 0.2239f, 8.45f, 0.1f, 0.1f, 0.3981f, 0.046f, new Vector3(0f, 0f, 0f), 1.5849f, 0.032f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 2854.4f, 20f, 0f, 1);
+
+	public static readonly ReverbProperties PipeResonant = new ReverbProperties(0.1373f, 0.91f, 0.3162f, 0.4467f, 0.2818f, 6.81f, 0.18f, 0.1f, 0.7079f, 0.01f, new Vector3(0f, 0f, 0f), 1f, 0.022f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 2854.4f, 20f, 0f, 0);
+
+	public static readonly ReverbProperties OutdoorsBackyard = new ReverbProperties(1f, 0.45f, 0.3162f, 0.2512f, 0.5012f, 1.12f, 0.34f, 0.46f, 0.4467f, 0.069f, new Vector3(0f, 0f, -0f), 0.7079f, 0.023f, new Vector3(0f, 0f, 0f), 0.218f, 0.34f, 0.25f, 0f, 0.9943f, 4399.1f, 242.9f, 0f, 0);
+
+	public static readonly ReverbProperties OutdoorsRollingPlains = new ReverbProperties(1f, 0f, 0.3162f, 0.0112f, 0.631f, 2.13f, 0.21f, 0.46f, 0.1778f, 0.3f, new Vector3(0f, 0f, -0f), 0.4467f, 0.019f, new Vector3(0f, 0f, 0f), 0.25f, 1f, 0.25f, 0f, 0.9943f, 4399.1f, 242.9f, 0f, 0);
+
+	public static readonly ReverbProperties OutdoorsDeepCanyon = new ReverbProperties(1f, 0.74f, 0.3162f, 0.1778f, 0.631f, 3.89f, 0.21f, 0.46f, 0.3162f, 0.223f, new Vector3(0f, 0f, -0f), 0.3548f, 0.019f, new Vector3(0f, 0f, 0f), 0.25f, 1f, 0.25f, 0f, 0.9943f, 4399.1f, 242.9f, 0f, 0);
+
+	public static readonly ReverbProperties OutdoorsCreek = new ReverbProperties(1f, 0.35f, 0.3162f, 0.1778f, 0.5012f, 2.13f, 0.21f, 0.46f, 0.3981f, 0.115f, new Vector3(0f, 0f, -0f), 0.1995f, 0.031f, new Vector3(0f, 0f, 0f), 0.218f, 0.34f, 0.25f, 0f, 0.9943f, 4399.1f, 242.9f, 0f, 0);
+
+	public static readonly ReverbProperties OutdoorsValley = new ReverbProperties(1f, 0.28f, 0.3162f, 0.0282f, 0.1585f, 2.88f, 0.26f, 0.35f, 0.1413f, 0.263f, new Vector3(0f, 0f, -0f), 0.3981f, 0.1f, new Vector3(0f, 0f, 0f), 0.25f, 0.34f, 0.25f, 0f, 0.9943f, 2854.4f, 107.5f, 0f, 0);
+
+	public static readonly ReverbProperties MoodHeaven = new ReverbProperties(1f, 0.94f, 0.3162f, 0.7943f, 0.4467f, 5.04f, 1.12f, 0.56f, 0.2427f, 0.02f, new Vector3(0f, 0f, 0f), 1.2589f, 0.029f, new Vector3(0f, 0f, 0f), 0.25f, 0.08f, 2.742f, 0.05f, 0.9977f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties MoodHell = new ReverbProperties(1f, 0.57f, 0.3162f, 0.3548f, 0.4467f, 3.57f, 0.49f, 2f, 0f, 0.02f, new Vector3(0f, 0f, 0f), 1.4125f, 0.03f, new Vector3(0f, 0f, 0f), 0.11f, 0.04f, 2.109f, 0.52f, 0.9943f, 5000f, 139.5f, 0f, 0);
+
+	public static readonly ReverbProperties MoodMemory = new ReverbProperties(1f, 0.85f, 0.3162f, 0.631f, 0.3548f, 4.06f, 0.82f, 0.56f, 0.0398f, 0f, new Vector3(0f, 0f, 0f), 1.122f, 0f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.474f, 0.45f, 0.9886f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties DrivingCommentator = new ReverbProperties(1f, 0f, 0.3162f, 0.5623f, 0.5012f, 2.42f, 0.88f, 0.68f, 0.1995f, 0.093f, new Vector3(0f, 0f, 0f), 0.2512f, 0.017f, new Vector3(0f, 0f, 0f), 0.25f, 1f, 0.25f, 0f, 0.9886f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties DrivingPitGarage = new ReverbProperties(0.4287f, 0.59f, 0.3162f, 0.7079f, 0.5623f, 1.72f, 0.93f, 0.87f, 0.5623f, 0f, new Vector3(0f, 0f, 0f), 1.2589f, 0.016f, new Vector3(0f, 0f, 0f), 0.25f, 0.11f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties DrivingInCarRacer = new ReverbProperties(0.0832f, 0.8f, 0.3162f, 1f, 0.7943f, 0.17f, 2f, 0.41f, 1.7783f, 0.007f, new Vector3(0f, 0f, 0f), 0.7079f, 0.015f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 10268.2f, 251f, 0f, 1);
+
+	public static readonly ReverbProperties DrivingInCarSports = new ReverbProperties(0.0832f, 0.8f, 0.3162f, 0.631f, 1f, 0.17f, 0.75f, 0.41f, 1f, 0.01f, new Vector3(0f, 0f, 0f), 0.5623f, 0f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 10268.2f, 251f, 0f, 1);
+
+	public static readonly ReverbProperties DrivingInCarLuxury = new ReverbProperties(0.256f, 1f, 0.3162f, 0.1f, 0.5012f, 0.13f, 0.41f, 0.46f, 0.7943f, 0.01f, new Vector3(0f, 0f, 0f), 1.5849f, 0.01f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 10268.2f, 251f, 0f, 1);
+
+	public static readonly ReverbProperties DrivingFullGrandStand = new ReverbProperties(1f, 1f, 0.3162f, 0.2818f, 0.631f, 3.01f, 1.37f, 1.28f, 0.3548f, 0.09f, new Vector3(0f, 0f, 0f), 0.1778f, 0.049f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 10420.2f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties DrivingEmptyGrandStand = new ReverbProperties(1f, 1f, 0.3162f, 1f, 0.7943f, 4.62f, 1.75f, 1.4f, 0.2082f, 0.09f, new Vector3(0f, 0f, 0f), 0.2512f, 0.049f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0f, 0.9943f, 10420.2f, 250f, 0f, 0);
+
+	public static readonly ReverbProperties DrivingTunnel = new ReverbProperties(1f, 0.81f, 0.3162f, 0.3981f, 0.8913f, 3.42f, 0.94f, 1.31f, 0.7079f, 0.051f, new Vector3(0f, 0f, 0f), 0.7079f, 0.047f, new Vector3(0f, 0f, 0f), 0.214f, 0.05f, 0.25f, 0f, 0.9943f, 5000f, 155.3f, 0f, 1);
+
+	public static readonly ReverbProperties CityStreets = new ReverbProperties(1f, 0.78f, 0.3162f, 0.7079f, 0.8913f, 1.79f, 1.12f, 0.91f, 0.2818f, 0.046f, new Vector3(0f, 0f, 0f), 0.1995f, 0.028f, new Vector3(0f, 0f, 0f), 0.25f, 0.2f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties CitySubway = new ReverbProperties(1f, 0.74f, 0.3162f, 0.7079f, 0.8913f, 3.01f, 1.23f, 0.91f, 0.7079f, 0.046f, new Vector3(0f, 0f, 0f), 1.2589f, 0.028f, new Vector3(0f, 0f, 0f), 0.125f, 0.21f, 0.25f, 0f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties CityMuseum = new ReverbProperties(1f, 0.82f, 0.3162f, 0.1778f, 0.1778f, 3.28f, 1.4f, 0.57f, 0.2512f, 0.039f, new Vector3(0f, 0f, -0f), 0.8913f, 0.034f, new Vector3(0f, 0f, 0f), 0.13f, 0.17f, 0.25f, 0f, 0.9943f, 2854.4f, 107.5f, 0f, 0);
+
+	public static readonly ReverbProperties CityLibrary = new ReverbProperties(1f, 0.82f, 0.3162f, 0.2818f, 0.0891f, 2.76f, 0.89f, 0.41f, 0.3548f, 0.029f, new Vector3(0f, 0f, -0f), 0.8913f, 0.02f, new Vector3(0f, 0f, 0f), 0.13f, 0.17f, 0.25f, 0f, 0.9943f, 2854.4f, 107.5f, 0f, 0);
+
+	public static readonly ReverbProperties CityUnderpass = new ReverbProperties(1f, 0.82f, 0.3162f, 0.4467f, 0.8913f, 3.57f, 1.12f, 0.91f, 0.3981f, 0.059f, new Vector3(0f, 0f, 0f), 0.8913f, 0.037f, new Vector3(0f, 0f, 0f), 0.25f, 0.14f, 0.25f, 0f, 0.992f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties CityAbandoned = new ReverbProperties(1f, 0.69f, 0.3162f, 0.7943f, 0.8913f, 3.28f, 1.17f, 0.91f, 0.4467f, 0.044f, new Vector3(0f, 0f, 0f), 0.2818f, 0.024f, new Vector3(0f, 0f, 0f), 0.25f, 0.2f, 0.25f, 0f, 0.9966f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties DustyRoom = new ReverbProperties(0.3645f, 0.56f, 0.3162f, 0.7943f, 0.7079f, 1.79f, 0.38f, 0.21f, 0.5012f, 0.002f, new Vector3(0f, 0f, 0f), 1.2589f, 0.006f, new Vector3(0f, 0f, 0f), 0.202f, 0.05f, 0.25f, 0f, 0.9886f, 13046f, 163.3f, 0f, 1);
+
+	public static readonly ReverbProperties Chapel = new ReverbProperties(1f, 0.84f, 0.3162f, 0.5623f, 1f, 4.62f, 0.64f, 1.23f, 0.4467f, 0.032f, new Vector3(0f, 0f, 0f), 0.7943f, 0.049f, new Vector3(0f, 0f, 0f), 0.25f, 0f, 0.25f, 0.11f, 0.9943f, 5000f, 250f, 0f, 1);
+
+	public static readonly ReverbProperties SmallWaterRoom = new ReverbProperties(1f, 0.7f, 0.3162f, 0.4477f, 1f, 1.51f, 1.25f, 1.14f, 0.8913f, 0.02f, new Vector3(0f, 0f, 0f), 1.4125f, 0.03f, new Vector3(0f, 0f, 0f), 0.179f, 0.15f, 0.895f, 0.19f, 0.992f, 5000f, 250f, 0f, 0);
+}

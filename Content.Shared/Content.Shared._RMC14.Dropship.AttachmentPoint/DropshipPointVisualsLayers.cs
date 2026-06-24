@@ -1,0 +1,12 @@
+using System;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared._RMC14.Dropship.AttachmentPoint;
+
+[Serializable]
+[NetSerializable]
+public enum DropshipPointVisualsLayers
+{
+	AttachmentBase,
+	AttachedUtility
+}

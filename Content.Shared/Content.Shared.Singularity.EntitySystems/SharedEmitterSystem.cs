@@ -1,0 +1,7 @@
+using Robust.Shared.GameObjects;
+
+namespace Content.Shared.Singularity.EntitySystems;
+
+public abstract class SharedEmitterSystem : EntitySystem
+{
+}

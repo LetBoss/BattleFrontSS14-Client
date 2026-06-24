@@ -1,0 +1,25 @@
+using System.Runtime.CompilerServices;
+using Robust.Shared.GameObjects;
+
+namespace Content.Shared.DragDrop;
+
+[ByRefEvent]
+public record struct DragDropTargetEvent(EntityUid User, EntityUid Dragged)
+{
+	public readonly EntityUid User = User;
+
+	public readonly EntityUid Dragged = Dragged;
+
+	public bool Handled = false;
+
+	[CompilerGenerated]
+	public readonly void Deconstruct(out EntityUid User, out EntityUid Dragged)
+	{
+		//IL_0002: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0007: Unknown result type (might be due to invalid IL or missing references)
+		//IL_000e: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
+		User = this.User;
+		Dragged = this.Dragged;
+	}
+}

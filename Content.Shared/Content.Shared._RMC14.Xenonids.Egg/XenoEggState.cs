@@ -1,0 +1,17 @@
+using System;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared._RMC14.Xenonids.Egg;
+
+[Serializable]
+[NetSerializable]
+public enum XenoEggState
+{
+	Item,
+	Growing,
+	Grown,
+	Opening,
+	Opened,
+	Fragile,
+	Sustained
+}

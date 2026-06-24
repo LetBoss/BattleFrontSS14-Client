@@ -1,0 +1,13 @@
+using System;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared._RMC14.Marines.ControlComputer;
+
+[Serializable]
+[NetSerializable]
+public sealed class GibbedMarineInfo
+{
+	public string Name = string.Empty;
+
+	public string? LastPlayerId;
+}

@@ -1,0 +1,62 @@
+using System;
+using Content.Shared.Administration.Components;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+
+namespace Content.Client.Administration.Components;
+
+[RegisterComponent]
+public sealed class KillSignComponent : SharedKillSignComponent, ISerializationGenerated<KillSignComponent>, ISerializationGenerated
+{
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public void InternalCopy(ref KillSignComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		SharedKillSignComponent target2 = target;
+		base.InternalCopy(ref target2, serialization, hookCtx, context);
+		target = (KillSignComponent)target2;
+		serialization.TryCustomCopy<KillSignComponent>(this, ref target, hookCtx, false, context);
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public void Copy(ref KillSignComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		InternalCopy(ref target, serialization, hookCtx, context);
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void Copy(ref SharedKillSignComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		KillSignComponent target2 = (KillSignComponent)target;
+		Copy(ref target2, serialization, hookCtx, context);
+		target = target2;
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void Copy(ref object target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		KillSignComponent target2 = (KillSignComponent)target;
+		Copy(ref target2, serialization, hookCtx, context);
+		target = target2;
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void InternalCopy(ref IComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		KillSignComponent target2 = (KillSignComponent)(object)target;
+		Copy(ref target2, serialization, hookCtx, context);
+		target = (IComponent)(object)target2;
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void Copy(ref IComponent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		((Component)this).InternalCopy(ref target, serialization, hookCtx, context);
+	}
+
+	[Obsolete("Use ISerializationManager.CreateCopy instead")]
+	public override KillSignComponent Instantiate()
+	{
+		return new KillSignComponent();
+	}
+}

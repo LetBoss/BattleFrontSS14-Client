@@ -1,0 +1,13 @@
+using System;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared.CartridgeLoader.Cartridges;
+
+[Serializable]
+[NetSerializable]
+public enum NanoTaskPriority : byte
+{
+	High,
+	Medium,
+	Low
+}

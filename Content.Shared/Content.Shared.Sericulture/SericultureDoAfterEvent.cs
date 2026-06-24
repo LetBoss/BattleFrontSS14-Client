@@ -1,0 +1,48 @@
+using System;
+using Content.Shared.DoAfter;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+
+namespace Content.Shared.Sericulture;
+
+[Serializable]
+[NetSerializable]
+public sealed class SericultureDoAfterEvent : SimpleDoAfterEvent, ISerializationGenerated<SericultureDoAfterEvent>, ISerializationGenerated
+{
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public void InternalCopy(ref SericultureDoAfterEvent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		SimpleDoAfterEvent definitionCast = target;
+		base.InternalCopy(ref definitionCast, serialization, hookCtx, context);
+		target = (SericultureDoAfterEvent)definitionCast;
+		serialization.TryCustomCopy<SericultureDoAfterEvent>(this, ref target, hookCtx, false, context);
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public void Copy(ref SericultureDoAfterEvent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		InternalCopy(ref target, serialization, hookCtx, context);
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void Copy(ref SimpleDoAfterEvent target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		SericultureDoAfterEvent cast = (SericultureDoAfterEvent)target;
+		Copy(ref cast, serialization, hookCtx, context);
+		target = cast;
+	}
+
+	[Obsolete("Use ISerializationManager.CopyTo instead")]
+	public override void Copy(ref object target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)
+	{
+		SericultureDoAfterEvent cast = (SericultureDoAfterEvent)target;
+		Copy(ref cast, serialization, hookCtx, context);
+		target = cast;
+	}
+
+	[Obsolete("Use ISerializationManager.CreateCopy instead")]
+	public override SericultureDoAfterEvent Instantiate()
+	{
+		return new SericultureDoAfterEvent();
+	}
+}
