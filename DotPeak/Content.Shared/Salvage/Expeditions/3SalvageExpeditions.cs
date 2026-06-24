@@ -1,0 +1,148 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Salvage.Expeditions.SalvageExpeditionDataComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.ViewVariables;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Salvage.Expeditions;
+
+[RegisterComponent]
+[AutoGenerateComponentPause]
+public sealed class SalvageExpeditionDataComponent : 
+  Component,
+  ISerializationGenerated<SalvageExpeditionDataComponent>,
+  ISerializationGenerated
+{
+  [Robust.Shared.ViewVariables.ViewVariables(VVAccess.ReadWrite)]
+  [DataField("cooldown", false, 1, false, false, null)]
+  public bool Cooldown;
+  [Robust.Shared.ViewVariables.ViewVariables(VVAccess.ReadWrite)]
+  [DataField("nextOffer", false, 1, false, false, typeof (TimeOffsetSerializer))]
+  [AutoPausedField]
+  public TimeSpan NextOffer;
+  [Robust.Shared.ViewVariables.ViewVariables]
+  public readonly Dictionary<ushort, SalvageMissionParams> Missions = new Dictionary<ushort, SalvageMissionParams>();
+  [Robust.Shared.ViewVariables.ViewVariables]
+  public ushort ActiveMission;
+  public ushort NextIndex = 1;
+
+  [Robust.Shared.ViewVariables.ViewVariables]
+  public bool Claimed => this.ActiveMission > (ushort) 0;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref SalvageExpeditionDataComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (SalvageExpeditionDataComponent) target1;
+    if (serialization.TryCustomCopy<SalvageExpeditionDataComponent>(this, ref target, hookCtx, false, context))
+      return;
+    bool target2 = false;
+    if (!serialization.TryCustomCopy<bool>(this.Cooldown, ref target2, hookCtx, false, context))
+      target2 = this.Cooldown;
+    target.Cooldown = target2;
+    TimeSpan target3 = new TimeSpan();
+    if (!serialization.TryCustomCopy<TimeSpan>(this.NextOffer, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<TimeSpan>(this.NextOffer, hookCtx, context);
+    target.NextOffer = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref SalvageExpeditionDataComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SalvageExpeditionDataComponent target1 = (SalvageExpeditionDataComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SalvageExpeditionDataComponent target1 = (SalvageExpeditionDataComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SalvageExpeditionDataComponent target1 = (SalvageExpeditionDataComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual SalvageExpeditionDataComponent Component.Instantiate()
+  {
+    return new SalvageExpeditionDataComponent();
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class SalvageExpeditionDataComponent_AutoPauseSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<SalvageExpeditionDataComponent, EntityUnpausedEvent>(new ComponentEventRefHandler<SalvageExpeditionDataComponent, EntityUnpausedEvent>(this.OnEntityUnpaused));
+    }
+
+    private void OnEntityUnpaused(
+      EntityUid uid,
+      #nullable disable
+      SalvageExpeditionDataComponent component,
+      ref EntityUnpausedEvent args)
+    {
+      component.NextOffer += args.PausedTime;
+    }
+  }
+}

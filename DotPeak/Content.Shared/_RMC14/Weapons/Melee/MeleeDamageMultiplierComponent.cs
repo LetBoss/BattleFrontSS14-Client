@@ -1,0 +1,172 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Weapons.Melee.MeleeDamageMultiplierComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Whitelist;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Weapons.Melee;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (SharedRMCMeleeWeaponSystem)})]
+public sealed class MeleeDamageMultiplierComponent : 
+  Component,
+  ISerializationGenerated<MeleeDamageMultiplierComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public float Multiplier = 0.5f;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public EntityWhitelist Whitelist = new EntityWhitelist();
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref MeleeDamageMultiplierComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (MeleeDamageMultiplierComponent) target1;
+    if (serialization.TryCustomCopy<MeleeDamageMultiplierComponent>(this, ref target, hookCtx, false, context))
+      return;
+    float target2 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.Multiplier, ref target2, hookCtx, false, context))
+      target2 = this.Multiplier;
+    target.Multiplier = target2;
+    EntityWhitelist target3 = (EntityWhitelist) null;
+    if (this.Whitelist == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<EntityWhitelist>(this.Whitelist, ref target3, hookCtx, false, context))
+    {
+      if (this.Whitelist == null)
+        target3 = (EntityWhitelist) null;
+      else
+        serialization.CopyTo<EntityWhitelist>(this.Whitelist, ref target3, hookCtx, context, true);
+    }
+    target.Whitelist = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref MeleeDamageMultiplierComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    MeleeDamageMultiplierComponent target1 = (MeleeDamageMultiplierComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    MeleeDamageMultiplierComponent target1 = (MeleeDamageMultiplierComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    MeleeDamageMultiplierComponent target1 = (MeleeDamageMultiplierComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual MeleeDamageMultiplierComponent Component.Instantiate()
+  {
+    return new MeleeDamageMultiplierComponent();
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class MeleeDamageMultiplierComponent_AutoState : IComponentState
+  {
+    public float Multiplier;
+    public EntityWhitelist Whitelist;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class MeleeDamageMultiplierComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<MeleeDamageMultiplierComponent, ComponentGetState>(new ComponentEventRefHandler<MeleeDamageMultiplierComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<MeleeDamageMultiplierComponent, ComponentHandleState>(new ComponentEventRefHandler<MeleeDamageMultiplierComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      MeleeDamageMultiplierComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new MeleeDamageMultiplierComponent.MeleeDamageMultiplierComponent_AutoState()
+      {
+        Multiplier = component.Multiplier,
+        Whitelist = component.Whitelist
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      MeleeDamageMultiplierComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is MeleeDamageMultiplierComponent.MeleeDamageMultiplierComponent_AutoState current))
+        return;
+      component.Multiplier = current.Multiplier;
+      component.Whitelist = current.Whitelist;
+    }
+  }
+}

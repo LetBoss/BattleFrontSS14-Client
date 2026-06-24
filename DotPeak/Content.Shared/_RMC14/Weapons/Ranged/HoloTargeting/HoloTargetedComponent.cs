@@ -1,0 +1,168 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Weapons.Ranged.HoloTargeting.HoloTargetedComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Weapons.Ranged.HoloTargeting;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (RMCHoloTargetedSystem)})]
+public sealed class HoloTargetedComponent : 
+  Component,
+  ISerializationGenerated<HoloTargetedComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public float Stacks;
+  [DataField(null, false, 1, false, false, null)]
+  public float Decay = 5f;
+  [DataField(null, false, 1, false, false, null)]
+  public float DecayTimer;
+  [DataField(null, false, 1, false, false, null)]
+  public float DecayDelay = 5f;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref HoloTargetedComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (HoloTargetedComponent) target1;
+    if (serialization.TryCustomCopy<HoloTargetedComponent>(this, ref target, hookCtx, false, context))
+      return;
+    float target2 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.Stacks, ref target2, hookCtx, false, context))
+      target2 = this.Stacks;
+    target.Stacks = target2;
+    float target3 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.Decay, ref target3, hookCtx, false, context))
+      target3 = this.Decay;
+    target.Decay = target3;
+    float target4 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.DecayTimer, ref target4, hookCtx, false, context))
+      target4 = this.DecayTimer;
+    target.DecayTimer = target4;
+    float target5 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.DecayDelay, ref target5, hookCtx, false, context))
+      target5 = this.DecayDelay;
+    target.DecayDelay = target5;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref HoloTargetedComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    HoloTargetedComponent target1 = (HoloTargetedComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    HoloTargetedComponent target1 = (HoloTargetedComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    HoloTargetedComponent target1 = (HoloTargetedComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual HoloTargetedComponent Component.Instantiate() => new HoloTargetedComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class HoloTargetedComponent_AutoState : IComponentState
+  {
+    public float Stacks;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class HoloTargetedComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<HoloTargetedComponent, ComponentGetState>(new ComponentEventRefHandler<HoloTargetedComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<HoloTargetedComponent, ComponentHandleState>(new ComponentEventRefHandler<HoloTargetedComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      HoloTargetedComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new HoloTargetedComponent.HoloTargetedComponent_AutoState()
+      {
+        Stacks = component.Stacks
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      HoloTargetedComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is HoloTargetedComponent.HoloTargetedComponent_AutoState current))
+        return;
+      component.Stacks = current.Stacks;
+    }
+  }
+}

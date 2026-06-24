@@ -1,0 +1,170 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Pulling.SlowOnPullComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Whitelist;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Pulling;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (RMCPullingSystem)})]
+public sealed class SlowOnPullComponent : 
+  Component,
+  ISerializationGenerated<SlowOnPullComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public float Multiplier = 1f;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public List<SlowOnPullComponent.SlowdownWhitelist> Slowdowns = new List<SlowOnPullComponent.SlowdownWhitelist>();
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref SlowOnPullComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (SlowOnPullComponent) target1;
+    if (serialization.TryCustomCopy<SlowOnPullComponent>(this, ref target, hookCtx, false, context))
+      return;
+    float target2 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.Multiplier, ref target2, hookCtx, false, context))
+      target2 = this.Multiplier;
+    target.Multiplier = target2;
+    List<SlowOnPullComponent.SlowdownWhitelist> target3 = (List<SlowOnPullComponent.SlowdownWhitelist>) null;
+    if (this.Slowdowns == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<List<SlowOnPullComponent.SlowdownWhitelist>>(this.Slowdowns, ref target3, hookCtx, true, context))
+      target3 = serialization.CreateCopy<List<SlowOnPullComponent.SlowdownWhitelist>>(this.Slowdowns, hookCtx, context);
+    target.Slowdowns = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref SlowOnPullComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SlowOnPullComponent target1 = (SlowOnPullComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SlowOnPullComponent target1 = (SlowOnPullComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SlowOnPullComponent target1 = (SlowOnPullComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual SlowOnPullComponent Component.Instantiate() => new SlowOnPullComponent();
+
+  [DataRecord]
+  [NetSerializable]
+  [Serializable]
+  public readonly record struct SlowdownWhitelist(float Multiplier, EntityWhitelist Whitelist);
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class SlowOnPullComponent_AutoState : IComponentState
+  {
+    public float Multiplier;
+    public List<SlowOnPullComponent.SlowdownWhitelist> Slowdowns;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class SlowOnPullComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<SlowOnPullComponent, ComponentGetState>(new ComponentEventRefHandler<SlowOnPullComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<SlowOnPullComponent, ComponentHandleState>(new ComponentEventRefHandler<SlowOnPullComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      SlowOnPullComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new SlowOnPullComponent.SlowOnPullComponent_AutoState()
+      {
+        Multiplier = component.Multiplier,
+        Slowdowns = component.Slowdowns
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      SlowOnPullComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is SlowOnPullComponent.SlowOnPullComponent_AutoState current))
+        return;
+      component.Multiplier = current.Multiplier;
+      component.Slowdowns = current.Slowdowns == null ? (List<SlowOnPullComponent.SlowdownWhitelist>) null : new List<SlowOnPullComponent.SlowdownWhitelist>((IEnumerable<SlowOnPullComponent.SlowdownWhitelist>) current.Slowdowns);
+    }
+  }
+}

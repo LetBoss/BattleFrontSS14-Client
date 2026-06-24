@@ -1,0 +1,177 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._CIV14merka.Medical.CivDefibComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.FixedPoint;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._CIV14merka.Medical;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class CivDefibComponent : 
+  Component,
+  ISerializationGenerated<CivDefibComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public FixedPoint2 ReviveHp = FixedPoint2.New(5);
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public float Delay = 5f;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool TeamOnly = true;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public int Uses = 3;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref CivDefibComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (CivDefibComponent) target1;
+    if (serialization.TryCustomCopy<CivDefibComponent>(this, ref target, hookCtx, false, context))
+      return;
+    FixedPoint2 target2 = new FixedPoint2();
+    if (!serialization.TryCustomCopy<FixedPoint2>(this.ReviveHp, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<FixedPoint2>(this.ReviveHp, hookCtx, context);
+    target.ReviveHp = target2;
+    float target3 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.Delay, ref target3, hookCtx, false, context))
+      target3 = this.Delay;
+    target.Delay = target3;
+    bool target4 = false;
+    if (!serialization.TryCustomCopy<bool>(this.TeamOnly, ref target4, hookCtx, false, context))
+      target4 = this.TeamOnly;
+    target.TeamOnly = target4;
+    int target5 = 0;
+    if (!serialization.TryCustomCopy<int>(this.Uses, ref target5, hookCtx, false, context))
+      target5 = this.Uses;
+    target.Uses = target5;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref CivDefibComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    CivDefibComponent target1 = (CivDefibComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    CivDefibComponent target1 = (CivDefibComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    CivDefibComponent target1 = (CivDefibComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual CivDefibComponent Component.Instantiate() => new CivDefibComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class CivDefibComponent_AutoState : IComponentState
+  {
+    public FixedPoint2 ReviveHp;
+    public float Delay;
+    public bool TeamOnly;
+    public int Uses;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class CivDefibComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<CivDefibComponent, ComponentGetState>(new ComponentEventRefHandler<CivDefibComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<CivDefibComponent, ComponentHandleState>(new ComponentEventRefHandler<CivDefibComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(EntityUid uid, CivDefibComponent component, ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new CivDefibComponent.CivDefibComponent_AutoState()
+      {
+        ReviveHp = component.ReviveHp,
+        Delay = component.Delay,
+        TeamOnly = component.TeamOnly,
+        Uses = component.Uses
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      CivDefibComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is CivDefibComponent.CivDefibComponent_AutoState current))
+        return;
+      component.ReviveHp = current.ReviveHp;
+      component.Delay = current.Delay;
+      component.TeamOnly = current.TeamOnly;
+      component.Uses = current.Uses;
+    }
+  }
+}

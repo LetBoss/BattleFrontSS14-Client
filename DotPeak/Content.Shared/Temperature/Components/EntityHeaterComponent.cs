@@ -1,0 +1,169 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Temperature.Components.EntityHeaterComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Temperature.Systems;
+using Robust.Shared.Analyzers;
+using Robust.Shared.Audio;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Temperature.Components;
+
+[RegisterComponent]
+[Access(new Type[] {typeof (SharedEntityHeaterSystem)})]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class EntityHeaterComponent : 
+  Component,
+  ISerializationGenerated<EntityHeaterComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  public float Power = 2400f;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public EntityHeaterSetting Setting;
+  [DataField(null, false, 1, false, false, null)]
+  public SoundPathSpecifier? SettingSound;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref EntityHeaterComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (EntityHeaterComponent) target1;
+    if (serialization.TryCustomCopy<EntityHeaterComponent>(this, ref target, hookCtx, false, context))
+      return;
+    float target2 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.Power, ref target2, hookCtx, false, context))
+      target2 = this.Power;
+    target.Power = target2;
+    EntityHeaterSetting target3 = EntityHeaterSetting.Off;
+    if (!serialization.TryCustomCopy<EntityHeaterSetting>(this.Setting, ref target3, hookCtx, false, context))
+      target3 = this.Setting;
+    target.Setting = target3;
+    SoundPathSpecifier target4 = (SoundPathSpecifier) null;
+    if (!serialization.TryCustomCopy<SoundPathSpecifier>(this.SettingSound, ref target4, hookCtx, false, context))
+    {
+      if (this.SettingSound == null)
+        target4 = (SoundPathSpecifier) null;
+      else
+        serialization.CopyTo<SoundPathSpecifier>(this.SettingSound, ref target4, hookCtx, context);
+    }
+    target.SettingSound = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref EntityHeaterComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    EntityHeaterComponent target1 = (EntityHeaterComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    EntityHeaterComponent target1 = (EntityHeaterComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    EntityHeaterComponent target1 = (EntityHeaterComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual EntityHeaterComponent Component.Instantiate() => new EntityHeaterComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class EntityHeaterComponent_AutoState : IComponentState
+  {
+    public EntityHeaterSetting Setting;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class EntityHeaterComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<EntityHeaterComponent, ComponentGetState>(new ComponentEventRefHandler<EntityHeaterComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<EntityHeaterComponent, ComponentHandleState>(new ComponentEventRefHandler<EntityHeaterComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      EntityHeaterComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new EntityHeaterComponent.EntityHeaterComponent_AutoState()
+      {
+        Setting = component.Setting
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      EntityHeaterComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is EntityHeaterComponent.EntityHeaterComponent_AutoState current))
+        return;
+      component.Setting = current.Setting;
+    }
+  }
+}

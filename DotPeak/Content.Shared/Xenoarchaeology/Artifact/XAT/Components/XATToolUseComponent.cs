@@ -1,0 +1,172 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Xenoarchaeology.Artifact.XAT.Components.XATToolUseComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Tools;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Xenoarchaeology.Artifact.XAT.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[Access(new Type[] {typeof (XATToolUseSystem)})]
+[AutoGenerateComponentState(false, false)]
+public sealed class XATToolUseComponent : 
+  Component,
+  ISerializationGenerated<XATToolUseComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public ProtoId<ToolQualityPrototype> RequiredTool;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public float Delay = 3f;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public float Fuel;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref XATToolUseComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (XATToolUseComponent) target1;
+    if (serialization.TryCustomCopy<XATToolUseComponent>(this, ref target, hookCtx, false, context))
+      return;
+    ProtoId<ToolQualityPrototype> target2 = new ProtoId<ToolQualityPrototype>();
+    if (!serialization.TryCustomCopy<ProtoId<ToolQualityPrototype>>(this.RequiredTool, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<ProtoId<ToolQualityPrototype>>(this.RequiredTool, hookCtx, context);
+    target.RequiredTool = target2;
+    float target3 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.Delay, ref target3, hookCtx, false, context))
+      target3 = this.Delay;
+    target.Delay = target3;
+    float target4 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.Fuel, ref target4, hookCtx, false, context))
+      target4 = this.Fuel;
+    target.Fuel = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref XATToolUseComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XATToolUseComponent target1 = (XATToolUseComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XATToolUseComponent target1 = (XATToolUseComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XATToolUseComponent target1 = (XATToolUseComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual XATToolUseComponent Component.Instantiate() => new XATToolUseComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class XATToolUseComponent_AutoState : IComponentState
+  {
+    public ProtoId<ToolQualityPrototype> RequiredTool;
+    public float Delay;
+    public float Fuel;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class XATToolUseComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<XATToolUseComponent, ComponentGetState>(new ComponentEventRefHandler<XATToolUseComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<XATToolUseComponent, ComponentHandleState>(new ComponentEventRefHandler<XATToolUseComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      XATToolUseComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new XATToolUseComponent.XATToolUseComponent_AutoState()
+      {
+        RequiredTool = component.RequiredTool,
+        Delay = component.Delay,
+        Fuel = component.Fuel
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      XATToolUseComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is XATToolUseComponent.XATToolUseComponent_AutoState current))
+        return;
+      component.RequiredTool = current.RequiredTool;
+      component.Delay = current.Delay;
+      component.Fuel = current.Fuel;
+    }
+  }
+}

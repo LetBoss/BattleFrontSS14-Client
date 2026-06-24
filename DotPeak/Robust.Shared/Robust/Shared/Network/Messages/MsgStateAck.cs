@@ -1,0 +1,29 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Robust.Shared.Network.Messages.MsgStateAck
+// Assembly: Robust.Shared, Version=272.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 00043EA9-5325-44A7-AF0D-91DD061626DD
+// Assembly location: C:\Users\sus\AppData\Roaming\Space Station 14\launcher\engines\Robust.Shared.dll
+
+using Lidgren.Network;
+using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
+
+#nullable disable
+namespace Robust.Shared.Network.Messages;
+
+public sealed class MsgStateAck : NetMessage
+{
+  public override MsgGroups MsgGroup => MsgGroups.Entity;
+
+  public GameTick Sequence { get; set; }
+
+  public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
+  {
+    this.Sequence = new GameTick(((NetBuffer) buffer).ReadUInt32());
+  }
+
+  public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
+  {
+    ((NetBuffer) buffer).Write(this.Sequence.Value);
+  }
+}

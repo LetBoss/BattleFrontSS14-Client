@@ -1,0 +1,197 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Xenonids.Fruit.Components.XenoFruitEffectSpeedComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.FixedPoint;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Xenonids.Fruit.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(true, false)]
+[AutoGenerateComponentPause]
+[Access(new Type[] {typeof (SharedXenoFruitSystem)})]
+public sealed class XenoFruitEffectSpeedComponent : 
+  Component,
+  ISerializationGenerated<XenoFruitEffectSpeedComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public FixedPoint2 SpeedModifier;
+  [DataField(null, false, 1, false, false, typeof (TimeOffsetSerializer))]
+  [AutoNetworkedField]
+  [AutoPausedField]
+  public TimeSpan? EndAt;
+  [DataField(null, false, 1, false, false, null)]
+  public TimeSpan Duration = TimeSpan.FromSeconds(0L);
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref XenoFruitEffectSpeedComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (XenoFruitEffectSpeedComponent) target1;
+    if (serialization.TryCustomCopy<XenoFruitEffectSpeedComponent>(this, ref target, hookCtx, false, context))
+      return;
+    FixedPoint2 target2 = new FixedPoint2();
+    if (!serialization.TryCustomCopy<FixedPoint2>(this.SpeedModifier, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<FixedPoint2>(this.SpeedModifier, hookCtx, context);
+    target.SpeedModifier = target2;
+    TimeSpan? target3 = new TimeSpan?();
+    if (!serialization.TryCustomCopy<TimeSpan?>(this.EndAt, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<TimeSpan?>(this.EndAt, hookCtx, context);
+    target.EndAt = target3;
+    TimeSpan target4 = new TimeSpan();
+    if (!serialization.TryCustomCopy<TimeSpan>(this.Duration, ref target4, hookCtx, false, context))
+      target4 = serialization.CreateCopy<TimeSpan>(this.Duration, hookCtx, context);
+    target.Duration = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref XenoFruitEffectSpeedComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoFruitEffectSpeedComponent target1 = (XenoFruitEffectSpeedComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoFruitEffectSpeedComponent target1 = (XenoFruitEffectSpeedComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoFruitEffectSpeedComponent target1 = (XenoFruitEffectSpeedComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual XenoFruitEffectSpeedComponent Component.Instantiate()
+  {
+    return new XenoFruitEffectSpeedComponent();
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class XenoFruitEffectSpeedComponent_AutoPauseSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<XenoFruitEffectSpeedComponent, EntityUnpausedEvent>(new ComponentEventRefHandler<XenoFruitEffectSpeedComponent, EntityUnpausedEvent>(this.OnEntityUnpaused));
+    }
+
+    private void OnEntityUnpaused(
+      EntityUid uid,
+      #nullable disable
+      XenoFruitEffectSpeedComponent component,
+      ref EntityUnpausedEvent args)
+    {
+      if (component.EndAt.HasValue)
+        component.EndAt = new TimeSpan?(component.EndAt.Value + args.PausedTime);
+      this.Dirty(uid, (IComponent) component);
+    }
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class XenoFruitEffectSpeedComponent_AutoState : IComponentState
+  {
+    public FixedPoint2 SpeedModifier;
+    public TimeSpan? EndAt;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class XenoFruitEffectSpeedComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<XenoFruitEffectSpeedComponent, ComponentGetState>(new ComponentEventRefHandler<XenoFruitEffectSpeedComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<XenoFruitEffectSpeedComponent, ComponentHandleState>(new ComponentEventRefHandler<XenoFruitEffectSpeedComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      #nullable enable
+      XenoFruitEffectSpeedComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new XenoFruitEffectSpeedComponent.XenoFruitEffectSpeedComponent_AutoState()
+      {
+        SpeedModifier = component.SpeedModifier,
+        EndAt = component.EndAt
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      XenoFruitEffectSpeedComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is XenoFruitEffectSpeedComponent.XenoFruitEffectSpeedComponent_AutoState current))
+        return;
+      component.SpeedModifier = current.SpeedModifier;
+      component.EndAt = current.EndAt;
+      AfterAutoHandleStateEvent args1 = new AfterAutoHandleStateEvent(args.Current);
+      this.EntityManager.EventBus.RaiseComponentEvent<AfterAutoHandleStateEvent, XenoFruitEffectSpeedComponent>(uid, component, ref args1);
+    }
+  }
+}

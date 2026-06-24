@@ -1,0 +1,166 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Weapons.Ranged.RMCAmmoEjectComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.Audio;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Weapons.Ranged;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (CMGunSystem)})]
+public sealed class RMCAmmoEjectComponent : 
+  Component,
+  ISerializationGenerated<RMCAmmoEjectComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public string ContainerID = "gun_magazine";
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public SoundSpecifier EjectSound = (SoundSpecifier) new SoundPathSpecifier("/Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg", new AudioParams?(AudioParams.Default.WithVolume(-2f)));
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref RMCAmmoEjectComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (RMCAmmoEjectComponent) target1;
+    if (serialization.TryCustomCopy<RMCAmmoEjectComponent>(this, ref target, hookCtx, false, context))
+      return;
+    string target2 = (string) null;
+    if (this.ContainerID == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<string>(this.ContainerID, ref target2, hookCtx, false, context))
+      target2 = this.ContainerID;
+    target.ContainerID = target2;
+    SoundSpecifier target3 = (SoundSpecifier) null;
+    if (this.EjectSound == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<SoundSpecifier>(this.EjectSound, ref target3, hookCtx, true, context))
+      target3 = serialization.CreateCopy<SoundSpecifier>(this.EjectSound, hookCtx, context);
+    target.EjectSound = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref RMCAmmoEjectComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCAmmoEjectComponent target1 = (RMCAmmoEjectComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCAmmoEjectComponent target1 = (RMCAmmoEjectComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCAmmoEjectComponent target1 = (RMCAmmoEjectComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual RMCAmmoEjectComponent Component.Instantiate() => new RMCAmmoEjectComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class RMCAmmoEjectComponent_AutoState : IComponentState
+  {
+    public string ContainerID;
+    public SoundSpecifier EjectSound;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class RMCAmmoEjectComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<RMCAmmoEjectComponent, ComponentGetState>(new ComponentEventRefHandler<RMCAmmoEjectComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<RMCAmmoEjectComponent, ComponentHandleState>(new ComponentEventRefHandler<RMCAmmoEjectComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      RMCAmmoEjectComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new RMCAmmoEjectComponent.RMCAmmoEjectComponent_AutoState()
+      {
+        ContainerID = component.ContainerID,
+        EjectSound = component.EjectSound
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      RMCAmmoEjectComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is RMCAmmoEjectComponent.RMCAmmoEjectComponent_AutoState current))
+        return;
+      component.ContainerID = current.ContainerID;
+      component.EjectSound = current.EjectSound;
+    }
+  }
+}

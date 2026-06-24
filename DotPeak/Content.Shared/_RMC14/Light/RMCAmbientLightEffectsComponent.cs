@@ -1,0 +1,164 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Light.RMCAmbientLightEffectsComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Dataset;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Light;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class RMCAmbientLightEffectsComponent : 
+  Component,
+  ISerializationGenerated<RMCAmbientLightEffectsComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public ProtoId<DatasetPrototype> Sunset = (ProtoId<DatasetPrototype>) "RMCColorSequenceSunsetWarm";
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public ProtoId<DatasetPrototype> Sunrise = (ProtoId<DatasetPrototype>) "RMCColorSequenceSunrise";
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref RMCAmbientLightEffectsComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (RMCAmbientLightEffectsComponent) target1;
+    if (serialization.TryCustomCopy<RMCAmbientLightEffectsComponent>(this, ref target, hookCtx, false, context))
+      return;
+    ProtoId<DatasetPrototype> target2 = new ProtoId<DatasetPrototype>();
+    if (!serialization.TryCustomCopy<ProtoId<DatasetPrototype>>(this.Sunset, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<ProtoId<DatasetPrototype>>(this.Sunset, hookCtx, context);
+    target.Sunset = target2;
+    ProtoId<DatasetPrototype> target3 = new ProtoId<DatasetPrototype>();
+    if (!serialization.TryCustomCopy<ProtoId<DatasetPrototype>>(this.Sunrise, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<ProtoId<DatasetPrototype>>(this.Sunrise, hookCtx, context);
+    target.Sunrise = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref RMCAmbientLightEffectsComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCAmbientLightEffectsComponent target1 = (RMCAmbientLightEffectsComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCAmbientLightEffectsComponent target1 = (RMCAmbientLightEffectsComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCAmbientLightEffectsComponent target1 = (RMCAmbientLightEffectsComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual RMCAmbientLightEffectsComponent Component.Instantiate()
+  {
+    return new RMCAmbientLightEffectsComponent();
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class RMCAmbientLightEffectsComponent_AutoState : IComponentState
+  {
+    public ProtoId<DatasetPrototype> Sunset;
+    public ProtoId<DatasetPrototype> Sunrise;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class RMCAmbientLightEffectsComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<RMCAmbientLightEffectsComponent, ComponentGetState>(new ComponentEventRefHandler<RMCAmbientLightEffectsComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<RMCAmbientLightEffectsComponent, ComponentHandleState>(new ComponentEventRefHandler<RMCAmbientLightEffectsComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      RMCAmbientLightEffectsComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new RMCAmbientLightEffectsComponent.RMCAmbientLightEffectsComponent_AutoState()
+      {
+        Sunset = component.Sunset,
+        Sunrise = component.Sunrise
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      RMCAmbientLightEffectsComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is RMCAmbientLightEffectsComponent.RMCAmbientLightEffectsComponent_AutoState current))
+        return;
+      component.Sunset = current.Sunset;
+      component.Sunrise = current.Sunrise;
+    }
+  }
+}

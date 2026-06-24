@@ -1,0 +1,172 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Projectiles.ProjectileMaxRangeComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared._PUBG.Weapons.Ranged;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Map;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Projectiles;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (RMCProjectileSystem), typeof (PubgGunRangeSystem)})]
+public sealed class ProjectileMaxRangeComponent : 
+  Component,
+  ISerializationGenerated<ProjectileMaxRangeComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public EntityCoordinates? Origin;
+  [DataField(null, false, 1, true, false, null)]
+  [AutoNetworkedField]
+  public float Max;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool Delete = true;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref ProjectileMaxRangeComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (ProjectileMaxRangeComponent) target1;
+    if (serialization.TryCustomCopy<ProjectileMaxRangeComponent>(this, ref target, hookCtx, false, context))
+      return;
+    EntityCoordinates? target2 = new EntityCoordinates?();
+    if (!serialization.TryCustomCopy<EntityCoordinates?>(this.Origin, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<EntityCoordinates?>(this.Origin, hookCtx, context);
+    target.Origin = target2;
+    float target3 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.Max, ref target3, hookCtx, false, context))
+      target3 = this.Max;
+    target.Max = target3;
+    bool target4 = false;
+    if (!serialization.TryCustomCopy<bool>(this.Delete, ref target4, hookCtx, false, context))
+      target4 = this.Delete;
+    target.Delete = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref ProjectileMaxRangeComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ProjectileMaxRangeComponent target1 = (ProjectileMaxRangeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ProjectileMaxRangeComponent target1 = (ProjectileMaxRangeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ProjectileMaxRangeComponent target1 = (ProjectileMaxRangeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual ProjectileMaxRangeComponent Component.Instantiate() => new ProjectileMaxRangeComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class ProjectileMaxRangeComponent_AutoState : IComponentState
+  {
+    public NetCoordinates? Origin;
+    public float Max;
+    public bool Delete;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class ProjectileMaxRangeComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<ProjectileMaxRangeComponent, ComponentGetState>(new ComponentEventRefHandler<ProjectileMaxRangeComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<ProjectileMaxRangeComponent, ComponentHandleState>(new ComponentEventRefHandler<ProjectileMaxRangeComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      ProjectileMaxRangeComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new ProjectileMaxRangeComponent.ProjectileMaxRangeComponent_AutoState()
+      {
+        Origin = this.GetNetCoordinates(component.Origin),
+        Max = component.Max,
+        Delete = component.Delete
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      ProjectileMaxRangeComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is ProjectileMaxRangeComponent.ProjectileMaxRangeComponent_AutoState current))
+        return;
+      component.Origin = this.EnsureCoordinates<ProjectileMaxRangeComponent>(current.Origin, uid);
+      component.Max = current.Max;
+      component.Delete = current.Delete;
+    }
+  }
+}

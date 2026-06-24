@@ -1,0 +1,226 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Anomaly.Components.InnerBodyAnomalyComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Anomaly.Effects;
+using Content.Shared.Body.Prototypes;
+using Robust.Shared.Analyzers;
+using Robust.Shared.Audio;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Localization;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using Robust.Shared.Utility;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Anomaly.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(true, false)]
+[Access(new Type[] {typeof (SharedInnerBodyAnomalySystem)})]
+public sealed class InnerBodyAnomalyComponent : 
+  Component,
+  ISerializationGenerated<InnerBodyAnomalyComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  public bool Injected;
+  [DataField(null, false, 1, true, false, null)]
+  public EntProtoId? InjectionProto;
+  [DataField(null, false, 1, false, false, null)]
+  public float StunDuration = 4f;
+  [DataField(null, false, 1, false, false, null)]
+  public LocId? StartMessage;
+  [DataField(null, false, 1, false, false, null)]
+  public LocId? EndMessage = LocId.op_Implicit("inner-anomaly-end-message");
+  [DataField(null, false, 1, false, false, null)]
+  public SoundSpecifier? StartSound = (SoundSpecifier) new SoundPathSpecifier("/Audio/Effects/inneranomaly.ogg", new AudioParams?());
+  [DataField(null, false, 1, false, false, null)]
+  public float LastSeverityInformed;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public SpriteSpecifier? FallbackSprite;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public Dictionary<ProtoId<BodyPrototype>, SpriteSpecifier> SpeciesSprites = new Dictionary<ProtoId<BodyPrototype>, SpriteSpecifier>();
+  [DataField(null, false, 1, false, false, null)]
+  public string LayerMap = "inner_anomaly_layer";
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref InnerBodyAnomalyComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component component = (Component) target;
+    this.InternalCopy(ref component, serialization, hookCtx, context);
+    target = (InnerBodyAnomalyComponent) component;
+    if (serialization.TryCustomCopy<InnerBodyAnomalyComponent>(this, ref target, hookCtx, false, context))
+      return;
+    bool flag = false;
+    if (!serialization.TryCustomCopy<bool>(this.Injected, ref flag, hookCtx, false, context))
+      flag = this.Injected;
+    target.Injected = flag;
+    EntProtoId? nullable1 = new EntProtoId?();
+    if (!serialization.TryCustomCopy<EntProtoId?>(this.InjectionProto, ref nullable1, hookCtx, false, context))
+      nullable1 = serialization.CreateCopy<EntProtoId?>(this.InjectionProto, hookCtx, context, false);
+    target.InjectionProto = nullable1;
+    float num1 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.StunDuration, ref num1, hookCtx, false, context))
+      num1 = this.StunDuration;
+    target.StunDuration = num1;
+    LocId? nullable2 = new LocId?();
+    if (!serialization.TryCustomCopy<LocId?>(this.StartMessage, ref nullable2, hookCtx, false, context))
+      nullable2 = serialization.CreateCopy<LocId?>(this.StartMessage, hookCtx, context, false);
+    target.StartMessage = nullable2;
+    LocId? nullable3 = new LocId?();
+    if (!serialization.TryCustomCopy<LocId?>(this.EndMessage, ref nullable3, hookCtx, false, context))
+      nullable3 = serialization.CreateCopy<LocId?>(this.EndMessage, hookCtx, context, false);
+    target.EndMessage = nullable3;
+    SoundSpecifier soundSpecifier = (SoundSpecifier) null;
+    if (!serialization.TryCustomCopy<SoundSpecifier>(this.StartSound, ref soundSpecifier, hookCtx, true, context))
+      soundSpecifier = serialization.CreateCopy<SoundSpecifier>(this.StartSound, hookCtx, context, false);
+    target.StartSound = soundSpecifier;
+    float num2 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.LastSeverityInformed, ref num2, hookCtx, false, context))
+      num2 = this.LastSeverityInformed;
+    target.LastSeverityInformed = num2;
+    SpriteSpecifier spriteSpecifier = (SpriteSpecifier) null;
+    if (!serialization.TryCustomCopy<SpriteSpecifier>(this.FallbackSprite, ref spriteSpecifier, hookCtx, true, context))
+      spriteSpecifier = serialization.CreateCopy<SpriteSpecifier>(this.FallbackSprite, hookCtx, context, false);
+    target.FallbackSprite = spriteSpecifier;
+    Dictionary<ProtoId<BodyPrototype>, SpriteSpecifier> dictionary = (Dictionary<ProtoId<BodyPrototype>, SpriteSpecifier>) null;
+    if (this.SpeciesSprites == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<Dictionary<ProtoId<BodyPrototype>, SpriteSpecifier>>(this.SpeciesSprites, ref dictionary, hookCtx, true, context))
+      dictionary = serialization.CreateCopy<Dictionary<ProtoId<BodyPrototype>, SpriteSpecifier>>(this.SpeciesSprites, hookCtx, context, false);
+    target.SpeciesSprites = dictionary;
+    string str = (string) null;
+    if (this.LayerMap == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<string>(this.LayerMap, ref str, hookCtx, false, context))
+      str = this.LayerMap;
+    target.LayerMap = str;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref InnerBodyAnomalyComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    InnerBodyAnomalyComponent target1 = (InnerBodyAnomalyComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    InnerBodyAnomalyComponent target1 = (InnerBodyAnomalyComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    InnerBodyAnomalyComponent target1 = (InnerBodyAnomalyComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    base.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual InnerBodyAnomalyComponent Component.Instantiate() => new InnerBodyAnomalyComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class InnerBodyAnomalyComponent_AutoState : IComponentState
+  {
+    public SpriteSpecifier? FallbackSprite;
+    public Dictionary<ProtoId<BodyPrototype>, SpriteSpecifier> SpeciesSprites;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class InnerBodyAnomalyComponent_AutoNetworkSystem : EntitySystem
+  {
+    public virtual void Initialize()
+    {
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<InnerBodyAnomalyComponent, ComponentGetState>(new ComponentEventRefHandler<InnerBodyAnomalyComponent, ComponentGetState>((object) this, __methodptr(OnGetState)), (Type[]) null, (Type[]) null);
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<InnerBodyAnomalyComponent, ComponentHandleState>(new ComponentEventRefHandler<InnerBodyAnomalyComponent, ComponentHandleState>((object) this, __methodptr(OnHandleState)), (Type[]) null, (Type[]) null);
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      InnerBodyAnomalyComponent component,
+      ref ComponentGetState args)
+    {
+      ((ComponentGetState) ref args).State = (IComponentState) new InnerBodyAnomalyComponent.InnerBodyAnomalyComponent_AutoState()
+      {
+        FallbackSprite = component.FallbackSprite,
+        SpeciesSprites = component.SpeciesSprites
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      InnerBodyAnomalyComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(((ComponentHandleState) ref args).Current is InnerBodyAnomalyComponent.InnerBodyAnomalyComponent_AutoState current))
+        return;
+      component.FallbackSprite = current.FallbackSprite;
+      component.SpeciesSprites = current.SpeciesSprites == null ? (Dictionary<ProtoId<BodyPrototype>, SpriteSpecifier>) null : new Dictionary<ProtoId<BodyPrototype>, SpriteSpecifier>((IDictionary<ProtoId<BodyPrototype>, SpriteSpecifier>) current.SpeciesSprites);
+      AfterAutoHandleStateEvent handleStateEvent;
+      // ISSUE: explicit constructor call
+      ((AfterAutoHandleStateEvent) ref handleStateEvent).\u002Ector(((ComponentHandleState) ref args).Current);
+      ((IDirectedEventBus) this.EntityManager.EventBus).RaiseComponentEvent<AfterAutoHandleStateEvent, InnerBodyAnomalyComponent>(uid, component, ref handleStateEvent);
+    }
+  }
+}

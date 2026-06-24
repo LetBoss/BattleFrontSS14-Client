@@ -1,0 +1,171 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Storage.RemoveOnlyStorageComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Whitelist;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Storage;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (RMCStorageSystem)})]
+public sealed class RemoveOnlyStorageComponent : 
+  Component,
+  ISerializationGenerated<RemoveOnlyStorageComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public EntityWhitelist? Whitelist = new EntityWhitelist();
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public EntityWhitelist? Blacklist;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref RemoveOnlyStorageComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (RemoveOnlyStorageComponent) target1;
+    if (serialization.TryCustomCopy<RemoveOnlyStorageComponent>(this, ref target, hookCtx, false, context))
+      return;
+    EntityWhitelist target2 = (EntityWhitelist) null;
+    if (!serialization.TryCustomCopy<EntityWhitelist>(this.Whitelist, ref target2, hookCtx, false, context))
+    {
+      if (this.Whitelist == null)
+        target2 = (EntityWhitelist) null;
+      else
+        serialization.CopyTo<EntityWhitelist>(this.Whitelist, ref target2, hookCtx, context);
+    }
+    target.Whitelist = target2;
+    EntityWhitelist target3 = (EntityWhitelist) null;
+    if (!serialization.TryCustomCopy<EntityWhitelist>(this.Blacklist, ref target3, hookCtx, false, context))
+    {
+      if (this.Blacklist == null)
+        target3 = (EntityWhitelist) null;
+      else
+        serialization.CopyTo<EntityWhitelist>(this.Blacklist, ref target3, hookCtx, context);
+    }
+    target.Blacklist = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref RemoveOnlyStorageComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RemoveOnlyStorageComponent target1 = (RemoveOnlyStorageComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RemoveOnlyStorageComponent target1 = (RemoveOnlyStorageComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RemoveOnlyStorageComponent target1 = (RemoveOnlyStorageComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual RemoveOnlyStorageComponent Component.Instantiate() => new RemoveOnlyStorageComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class RemoveOnlyStorageComponent_AutoState : IComponentState
+  {
+    public EntityWhitelist? Whitelist;
+    public EntityWhitelist? Blacklist;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class RemoveOnlyStorageComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<RemoveOnlyStorageComponent, ComponentGetState>(new ComponentEventRefHandler<RemoveOnlyStorageComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<RemoveOnlyStorageComponent, ComponentHandleState>(new ComponentEventRefHandler<RemoveOnlyStorageComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      RemoveOnlyStorageComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new RemoveOnlyStorageComponent.RemoveOnlyStorageComponent_AutoState()
+      {
+        Whitelist = component.Whitelist,
+        Blacklist = component.Blacklist
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      RemoveOnlyStorageComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is RemoveOnlyStorageComponent.RemoveOnlyStorageComponent_AutoState current))
+        return;
+      component.Whitelist = current.Whitelist;
+      component.Blacklist = current.Blacklist;
+    }
+  }
+}

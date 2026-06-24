@@ -1,0 +1,189 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Shuttles.Components.FTLDestinationComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Whitelist;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.ViewVariables;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Shuttles.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class FTLDestinationComponent : 
+  Component,
+  ISerializationGenerated<FTLDestinationComponent>,
+  ISerializationGenerated
+{
+  [Robust.Shared.ViewVariables.ViewVariables(VVAccess.ReadWrite)]
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public EntityWhitelist? Whitelist;
+  [Robust.Shared.ViewVariables.ViewVariables(VVAccess.ReadWrite)]
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool Enabled = true;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool BeaconsOnly;
+  [Robust.Shared.ViewVariables.ViewVariables(VVAccess.ReadWrite)]
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool RequireCoordinateDisk;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref FTLDestinationComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (FTLDestinationComponent) target1;
+    if (serialization.TryCustomCopy<FTLDestinationComponent>(this, ref target, hookCtx, false, context))
+      return;
+    EntityWhitelist target2 = (EntityWhitelist) null;
+    if (!serialization.TryCustomCopy<EntityWhitelist>(this.Whitelist, ref target2, hookCtx, false, context))
+    {
+      if (this.Whitelist == null)
+        target2 = (EntityWhitelist) null;
+      else
+        serialization.CopyTo<EntityWhitelist>(this.Whitelist, ref target2, hookCtx, context);
+    }
+    target.Whitelist = target2;
+    bool target3 = false;
+    if (!serialization.TryCustomCopy<bool>(this.Enabled, ref target3, hookCtx, false, context))
+      target3 = this.Enabled;
+    target.Enabled = target3;
+    bool target4 = false;
+    if (!serialization.TryCustomCopy<bool>(this.BeaconsOnly, ref target4, hookCtx, false, context))
+      target4 = this.BeaconsOnly;
+    target.BeaconsOnly = target4;
+    bool target5 = false;
+    if (!serialization.TryCustomCopy<bool>(this.RequireCoordinateDisk, ref target5, hookCtx, false, context))
+      target5 = this.RequireCoordinateDisk;
+    target.RequireCoordinateDisk = target5;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref FTLDestinationComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    FTLDestinationComponent target1 = (FTLDestinationComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    FTLDestinationComponent target1 = (FTLDestinationComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    FTLDestinationComponent target1 = (FTLDestinationComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual FTLDestinationComponent Component.Instantiate() => new FTLDestinationComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class FTLDestinationComponent_AutoState : IComponentState
+  {
+    public EntityWhitelist? Whitelist;
+    public bool Enabled;
+    public bool BeaconsOnly;
+    public bool RequireCoordinateDisk;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class FTLDestinationComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<FTLDestinationComponent, ComponentGetState>(new ComponentEventRefHandler<FTLDestinationComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<FTLDestinationComponent, ComponentHandleState>(new ComponentEventRefHandler<FTLDestinationComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      FTLDestinationComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new FTLDestinationComponent.FTLDestinationComponent_AutoState()
+      {
+        Whitelist = component.Whitelist,
+        Enabled = component.Enabled,
+        BeaconsOnly = component.BeaconsOnly,
+        RequireCoordinateDisk = component.RequireCoordinateDisk
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      FTLDestinationComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is FTLDestinationComponent.FTLDestinationComponent_AutoState current))
+        return;
+      component.Whitelist = current.Whitelist;
+      component.Enabled = current.Enabled;
+      component.BeaconsOnly = current.BeaconsOnly;
+      component.RequireCoordinateDisk = current.RequireCoordinateDisk;
+    }
+  }
+}

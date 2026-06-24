@@ -1,0 +1,42 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Client.Cargo.BUI.CargoShuttleConsoleBoundUserInterface
+// Assembly: Content.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: B4469588-B038-4783-B6EC-1EFF6592A364
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Client.dll
+
+using Content.Client.Cargo.UI;
+using Content.Shared.Cargo.BUI;
+using Robust.Client.GameObjects;
+using Robust.Client.UserInterface;
+using Robust.Shared.GameObjects;
+using Robust.Shared.IoC;
+using Robust.Shared.Prototypes;
+using System;
+
+#nullable enable
+namespace Content.Client.Cargo.BUI;
+
+public sealed class CargoShuttleConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : 
+  BoundUserInterface(owner, uiKey)
+{
+  [Dependency]
+  private IPrototypeManager _protoManager;
+  [Robust.Shared.ViewVariables.ViewVariables]
+  private CargoShuttleMenu? _menu;
+
+  protected virtual void Open()
+  {
+    base.Open();
+    this._menu = BoundUserInterfaceExt.CreateWindow<CargoShuttleMenu>((BoundUserInterface) this);
+  }
+
+  protected virtual void UpdateState(BoundUserInterfaceState state)
+  {
+    base.UpdateState(state);
+    if (!(state is CargoShuttleConsoleBoundUserInterfaceState userInterfaceState))
+      return;
+    this._menu?.SetAccountName(userInterfaceState.AccountName);
+    this._menu?.SetShuttleName(userInterfaceState.ShuttleName);
+    this._menu?.SetOrders(this.EntMan.System<SpriteSystem>(), this._protoManager, userInterfaceState.Orders);
+  }
+}

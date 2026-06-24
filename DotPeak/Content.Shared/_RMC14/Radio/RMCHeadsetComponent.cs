@@ -1,0 +1,167 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Radio.RMCHeadsetComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Radio;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Radio;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (RMCRadioSystem)})]
+public sealed class RMCHeadsetComponent : 
+  Component,
+  ISerializationGenerated<RMCHeadsetComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public HashSet<ProtoId<RadioChannelPrototype>> Channels = new HashSet<ProtoId<RadioChannelPrototype>>();
+
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public int? RadioTextIncrease { get; set; } = new int?(0);
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref RMCHeadsetComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (RMCHeadsetComponent) target1;
+    if (serialization.TryCustomCopy<RMCHeadsetComponent>(this, ref target, hookCtx, false, context))
+      return;
+    HashSet<ProtoId<RadioChannelPrototype>> target2 = (HashSet<ProtoId<RadioChannelPrototype>>) null;
+    if (this.Channels == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<HashSet<ProtoId<RadioChannelPrototype>>>(this.Channels, ref target2, hookCtx, true, context))
+      target2 = serialization.CreateCopy<HashSet<ProtoId<RadioChannelPrototype>>>(this.Channels, hookCtx, context);
+    target.Channels = target2;
+    int? target3 = new int?();
+    if (!serialization.TryCustomCopy<int?>(this.RadioTextIncrease, ref target3, hookCtx, false, context))
+      target3 = this.RadioTextIncrease;
+    target.RadioTextIncrease = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref RMCHeadsetComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCHeadsetComponent target1 = (RMCHeadsetComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCHeadsetComponent target1 = (RMCHeadsetComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCHeadsetComponent target1 = (RMCHeadsetComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual RMCHeadsetComponent Component.Instantiate() => new RMCHeadsetComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class RMCHeadsetComponent_AutoState : IComponentState
+  {
+    public HashSet<ProtoId<RadioChannelPrototype>> Channels;
+    public int? RadioTextIncrease;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class RMCHeadsetComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<RMCHeadsetComponent, ComponentGetState>(new ComponentEventRefHandler<RMCHeadsetComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<RMCHeadsetComponent, ComponentHandleState>(new ComponentEventRefHandler<RMCHeadsetComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      RMCHeadsetComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new RMCHeadsetComponent.RMCHeadsetComponent_AutoState()
+      {
+        Channels = component.Channels,
+        RadioTextIncrease = component.RadioTextIncrease
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      RMCHeadsetComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is RMCHeadsetComponent.RMCHeadsetComponent_AutoState current))
+        return;
+      component.Channels = current.Channels == null ? (HashSet<ProtoId<RadioChannelPrototype>>) null : new HashSet<ProtoId<RadioChannelPrototype>>((IEnumerable<ProtoId<RadioChannelPrototype>>) current.Channels);
+      component.RadioTextIncrease = current.RadioTextIncrease;
+    }
+  }
+}

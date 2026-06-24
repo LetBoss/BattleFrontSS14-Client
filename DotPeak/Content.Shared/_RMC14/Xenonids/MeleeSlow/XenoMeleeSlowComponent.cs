@@ -1,0 +1,170 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Xenonids.MeleeSlow.XenoMeleeSlowComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Xenonids.MeleeSlow;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (XenoMeleeSlowSystem)})]
+public sealed class XenoMeleeSlowComponent : 
+  Component,
+  ISerializationGenerated<XenoMeleeSlowComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public TimeSpan SlowTime = TimeSpan.FromSeconds(3.5);
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool RequiresKnockDown;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool HigherOnXenos;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref XenoMeleeSlowComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (XenoMeleeSlowComponent) target1;
+    if (serialization.TryCustomCopy<XenoMeleeSlowComponent>(this, ref target, hookCtx, false, context))
+      return;
+    TimeSpan target2 = new TimeSpan();
+    if (!serialization.TryCustomCopy<TimeSpan>(this.SlowTime, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<TimeSpan>(this.SlowTime, hookCtx, context);
+    target.SlowTime = target2;
+    bool target3 = false;
+    if (!serialization.TryCustomCopy<bool>(this.RequiresKnockDown, ref target3, hookCtx, false, context))
+      target3 = this.RequiresKnockDown;
+    target.RequiresKnockDown = target3;
+    bool target4 = false;
+    if (!serialization.TryCustomCopy<bool>(this.HigherOnXenos, ref target4, hookCtx, false, context))
+      target4 = this.HigherOnXenos;
+    target.HigherOnXenos = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref XenoMeleeSlowComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoMeleeSlowComponent target1 = (XenoMeleeSlowComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoMeleeSlowComponent target1 = (XenoMeleeSlowComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoMeleeSlowComponent target1 = (XenoMeleeSlowComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual XenoMeleeSlowComponent Component.Instantiate() => new XenoMeleeSlowComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class XenoMeleeSlowComponent_AutoState : IComponentState
+  {
+    public TimeSpan SlowTime;
+    public bool RequiresKnockDown;
+    public bool HigherOnXenos;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class XenoMeleeSlowComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<XenoMeleeSlowComponent, ComponentGetState>(new ComponentEventRefHandler<XenoMeleeSlowComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<XenoMeleeSlowComponent, ComponentHandleState>(new ComponentEventRefHandler<XenoMeleeSlowComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      XenoMeleeSlowComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new XenoMeleeSlowComponent.XenoMeleeSlowComponent_AutoState()
+      {
+        SlowTime = component.SlowTime,
+        RequiresKnockDown = component.RequiresKnockDown,
+        HigherOnXenos = component.HigherOnXenos
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      XenoMeleeSlowComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is XenoMeleeSlowComponent.XenoMeleeSlowComponent_AutoState current))
+        return;
+      component.SlowTime = current.SlowTime;
+      component.RequiresKnockDown = current.RequiresKnockDown;
+      component.HigherOnXenos = current.HigherOnXenos;
+    }
+  }
+}

@@ -1,0 +1,165 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Dropship.Weapon.ActiveFlareSignalComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Map;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Dropship.Weapon;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (SharedDropshipWeaponSystem)})]
+public sealed class ActiveFlareSignalComponent : 
+  Component,
+  ISerializationGenerated<ActiveFlareSignalComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public string? Abbreviation;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public Queue<NetCoordinates> LastCoordinates = new Queue<NetCoordinates>();
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref ActiveFlareSignalComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (ActiveFlareSignalComponent) target1;
+    if (serialization.TryCustomCopy<ActiveFlareSignalComponent>(this, ref target, hookCtx, false, context))
+      return;
+    string target2 = (string) null;
+    if (!serialization.TryCustomCopy<string>(this.Abbreviation, ref target2, hookCtx, false, context))
+      target2 = this.Abbreviation;
+    target.Abbreviation = target2;
+    Queue<NetCoordinates> target3 = (Queue<NetCoordinates>) null;
+    if (this.LastCoordinates == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<Queue<NetCoordinates>>(this.LastCoordinates, ref target3, hookCtx, true, context))
+      target3 = serialization.CreateCopy<Queue<NetCoordinates>>(this.LastCoordinates, hookCtx, context);
+    target.LastCoordinates = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref ActiveFlareSignalComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ActiveFlareSignalComponent target1 = (ActiveFlareSignalComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ActiveFlareSignalComponent target1 = (ActiveFlareSignalComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ActiveFlareSignalComponent target1 = (ActiveFlareSignalComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual ActiveFlareSignalComponent Component.Instantiate() => new ActiveFlareSignalComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class ActiveFlareSignalComponent_AutoState : IComponentState
+  {
+    public string? Abbreviation;
+    public Queue<NetCoordinates> LastCoordinates;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class ActiveFlareSignalComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<ActiveFlareSignalComponent, ComponentGetState>(new ComponentEventRefHandler<ActiveFlareSignalComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<ActiveFlareSignalComponent, ComponentHandleState>(new ComponentEventRefHandler<ActiveFlareSignalComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      ActiveFlareSignalComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new ActiveFlareSignalComponent.ActiveFlareSignalComponent_AutoState()
+      {
+        Abbreviation = component.Abbreviation,
+        LastCoordinates = component.LastCoordinates
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      ActiveFlareSignalComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is ActiveFlareSignalComponent.ActiveFlareSignalComponent_AutoState current))
+        return;
+      component.Abbreviation = current.Abbreviation;
+      component.LastCoordinates = current.LastCoordinates;
+    }
+  }
+}

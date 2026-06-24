@@ -1,0 +1,172 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Xenonids.Construction.XenoConstructionActionComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Xenonids.Construction;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class XenoConstructionActionComponent : 
+  Component,
+  ISerializationGenerated<XenoConstructionActionComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, true, false, null)]
+  [AutoNetworkedField]
+  public bool CheckStructureSelected;
+  [DataField(null, false, 1, true, false, null)]
+  [AutoNetworkedField]
+  public bool CheckWeeds;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool CanUpgrade;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref XenoConstructionActionComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (XenoConstructionActionComponent) target1;
+    if (serialization.TryCustomCopy<XenoConstructionActionComponent>(this, ref target, hookCtx, false, context))
+      return;
+    bool target2 = false;
+    if (!serialization.TryCustomCopy<bool>(this.CheckStructureSelected, ref target2, hookCtx, false, context))
+      target2 = this.CheckStructureSelected;
+    target.CheckStructureSelected = target2;
+    bool target3 = false;
+    if (!serialization.TryCustomCopy<bool>(this.CheckWeeds, ref target3, hookCtx, false, context))
+      target3 = this.CheckWeeds;
+    target.CheckWeeds = target3;
+    bool target4 = false;
+    if (!serialization.TryCustomCopy<bool>(this.CanUpgrade, ref target4, hookCtx, false, context))
+      target4 = this.CanUpgrade;
+    target.CanUpgrade = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref XenoConstructionActionComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoConstructionActionComponent target1 = (XenoConstructionActionComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoConstructionActionComponent target1 = (XenoConstructionActionComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoConstructionActionComponent target1 = (XenoConstructionActionComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual XenoConstructionActionComponent Component.Instantiate()
+  {
+    return new XenoConstructionActionComponent();
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class XenoConstructionActionComponent_AutoState : IComponentState
+  {
+    public bool CheckStructureSelected;
+    public bool CheckWeeds;
+    public bool CanUpgrade;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class XenoConstructionActionComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<XenoConstructionActionComponent, ComponentGetState>(new ComponentEventRefHandler<XenoConstructionActionComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<XenoConstructionActionComponent, ComponentHandleState>(new ComponentEventRefHandler<XenoConstructionActionComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      XenoConstructionActionComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new XenoConstructionActionComponent.XenoConstructionActionComponent_AutoState()
+      {
+        CheckStructureSelected = component.CheckStructureSelected,
+        CheckWeeds = component.CheckWeeds,
+        CanUpgrade = component.CanUpgrade
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      XenoConstructionActionComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is XenoConstructionActionComponent.XenoConstructionActionComponent_AutoState current))
+        return;
+      component.CheckStructureSelected = current.CheckStructureSelected;
+      component.CheckWeeds = current.CheckWeeds;
+      component.CanUpgrade = current.CanUpgrade;
+    }
+  }
+}

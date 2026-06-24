@@ -1,0 +1,202 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Standing.RMCRestComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Standing;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[AutoGenerateComponentPause]
+[Access(new Type[] {typeof (RMCStandingSystem)})]
+public sealed class RMCRestComponent : 
+  Component,
+  ISerializationGenerated<RMCRestComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool Resting;
+  [DataField(null, false, 1, false, false, typeof (TimeOffsetSerializer))]
+  [AutoNetworkedField]
+  [AutoPausedField]
+  public TimeSpan LastToggleAt;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public TimeSpan Cooldown = TimeSpan.FromSeconds(1L);
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public float RestingSpeed = 0.15f;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref RMCRestComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (RMCRestComponent) target1;
+    if (serialization.TryCustomCopy<RMCRestComponent>(this, ref target, hookCtx, false, context))
+      return;
+    bool target2 = false;
+    if (!serialization.TryCustomCopy<bool>(this.Resting, ref target2, hookCtx, false, context))
+      target2 = this.Resting;
+    target.Resting = target2;
+    TimeSpan target3 = new TimeSpan();
+    if (!serialization.TryCustomCopy<TimeSpan>(this.LastToggleAt, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<TimeSpan>(this.LastToggleAt, hookCtx, context);
+    target.LastToggleAt = target3;
+    TimeSpan target4 = new TimeSpan();
+    if (!serialization.TryCustomCopy<TimeSpan>(this.Cooldown, ref target4, hookCtx, false, context))
+      target4 = serialization.CreateCopy<TimeSpan>(this.Cooldown, hookCtx, context);
+    target.Cooldown = target4;
+    float target5 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.RestingSpeed, ref target5, hookCtx, false, context))
+      target5 = this.RestingSpeed;
+    target.RestingSpeed = target5;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref RMCRestComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCRestComponent target1 = (RMCRestComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCRestComponent target1 = (RMCRestComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCRestComponent target1 = (RMCRestComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual RMCRestComponent Component.Instantiate() => new RMCRestComponent();
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class RMCRestComponent_AutoPauseSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<RMCRestComponent, EntityUnpausedEvent>(new ComponentEventRefHandler<RMCRestComponent, EntityUnpausedEvent>(this.OnEntityUnpaused));
+    }
+
+    private void OnEntityUnpaused(
+      EntityUid uid,
+      #nullable disable
+      RMCRestComponent component,
+      ref EntityUnpausedEvent args)
+    {
+      component.LastToggleAt += args.PausedTime;
+      this.Dirty(uid, (IComponent) component);
+    }
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class RMCRestComponent_AutoState : IComponentState
+  {
+    public bool Resting;
+    public TimeSpan LastToggleAt;
+    public TimeSpan Cooldown;
+    public float RestingSpeed;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class RMCRestComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<RMCRestComponent, ComponentGetState>(new ComponentEventRefHandler<RMCRestComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<RMCRestComponent, ComponentHandleState>(new ComponentEventRefHandler<RMCRestComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(EntityUid uid, 
+    #nullable enable
+    RMCRestComponent component, ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new RMCRestComponent.RMCRestComponent_AutoState()
+      {
+        Resting = component.Resting,
+        LastToggleAt = component.LastToggleAt,
+        Cooldown = component.Cooldown,
+        RestingSpeed = component.RestingSpeed
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      RMCRestComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is RMCRestComponent.RMCRestComponent_AutoState current))
+        return;
+      component.Resting = current.Resting;
+      component.LastToggleAt = current.LastToggleAt;
+      component.Cooldown = current.Cooldown;
+      component.RestingSpeed = current.RestingSpeed;
+    }
+  }
+}

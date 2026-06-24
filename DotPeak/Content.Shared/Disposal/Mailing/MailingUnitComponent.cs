@@ -1,0 +1,181 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Disposal.Components.MailingUnitComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Disposal.Mailing;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Disposal.Components;
+
+[Access(new Type[] {typeof (SharedMailingUnitSystem)})]
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(true, false)]
+public sealed class MailingUnitComponent : 
+  Component,
+  ISerializationGenerated<MailingUnitComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public List<string> TargetList = new List<string>();
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public string? Target;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public string? Tag;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref MailingUnitComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component component = (Component) target;
+    this.InternalCopy(ref component, serialization, hookCtx, context);
+    target = (MailingUnitComponent) component;
+    if (serialization.TryCustomCopy<MailingUnitComponent>(this, ref target, hookCtx, false, context))
+      return;
+    List<string> stringList = (List<string>) null;
+    if (this.TargetList == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<List<string>>(this.TargetList, ref stringList, hookCtx, true, context))
+      stringList = serialization.CreateCopy<List<string>>(this.TargetList, hookCtx, context, false);
+    target.TargetList = stringList;
+    string str1 = (string) null;
+    if (!serialization.TryCustomCopy<string>(this.Target, ref str1, hookCtx, false, context))
+      str1 = this.Target;
+    target.Target = str1;
+    string str2 = (string) null;
+    if (!serialization.TryCustomCopy<string>(this.Tag, ref str2, hookCtx, false, context))
+      str2 = this.Tag;
+    target.Tag = str2;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref MailingUnitComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    MailingUnitComponent target1 = (MailingUnitComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    MailingUnitComponent target1 = (MailingUnitComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    MailingUnitComponent target1 = (MailingUnitComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    base.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual MailingUnitComponent Component.Instantiate() => new MailingUnitComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class MailingUnitComponent_AutoState : IComponentState
+  {
+    public List<string> TargetList;
+    public string? Target;
+    public string? Tag;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class MailingUnitComponent_AutoNetworkSystem : EntitySystem
+  {
+    public virtual void Initialize()
+    {
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<MailingUnitComponent, ComponentGetState>(new ComponentEventRefHandler<MailingUnitComponent, ComponentGetState>((object) this, __methodptr(OnGetState)), (Type[]) null, (Type[]) null);
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<MailingUnitComponent, ComponentHandleState>(new ComponentEventRefHandler<MailingUnitComponent, ComponentHandleState>((object) this, __methodptr(OnHandleState)), (Type[]) null, (Type[]) null);
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      MailingUnitComponent component,
+      ref ComponentGetState args)
+    {
+      ((ComponentGetState) ref args).State = (IComponentState) new MailingUnitComponent.MailingUnitComponent_AutoState()
+      {
+        TargetList = component.TargetList,
+        Target = component.Target,
+        Tag = component.Tag
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      MailingUnitComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(((ComponentHandleState) ref args).Current is MailingUnitComponent.MailingUnitComponent_AutoState current))
+        return;
+      component.TargetList = current.TargetList == null ? (List<string>) null : new List<string>((IEnumerable<string>) current.TargetList);
+      component.Target = current.Target;
+      component.Tag = current.Tag;
+      AfterAutoHandleStateEvent handleStateEvent;
+      // ISSUE: explicit constructor call
+      ((AfterAutoHandleStateEvent) ref handleStateEvent).\u002Ector(((ComponentHandleState) ref args).Current);
+      ((IDirectedEventBus) this.EntityManager.EventBus).RaiseComponentEvent<AfterAutoHandleStateEvent, MailingUnitComponent>(uid, component, ref handleStateEvent);
+    }
+  }
+}

@@ -1,0 +1,172 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Barricade.DirectionalAttackBlockerComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Barricade;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class DirectionalAttackBlockerComponent : 
+  Component,
+  ISerializationGenerated<DirectionalAttackBlockerComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public float MinimumBlockChance = 0.3f;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public int MaxHealth;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool BlockMarineAttacks;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref DirectionalAttackBlockerComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (DirectionalAttackBlockerComponent) target1;
+    if (serialization.TryCustomCopy<DirectionalAttackBlockerComponent>(this, ref target, hookCtx, false, context))
+      return;
+    float target2 = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.MinimumBlockChance, ref target2, hookCtx, false, context))
+      target2 = this.MinimumBlockChance;
+    target.MinimumBlockChance = target2;
+    int target3 = 0;
+    if (!serialization.TryCustomCopy<int>(this.MaxHealth, ref target3, hookCtx, false, context))
+      target3 = this.MaxHealth;
+    target.MaxHealth = target3;
+    bool target4 = false;
+    if (!serialization.TryCustomCopy<bool>(this.BlockMarineAttacks, ref target4, hookCtx, false, context))
+      target4 = this.BlockMarineAttacks;
+    target.BlockMarineAttacks = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref DirectionalAttackBlockerComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DirectionalAttackBlockerComponent target1 = (DirectionalAttackBlockerComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DirectionalAttackBlockerComponent target1 = (DirectionalAttackBlockerComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DirectionalAttackBlockerComponent target1 = (DirectionalAttackBlockerComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual DirectionalAttackBlockerComponent Component.Instantiate()
+  {
+    return new DirectionalAttackBlockerComponent();
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class DirectionalAttackBlockerComponent_AutoState : IComponentState
+  {
+    public float MinimumBlockChance;
+    public int MaxHealth;
+    public bool BlockMarineAttacks;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class DirectionalAttackBlockerComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<DirectionalAttackBlockerComponent, ComponentGetState>(new ComponentEventRefHandler<DirectionalAttackBlockerComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<DirectionalAttackBlockerComponent, ComponentHandleState>(new ComponentEventRefHandler<DirectionalAttackBlockerComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      DirectionalAttackBlockerComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new DirectionalAttackBlockerComponent.DirectionalAttackBlockerComponent_AutoState()
+      {
+        MinimumBlockChance = component.MinimumBlockChance,
+        MaxHealth = component.MaxHealth,
+        BlockMarineAttacks = component.BlockMarineAttacks
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      DirectionalAttackBlockerComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is DirectionalAttackBlockerComponent.DirectionalAttackBlockerComponent_AutoState current))
+        return;
+      component.MinimumBlockChance = current.MinimumBlockChance;
+      component.MaxHealth = current.MaxHealth;
+      component.BlockMarineAttacks = current.BlockMarineAttacks;
+    }
+  }
+}

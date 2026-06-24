@@ -1,0 +1,173 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Placeable.PlaceableSurfaceComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Numerics;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Placeable;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (PlaceableSurfaceSystem)})]
+public sealed class PlaceableSurfaceComponent : 
+  Component,
+  ISerializationGenerated<PlaceableSurfaceComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool IsPlaceable { get; set; } = true;
+
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool PlaceCentered { get; set; }
+
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public Vector2 PositionOffset { get; set; }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref PlaceableSurfaceComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (PlaceableSurfaceComponent) target1;
+    if (serialization.TryCustomCopy<PlaceableSurfaceComponent>(this, ref target, hookCtx, false, context))
+      return;
+    bool target2 = false;
+    if (!serialization.TryCustomCopy<bool>(this.IsPlaceable, ref target2, hookCtx, false, context))
+      target2 = this.IsPlaceable;
+    target.IsPlaceable = target2;
+    bool target3 = false;
+    if (!serialization.TryCustomCopy<bool>(this.PlaceCentered, ref target3, hookCtx, false, context))
+      target3 = this.PlaceCentered;
+    target.PlaceCentered = target3;
+    Vector2 target4 = new Vector2();
+    if (!serialization.TryCustomCopy<Vector2>(this.PositionOffset, ref target4, hookCtx, false, context))
+      target4 = serialization.CreateCopy<Vector2>(this.PositionOffset, hookCtx, context);
+    target.PositionOffset = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref PlaceableSurfaceComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    PlaceableSurfaceComponent target1 = (PlaceableSurfaceComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    PlaceableSurfaceComponent target1 = (PlaceableSurfaceComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    PlaceableSurfaceComponent target1 = (PlaceableSurfaceComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual PlaceableSurfaceComponent Component.Instantiate() => new PlaceableSurfaceComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class PlaceableSurfaceComponent_AutoState : IComponentState
+  {
+    public bool IsPlaceable;
+    public bool PlaceCentered;
+    public Vector2 PositionOffset;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class PlaceableSurfaceComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<PlaceableSurfaceComponent, ComponentGetState>(new ComponentEventRefHandler<PlaceableSurfaceComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<PlaceableSurfaceComponent, ComponentHandleState>(new ComponentEventRefHandler<PlaceableSurfaceComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      PlaceableSurfaceComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new PlaceableSurfaceComponent.PlaceableSurfaceComponent_AutoState()
+      {
+        IsPlaceable = component.IsPlaceable,
+        PlaceCentered = component.PlaceCentered,
+        PositionOffset = component.PositionOffset
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      PlaceableSurfaceComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is PlaceableSurfaceComponent.PlaceableSurfaceComponent_AutoState current))
+        return;
+      component.IsPlaceable = current.IsPlaceable;
+      component.PlaceCentered = current.PlaceCentered;
+      component.PositionOffset = current.PositionOffset;
+    }
+  }
+}

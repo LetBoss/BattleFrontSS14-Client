@@ -1,0 +1,22 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Robust.Shared.GameObjects.BoundUserInterfaceMessageAttempt
+// Assembly: Robust.Shared, Version=272.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 00043EA9-5325-44A7-AF0D-91DD061626DD
+// Assembly location: C:\Users\sus\AppData\Roaming\Space Station 14\launcher\engines\Robust.Shared.dll
+
+using System;
+
+#nullable enable
+namespace Robust.Shared.GameObjects;
+
+public sealed class BoundUserInterfaceMessageAttempt(
+  EntityUid actor,
+  EntityUid target,
+  Enum uiKey,
+  BoundUserInterfaceMessage message) : CancellableEntityEventArgs
+{
+  public readonly EntityUid Actor = actor;
+  public readonly EntityUid Target = target;
+  public readonly Enum UiKey = uiKey;
+  public readonly BoundUserInterfaceMessage Message = message;
+}

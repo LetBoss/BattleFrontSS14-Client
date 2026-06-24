@@ -1,0 +1,164 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.PowerLoader.PowerLoaderAttachableComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Tag;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.PowerLoader;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class PowerLoaderAttachableComponent : 
+  Component,
+  ISerializationGenerated<PowerLoaderAttachableComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public TimeSpan AttachDelay = TimeSpan.FromSeconds(5L);
+  [DataField(null, false, 1, false, false, null)]
+  public List<ProtoId<TagPrototype>> AttachableTypes = new List<ProtoId<TagPrototype>>();
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref PowerLoaderAttachableComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (PowerLoaderAttachableComponent) target1;
+    if (serialization.TryCustomCopy<PowerLoaderAttachableComponent>(this, ref target, hookCtx, false, context))
+      return;
+    TimeSpan target2 = new TimeSpan();
+    if (!serialization.TryCustomCopy<TimeSpan>(this.AttachDelay, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<TimeSpan>(this.AttachDelay, hookCtx, context);
+    target.AttachDelay = target2;
+    List<ProtoId<TagPrototype>> target3 = (List<ProtoId<TagPrototype>>) null;
+    if (this.AttachableTypes == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<List<ProtoId<TagPrototype>>>(this.AttachableTypes, ref target3, hookCtx, true, context))
+      target3 = serialization.CreateCopy<List<ProtoId<TagPrototype>>>(this.AttachableTypes, hookCtx, context);
+    target.AttachableTypes = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref PowerLoaderAttachableComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    PowerLoaderAttachableComponent target1 = (PowerLoaderAttachableComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    PowerLoaderAttachableComponent target1 = (PowerLoaderAttachableComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    PowerLoaderAttachableComponent target1 = (PowerLoaderAttachableComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual PowerLoaderAttachableComponent Component.Instantiate()
+  {
+    return new PowerLoaderAttachableComponent();
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class PowerLoaderAttachableComponent_AutoState : IComponentState
+  {
+    public TimeSpan AttachDelay;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class PowerLoaderAttachableComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<PowerLoaderAttachableComponent, ComponentGetState>(new ComponentEventRefHandler<PowerLoaderAttachableComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<PowerLoaderAttachableComponent, ComponentHandleState>(new ComponentEventRefHandler<PowerLoaderAttachableComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      PowerLoaderAttachableComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new PowerLoaderAttachableComponent.PowerLoaderAttachableComponent_AutoState()
+      {
+        AttachDelay = component.AttachDelay
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      PowerLoaderAttachableComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is PowerLoaderAttachableComponent.PowerLoaderAttachableComponent_AutoState current))
+        return;
+      component.AttachDelay = current.AttachDelay;
+    }
+  }
+}

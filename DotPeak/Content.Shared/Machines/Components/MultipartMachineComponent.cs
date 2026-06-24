@@ -1,0 +1,168 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Machines.Components.MultipartMachineComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Machines.EntitySystems;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Machines.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(true, false)]
+[Access(new Type[] {typeof (SharedMultipartMachineSystem)})]
+public sealed class MultipartMachineComponent : 
+  Component,
+  ISerializationGenerated<MultipartMachineComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public Dictionary<Enum, MachinePart> Parts = new Dictionary<Enum, MachinePart>();
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool IsAssembled;
+  public List<EntityUid> Ghosts = new List<EntityUid>();
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref MultipartMachineComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (MultipartMachineComponent) target1;
+    if (serialization.TryCustomCopy<MultipartMachineComponent>(this, ref target, hookCtx, false, context))
+      return;
+    Dictionary<Enum, MachinePart> target2 = (Dictionary<Enum, MachinePart>) null;
+    if (this.Parts == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<Dictionary<Enum, MachinePart>>(this.Parts, ref target2, hookCtx, true, context))
+      target2 = serialization.CreateCopy<Dictionary<Enum, MachinePart>>(this.Parts, hookCtx, context);
+    target.Parts = target2;
+    bool target3 = false;
+    if (!serialization.TryCustomCopy<bool>(this.IsAssembled, ref target3, hookCtx, false, context))
+      target3 = this.IsAssembled;
+    target.IsAssembled = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref MultipartMachineComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    MultipartMachineComponent target1 = (MultipartMachineComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    MultipartMachineComponent target1 = (MultipartMachineComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    MultipartMachineComponent target1 = (MultipartMachineComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual MultipartMachineComponent Component.Instantiate() => new MultipartMachineComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class MultipartMachineComponent_AutoState : IComponentState
+  {
+    public Dictionary<Enum, MachinePart> Parts;
+    public bool IsAssembled;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class MultipartMachineComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<MultipartMachineComponent, ComponentGetState>(new ComponentEventRefHandler<MultipartMachineComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<MultipartMachineComponent, ComponentHandleState>(new ComponentEventRefHandler<MultipartMachineComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      MultipartMachineComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new MultipartMachineComponent.MultipartMachineComponent_AutoState()
+      {
+        Parts = component.Parts,
+        IsAssembled = component.IsAssembled
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      MultipartMachineComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is MultipartMachineComponent.MultipartMachineComponent_AutoState current))
+        return;
+      component.Parts = current.Parts == null ? (Dictionary<Enum, MachinePart>) null : new Dictionary<Enum, MachinePart>((IDictionary<Enum, MachinePart>) current.Parts);
+      component.IsAssembled = current.IsAssembled;
+      AfterAutoHandleStateEvent args1 = new AfterAutoHandleStateEvent(args.Current);
+      this.EntityManager.EventBus.RaiseComponentEvent<AfterAutoHandleStateEvent, MultipartMachineComponent>(uid, component, ref args1);
+    }
+  }
+}

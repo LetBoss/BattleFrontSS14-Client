@@ -1,0 +1,168 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Weapons.Ranged.Components.BatteryWeaponFireModesComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Weapons.Ranged.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[Access(new Type[] {typeof (BatteryWeaponFireModesSystem)})]
+[AutoGenerateComponentState(false, false)]
+public sealed class BatteryWeaponFireModesComponent : 
+  Component,
+  ISerializationGenerated<BatteryWeaponFireModesComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, true, false, null)]
+  [AutoNetworkedField]
+  public List<BatteryWeaponFireMode> FireModes = new List<BatteryWeaponFireMode>();
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public int CurrentFireMode;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref BatteryWeaponFireModesComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (BatteryWeaponFireModesComponent) target1;
+    if (serialization.TryCustomCopy<BatteryWeaponFireModesComponent>(this, ref target, hookCtx, false, context))
+      return;
+    List<BatteryWeaponFireMode> target2 = (List<BatteryWeaponFireMode>) null;
+    if (this.FireModes == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<List<BatteryWeaponFireMode>>(this.FireModes, ref target2, hookCtx, true, context))
+      target2 = serialization.CreateCopy<List<BatteryWeaponFireMode>>(this.FireModes, hookCtx, context);
+    target.FireModes = target2;
+    int target3 = 0;
+    if (!serialization.TryCustomCopy<int>(this.CurrentFireMode, ref target3, hookCtx, false, context))
+      target3 = this.CurrentFireMode;
+    target.CurrentFireMode = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref BatteryWeaponFireModesComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    BatteryWeaponFireModesComponent target1 = (BatteryWeaponFireModesComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    BatteryWeaponFireModesComponent target1 = (BatteryWeaponFireModesComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    BatteryWeaponFireModesComponent target1 = (BatteryWeaponFireModesComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual BatteryWeaponFireModesComponent Component.Instantiate()
+  {
+    return new BatteryWeaponFireModesComponent();
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class BatteryWeaponFireModesComponent_AutoState : IComponentState
+  {
+    public List<BatteryWeaponFireMode> FireModes;
+    public int CurrentFireMode;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class BatteryWeaponFireModesComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<BatteryWeaponFireModesComponent, ComponentGetState>(new ComponentEventRefHandler<BatteryWeaponFireModesComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<BatteryWeaponFireModesComponent, ComponentHandleState>(new ComponentEventRefHandler<BatteryWeaponFireModesComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      BatteryWeaponFireModesComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new BatteryWeaponFireModesComponent.BatteryWeaponFireModesComponent_AutoState()
+      {
+        FireModes = component.FireModes,
+        CurrentFireMode = component.CurrentFireMode
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      BatteryWeaponFireModesComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is BatteryWeaponFireModesComponent.BatteryWeaponFireModesComponent_AutoState current))
+        return;
+      component.FireModes = current.FireModes == null ? (List<BatteryWeaponFireMode>) null : new List<BatteryWeaponFireMode>((IEnumerable<BatteryWeaponFireMode>) current.FireModes);
+      component.CurrentFireMode = current.CurrentFireMode;
+    }
+  }
+}

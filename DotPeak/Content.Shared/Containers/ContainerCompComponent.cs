@@ -1,0 +1,115 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Containers.ContainerCompComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Containers;
+
+[RegisterComponent]
+[NetworkedComponent]
+public sealed class ContainerCompComponent : 
+  Component,
+  ISerializationGenerated<ContainerCompComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, true, false, null)]
+  public EntProtoId Proto;
+  [DataField(null, false, 1, true, false, null)]
+  public string Container = string.Empty;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref ContainerCompComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component component = (Component) target;
+    this.InternalCopy(ref component, serialization, hookCtx, context);
+    target = (ContainerCompComponent) component;
+    if (serialization.TryCustomCopy<ContainerCompComponent>(this, ref target, hookCtx, false, context))
+      return;
+    EntProtoId entProtoId = new EntProtoId();
+    if (!serialization.TryCustomCopy<EntProtoId>(this.Proto, ref entProtoId, hookCtx, false, context))
+      entProtoId = serialization.CreateCopy<EntProtoId>(this.Proto, hookCtx, context, false);
+    target.Proto = entProtoId;
+    string str = (string) null;
+    if (this.Container == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<string>(this.Container, ref str, hookCtx, false, context))
+      str = this.Container;
+    target.Container = str;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref ContainerCompComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ContainerCompComponent target1 = (ContainerCompComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ContainerCompComponent target1 = (ContainerCompComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ContainerCompComponent target1 = (ContainerCompComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    base.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual ContainerCompComponent Component.Instantiate() => new ContainerCompComponent();
+}

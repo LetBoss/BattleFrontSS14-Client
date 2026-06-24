@@ -1,0 +1,193 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.SSDIndicator.SSDIndicatorComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.StatusIcon;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.ViewVariables;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.SSDIndicator;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[AutoGenerateComponentPause]
+public sealed class SSDIndicatorComponent : 
+  Component,
+  ISerializationGenerated<SSDIndicatorComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [Robust.Shared.ViewVariables.ViewVariables(VVAccess.ReadOnly)]
+  [AutoNetworkedField]
+  public bool IsSSD = true;
+  [DataField(null, false, 1, false, false, null)]
+  public ProtoId<SsdIconPrototype> Icon = (ProtoId<SsdIconPrototype>) "SSDIcon";
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  [AutoPausedField]
+  [Access(new Type[] {typeof (SSDIndicatorSystem)})]
+  public TimeSpan FallAsleepTime = TimeSpan.Zero;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref SSDIndicatorComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (SSDIndicatorComponent) target1;
+    if (serialization.TryCustomCopy<SSDIndicatorComponent>(this, ref target, hookCtx, false, context))
+      return;
+    bool target2 = false;
+    if (!serialization.TryCustomCopy<bool>(this.IsSSD, ref target2, hookCtx, false, context))
+      target2 = this.IsSSD;
+    target.IsSSD = target2;
+    ProtoId<SsdIconPrototype> target3 = new ProtoId<SsdIconPrototype>();
+    if (!serialization.TryCustomCopy<ProtoId<SsdIconPrototype>>(this.Icon, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<ProtoId<SsdIconPrototype>>(this.Icon, hookCtx, context);
+    target.Icon = target3;
+    TimeSpan target4 = new TimeSpan();
+    if (!serialization.TryCustomCopy<TimeSpan>(this.FallAsleepTime, ref target4, hookCtx, false, context))
+      target4 = serialization.CreateCopy<TimeSpan>(this.FallAsleepTime, hookCtx, context);
+    target.FallAsleepTime = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref SSDIndicatorComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SSDIndicatorComponent target1 = (SSDIndicatorComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SSDIndicatorComponent target1 = (SSDIndicatorComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SSDIndicatorComponent target1 = (SSDIndicatorComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual SSDIndicatorComponent Component.Instantiate() => new SSDIndicatorComponent();
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class SSDIndicatorComponent_AutoPauseSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<SSDIndicatorComponent, EntityUnpausedEvent>(new ComponentEventRefHandler<SSDIndicatorComponent, EntityUnpausedEvent>(this.OnEntityUnpaused));
+    }
+
+    private void OnEntityUnpaused(
+      EntityUid uid,
+      #nullable disable
+      SSDIndicatorComponent component,
+      ref EntityUnpausedEvent args)
+    {
+      component.FallAsleepTime += args.PausedTime;
+      this.Dirty(uid, (IComponent) component);
+    }
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class SSDIndicatorComponent_AutoState : IComponentState
+  {
+    public bool IsSSD;
+    public TimeSpan FallAsleepTime;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class SSDIndicatorComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<SSDIndicatorComponent, ComponentGetState>(new ComponentEventRefHandler<SSDIndicatorComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<SSDIndicatorComponent, ComponentHandleState>(new ComponentEventRefHandler<SSDIndicatorComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      #nullable enable
+      SSDIndicatorComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new SSDIndicatorComponent.SSDIndicatorComponent_AutoState()
+      {
+        IsSSD = component.IsSSD,
+        FallAsleepTime = component.FallAsleepTime
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      SSDIndicatorComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is SSDIndicatorComponent.SSDIndicatorComponent_AutoState current))
+        return;
+      component.IsSSD = current.IsSSD;
+      component.FallAsleepTime = current.FallAsleepTime;
+    }
+  }
+}

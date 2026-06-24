@@ -1,0 +1,166 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Requisitions.Components.RequisitionsInvoiceComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Requisitions.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (SharedRequisitionsSystem)})]
+public sealed class RequisitionsInvoiceComponent : 
+  Component,
+  ISerializationGenerated<RequisitionsInvoiceComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public int Reward = 100;
+  [DataField(null, false, 1, false, false, null)]
+  public EntProtoId PaperOutput = (EntProtoId) "RMCPaperRequisitionInvoice";
+  [DataField(null, false, 1, false, false, null)]
+  public string? RequiredStamp = "paper_stamp-approve";
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref RequisitionsInvoiceComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (RequisitionsInvoiceComponent) target1;
+    if (serialization.TryCustomCopy<RequisitionsInvoiceComponent>(this, ref target, hookCtx, false, context))
+      return;
+    int target2 = 0;
+    if (!serialization.TryCustomCopy<int>(this.Reward, ref target2, hookCtx, false, context))
+      target2 = this.Reward;
+    target.Reward = target2;
+    EntProtoId target3 = new EntProtoId();
+    if (!serialization.TryCustomCopy<EntProtoId>(this.PaperOutput, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<EntProtoId>(this.PaperOutput, hookCtx, context);
+    target.PaperOutput = target3;
+    string target4 = (string) null;
+    if (!serialization.TryCustomCopy<string>(this.RequiredStamp, ref target4, hookCtx, false, context))
+      target4 = this.RequiredStamp;
+    target.RequiredStamp = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref RequisitionsInvoiceComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RequisitionsInvoiceComponent target1 = (RequisitionsInvoiceComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RequisitionsInvoiceComponent target1 = (RequisitionsInvoiceComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RequisitionsInvoiceComponent target1 = (RequisitionsInvoiceComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual RequisitionsInvoiceComponent Component.Instantiate()
+  {
+    return new RequisitionsInvoiceComponent();
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class RequisitionsInvoiceComponent_AutoState : IComponentState
+  {
+    public int Reward;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class RequisitionsInvoiceComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<RequisitionsInvoiceComponent, ComponentGetState>(new ComponentEventRefHandler<RequisitionsInvoiceComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<RequisitionsInvoiceComponent, ComponentHandleState>(new ComponentEventRefHandler<RequisitionsInvoiceComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      RequisitionsInvoiceComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new RequisitionsInvoiceComponent.RequisitionsInvoiceComponent_AutoState()
+      {
+        Reward = component.Reward
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      RequisitionsInvoiceComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is RequisitionsInvoiceComponent.RequisitionsInvoiceComponent_AutoState current))
+        return;
+      component.Reward = current.Reward;
+    }
+  }
+}

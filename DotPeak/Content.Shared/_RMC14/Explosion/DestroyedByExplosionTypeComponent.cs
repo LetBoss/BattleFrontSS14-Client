@@ -1,0 +1,166 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Explosion.DestroyedByExplosionTypeComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Explosion;
+using Content.Shared.FixedPoint;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Explosion;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (SharedRMCExplosionSystem)})]
+public sealed class DestroyedByExplosionTypeComponent : 
+  Component,
+  ISerializationGenerated<DestroyedByExplosionTypeComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public ProtoId<ExplosionPrototype> Explosion = (ProtoId<ExplosionPrototype>) "RMCOB";
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public FixedPoint2 Threshold = (FixedPoint2) 9000;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref DestroyedByExplosionTypeComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (DestroyedByExplosionTypeComponent) target1;
+    if (serialization.TryCustomCopy<DestroyedByExplosionTypeComponent>(this, ref target, hookCtx, false, context))
+      return;
+    ProtoId<ExplosionPrototype> target2 = new ProtoId<ExplosionPrototype>();
+    if (!serialization.TryCustomCopy<ProtoId<ExplosionPrototype>>(this.Explosion, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<ProtoId<ExplosionPrototype>>(this.Explosion, hookCtx, context);
+    target.Explosion = target2;
+    FixedPoint2 target3 = new FixedPoint2();
+    if (!serialization.TryCustomCopy<FixedPoint2>(this.Threshold, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<FixedPoint2>(this.Threshold, hookCtx, context);
+    target.Threshold = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref DestroyedByExplosionTypeComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DestroyedByExplosionTypeComponent target1 = (DestroyedByExplosionTypeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DestroyedByExplosionTypeComponent target1 = (DestroyedByExplosionTypeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DestroyedByExplosionTypeComponent target1 = (DestroyedByExplosionTypeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual DestroyedByExplosionTypeComponent Component.Instantiate()
+  {
+    return new DestroyedByExplosionTypeComponent();
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class DestroyedByExplosionTypeComponent_AutoState : IComponentState
+  {
+    public ProtoId<ExplosionPrototype> Explosion;
+    public FixedPoint2 Threshold;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class DestroyedByExplosionTypeComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<DestroyedByExplosionTypeComponent, ComponentGetState>(new ComponentEventRefHandler<DestroyedByExplosionTypeComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<DestroyedByExplosionTypeComponent, ComponentHandleState>(new ComponentEventRefHandler<DestroyedByExplosionTypeComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      DestroyedByExplosionTypeComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new DestroyedByExplosionTypeComponent.DestroyedByExplosionTypeComponent_AutoState()
+      {
+        Explosion = component.Explosion,
+        Threshold = component.Threshold
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      DestroyedByExplosionTypeComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is DestroyedByExplosionTypeComponent.DestroyedByExplosionTypeComponent_AutoState current))
+        return;
+      component.Explosion = current.Explosion;
+      component.Threshold = current.Threshold;
+    }
+  }
+}

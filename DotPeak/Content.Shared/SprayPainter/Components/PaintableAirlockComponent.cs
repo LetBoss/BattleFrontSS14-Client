@@ -1,0 +1,162 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.SprayPainter.Components.PaintableAirlockComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Roles;
+using Content.Shared.SprayPainter.Prototypes;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.SprayPainter.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class PaintableAirlockComponent : 
+  Component,
+  ISerializationGenerated<PaintableAirlockComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, true, false, null)]
+  [AutoNetworkedField]
+  public ProtoId<AirlockGroupPrototype> Group = (ProtoId<AirlockGroupPrototype>) string.Empty;
+  [DataField(null, false, 1, true, false, null)]
+  [AutoNetworkedField]
+  public ProtoId<DepartmentPrototype>? Department;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref PaintableAirlockComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (PaintableAirlockComponent) target1;
+    if (serialization.TryCustomCopy<PaintableAirlockComponent>(this, ref target, hookCtx, false, context))
+      return;
+    ProtoId<AirlockGroupPrototype> target2 = new ProtoId<AirlockGroupPrototype>();
+    if (!serialization.TryCustomCopy<ProtoId<AirlockGroupPrototype>>(this.Group, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<ProtoId<AirlockGroupPrototype>>(this.Group, hookCtx, context);
+    target.Group = target2;
+    ProtoId<DepartmentPrototype>? target3 = new ProtoId<DepartmentPrototype>?();
+    if (!serialization.TryCustomCopy<ProtoId<DepartmentPrototype>?>(this.Department, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<ProtoId<DepartmentPrototype>?>(this.Department, hookCtx, context);
+    target.Department = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref PaintableAirlockComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    PaintableAirlockComponent target1 = (PaintableAirlockComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    PaintableAirlockComponent target1 = (PaintableAirlockComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    PaintableAirlockComponent target1 = (PaintableAirlockComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual PaintableAirlockComponent Component.Instantiate() => new PaintableAirlockComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class PaintableAirlockComponent_AutoState : IComponentState
+  {
+    public ProtoId<AirlockGroupPrototype> Group;
+    public ProtoId<DepartmentPrototype>? Department;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class PaintableAirlockComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<PaintableAirlockComponent, ComponentGetState>(new ComponentEventRefHandler<PaintableAirlockComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<PaintableAirlockComponent, ComponentHandleState>(new ComponentEventRefHandler<PaintableAirlockComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      PaintableAirlockComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new PaintableAirlockComponent.PaintableAirlockComponent_AutoState()
+      {
+        Group = component.Group,
+        Department = component.Department
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      PaintableAirlockComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is PaintableAirlockComponent.PaintableAirlockComponent_AutoState current))
+        return;
+      component.Group = current.Group;
+      component.Department = current.Department;
+    }
+  }
+}

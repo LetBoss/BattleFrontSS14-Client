@@ -1,0 +1,168 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Slippery.SlipperyComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.Audio;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Slippery;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class SlipperyComponent : 
+  Component,
+  ISerializationGenerated<SlipperyComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  [Access(new Type[] {}, Other = AccessPermissions.ReadWriteExecute)]
+  public SoundSpecifier SlipSound = (SoundSpecifier) new SoundPathSpecifier("/Audio/Effects/slip.ogg");
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public SlipperyEffectEntry SlipData = new SlipperyEffectEntry();
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref SlipperyComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (SlipperyComponent) target1;
+    if (serialization.TryCustomCopy<SlipperyComponent>(this, ref target, hookCtx, false, context))
+      return;
+    SoundSpecifier target2 = (SoundSpecifier) null;
+    if (this.SlipSound == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<SoundSpecifier>(this.SlipSound, ref target2, hookCtx, true, context))
+      target2 = serialization.CreateCopy<SoundSpecifier>(this.SlipSound, hookCtx, context);
+    target.SlipSound = target2;
+    SlipperyEffectEntry target3 = (SlipperyEffectEntry) null;
+    if (this.SlipData == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<SlipperyEffectEntry>(this.SlipData, ref target3, hookCtx, false, context))
+    {
+      if (this.SlipData == null)
+        target3 = (SlipperyEffectEntry) null;
+      else
+        serialization.CopyTo<SlipperyEffectEntry>(this.SlipData, ref target3, hookCtx, context, true);
+    }
+    target.SlipData = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref SlipperyComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SlipperyComponent target1 = (SlipperyComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SlipperyComponent target1 = (SlipperyComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SlipperyComponent target1 = (SlipperyComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual SlipperyComponent Component.Instantiate() => new SlipperyComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class SlipperyComponent_AutoState : IComponentState
+  {
+    public SoundSpecifier SlipSound;
+    public SlipperyEffectEntry SlipData;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class SlipperyComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<SlipperyComponent, ComponentGetState>(new ComponentEventRefHandler<SlipperyComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<SlipperyComponent, ComponentHandleState>(new ComponentEventRefHandler<SlipperyComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(EntityUid uid, SlipperyComponent component, ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new SlipperyComponent.SlipperyComponent_AutoState()
+      {
+        SlipSound = component.SlipSound,
+        SlipData = component.SlipData
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      SlipperyComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is SlipperyComponent.SlipperyComponent_AutoState current))
+        return;
+      component.SlipSound = current.SlipSound;
+      component.SlipData = current.SlipData;
+    }
+  }
+}

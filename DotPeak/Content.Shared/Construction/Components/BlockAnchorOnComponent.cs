@@ -1,0 +1,125 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Construction.Components.BlockAnchorOnComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Construction.EntitySystems;
+using Content.Shared.Whitelist;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Construction.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[Access(new Type[] {typeof (BlockAnchorOnSystem)})]
+public sealed class BlockAnchorOnComponent : 
+  Component,
+  ISerializationGenerated<BlockAnchorOnComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  public EntityWhitelist? Whitelist;
+  [DataField(null, false, 1, false, false, null)]
+  public EntityWhitelist? Blacklist;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref BlockAnchorOnComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component component = (Component) target;
+    this.InternalCopy(ref component, serialization, hookCtx, context);
+    target = (BlockAnchorOnComponent) component;
+    if (serialization.TryCustomCopy<BlockAnchorOnComponent>(this, ref target, hookCtx, false, context))
+      return;
+    EntityWhitelist entityWhitelist1 = (EntityWhitelist) null;
+    if (!serialization.TryCustomCopy<EntityWhitelist>(this.Whitelist, ref entityWhitelist1, hookCtx, false, context))
+    {
+      if (this.Whitelist == null)
+        entityWhitelist1 = (EntityWhitelist) null;
+      else
+        serialization.CopyTo<EntityWhitelist>(this.Whitelist, ref entityWhitelist1, hookCtx, context, false);
+    }
+    target.Whitelist = entityWhitelist1;
+    EntityWhitelist entityWhitelist2 = (EntityWhitelist) null;
+    if (!serialization.TryCustomCopy<EntityWhitelist>(this.Blacklist, ref entityWhitelist2, hookCtx, false, context))
+    {
+      if (this.Blacklist == null)
+        entityWhitelist2 = (EntityWhitelist) null;
+      else
+        serialization.CopyTo<EntityWhitelist>(this.Blacklist, ref entityWhitelist2, hookCtx, context, false);
+    }
+    target.Blacklist = entityWhitelist2;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref BlockAnchorOnComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    BlockAnchorOnComponent target1 = (BlockAnchorOnComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    BlockAnchorOnComponent target1 = (BlockAnchorOnComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    BlockAnchorOnComponent target1 = (BlockAnchorOnComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    base.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual BlockAnchorOnComponent Component.Instantiate() => new BlockAnchorOnComponent();
+}

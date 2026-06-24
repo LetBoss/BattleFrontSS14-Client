@@ -1,0 +1,159 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Research.TechnologyDisk.Components.TechnologyDiskComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Random;
+using Content.Shared.Research.Prototypes;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Research.TechnologyDisk.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class TechnologyDiskComponent : 
+  Component,
+  ISerializationGenerated<TechnologyDiskComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public List<ProtoId<LatheRecipePrototype>>? Recipes;
+  [DataField(null, false, 1, false, false, null)]
+  public ProtoId<WeightedRandomPrototype> TierWeightPrototype = (ProtoId<WeightedRandomPrototype>) "TechDiskTierWeights";
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref TechnologyDiskComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (TechnologyDiskComponent) target1;
+    if (serialization.TryCustomCopy<TechnologyDiskComponent>(this, ref target, hookCtx, false, context))
+      return;
+    List<ProtoId<LatheRecipePrototype>> target2 = (List<ProtoId<LatheRecipePrototype>>) null;
+    if (!serialization.TryCustomCopy<List<ProtoId<LatheRecipePrototype>>>(this.Recipes, ref target2, hookCtx, true, context))
+      target2 = serialization.CreateCopy<List<ProtoId<LatheRecipePrototype>>>(this.Recipes, hookCtx, context);
+    target.Recipes = target2;
+    ProtoId<WeightedRandomPrototype> target3 = new ProtoId<WeightedRandomPrototype>();
+    if (!serialization.TryCustomCopy<ProtoId<WeightedRandomPrototype>>(this.TierWeightPrototype, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<ProtoId<WeightedRandomPrototype>>(this.TierWeightPrototype, hookCtx, context);
+    target.TierWeightPrototype = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref TechnologyDiskComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    TechnologyDiskComponent target1 = (TechnologyDiskComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    TechnologyDiskComponent target1 = (TechnologyDiskComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    TechnologyDiskComponent target1 = (TechnologyDiskComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual TechnologyDiskComponent Component.Instantiate() => new TechnologyDiskComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class TechnologyDiskComponent_AutoState : IComponentState
+  {
+    public List<ProtoId<LatheRecipePrototype>>? Recipes;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class TechnologyDiskComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<TechnologyDiskComponent, ComponentGetState>(new ComponentEventRefHandler<TechnologyDiskComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<TechnologyDiskComponent, ComponentHandleState>(new ComponentEventRefHandler<TechnologyDiskComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      TechnologyDiskComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new TechnologyDiskComponent.TechnologyDiskComponent_AutoState()
+      {
+        Recipes = component.Recipes
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      TechnologyDiskComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is TechnologyDiskComponent.TechnologyDiskComponent_AutoState current))
+        return;
+      component.Recipes = current.Recipes == null ? (List<ProtoId<LatheRecipePrototype>>) null : new List<ProtoId<LatheRecipePrototype>>((IEnumerable<ProtoId<LatheRecipePrototype>>) current.Recipes);
+    }
+  }
+}

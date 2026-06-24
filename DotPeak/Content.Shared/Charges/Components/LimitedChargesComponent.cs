@@ -1,0 +1,175 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Charges.Components.LimitedChargesComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.Charges.Systems;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Charges.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (SharedChargesSystem)})]
+public sealed class LimitedChargesComponent : 
+  Component,
+  ISerializationGenerated<LimitedChargesComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public int LastCharges;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  [Access(new Type[] {})]
+  public int MaxCharges = 3;
+  [DataField(null, false, 1, false, false, typeof (TimeOffsetSerializer))]
+  [AutoNetworkedField]
+  public TimeSpan LastUpdate;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref LimitedChargesComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component component = (Component) target;
+    this.InternalCopy(ref component, serialization, hookCtx, context);
+    target = (LimitedChargesComponent) component;
+    if (serialization.TryCustomCopy<LimitedChargesComponent>(this, ref target, hookCtx, false, context))
+      return;
+    int num1 = 0;
+    if (!serialization.TryCustomCopy<int>(this.LastCharges, ref num1, hookCtx, false, context))
+      num1 = this.LastCharges;
+    target.LastCharges = num1;
+    int num2 = 0;
+    if (!serialization.TryCustomCopy<int>(this.MaxCharges, ref num2, hookCtx, false, context))
+      num2 = this.MaxCharges;
+    target.MaxCharges = num2;
+    TimeSpan timeSpan = new TimeSpan();
+    if (!serialization.TryCustomCopy<TimeSpan>(this.LastUpdate, ref timeSpan, hookCtx, false, context))
+      timeSpan = serialization.CreateCopy<TimeSpan>(this.LastUpdate, hookCtx, context, false);
+    target.LastUpdate = timeSpan;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref LimitedChargesComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    LimitedChargesComponent target1 = (LimitedChargesComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    LimitedChargesComponent target1 = (LimitedChargesComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    LimitedChargesComponent target1 = (LimitedChargesComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    base.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual LimitedChargesComponent Component.Instantiate() => new LimitedChargesComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class LimitedChargesComponent_AutoState : IComponentState
+  {
+    public int LastCharges;
+    public int MaxCharges;
+    public TimeSpan LastUpdate;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class LimitedChargesComponent_AutoNetworkSystem : EntitySystem
+  {
+    public virtual void Initialize()
+    {
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<LimitedChargesComponent, ComponentGetState>(new ComponentEventRefHandler<LimitedChargesComponent, ComponentGetState>((object) this, __methodptr(OnGetState)), (Type[]) null, (Type[]) null);
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<LimitedChargesComponent, ComponentHandleState>(new ComponentEventRefHandler<LimitedChargesComponent, ComponentHandleState>((object) this, __methodptr(OnHandleState)), (Type[]) null, (Type[]) null);
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      LimitedChargesComponent component,
+      ref ComponentGetState args)
+    {
+      ((ComponentGetState) ref args).State = (IComponentState) new LimitedChargesComponent.LimitedChargesComponent_AutoState()
+      {
+        LastCharges = component.LastCharges,
+        MaxCharges = component.MaxCharges,
+        LastUpdate = component.LastUpdate
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      LimitedChargesComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(((ComponentHandleState) ref args).Current is LimitedChargesComponent.LimitedChargesComponent_AutoState current))
+        return;
+      component.LastCharges = current.LastCharges;
+      component.MaxCharges = current.MaxCharges;
+      component.LastUpdate = current.LastUpdate;
+    }
+  }
+}

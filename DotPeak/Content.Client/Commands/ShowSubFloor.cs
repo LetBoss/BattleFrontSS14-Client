@@ -1,0 +1,35 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Client.Commands.ShowSubFloor
+// Assembly: Content.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: B4469588-B038-4783-B6EC-1EFF6592A364
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Client.dll
+
+using Content.Client.SubFloor;
+using Robust.Shared.Console;
+using Robust.Shared.GameObjects;
+using Robust.Shared.IoC;
+
+#nullable enable
+namespace Content.Client.Commands;
+
+internal sealed class ShowSubFloor : LocalizedCommands
+{
+  [Dependency]
+  private IEntitySystemManager _entitySystemManager;
+
+  public virtual string Command => "showsubfloor";
+
+  public virtual string Help
+  {
+    get
+    {
+      return this.LocalizationManager.GetString($"cmd-{base.Command}-help", ("command", (object) base.Command));
+    }
+  }
+
+  public virtual void Execute(IConsoleShell shell, string argStr, string[] args)
+  {
+    SubFloorHideSystem entitySystem = this._entitySystemManager.GetEntitySystem<SubFloorHideSystem>();
+    entitySystem.ShowAll = !entitySystem.ShowAll;
+  }
+}

@@ -1,0 +1,170 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Vents.VentCrawlingComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Maths;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Vents;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class VentCrawlingComponent : 
+  Component,
+  ISerializationGenerated<VentCrawlingComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public TimeSpan NextVentMoveTime;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public Direction? TravelDirection;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public TimeSpan NextVentCrawlSound;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref VentCrawlingComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (VentCrawlingComponent) target1;
+    if (serialization.TryCustomCopy<VentCrawlingComponent>(this, ref target, hookCtx, false, context))
+      return;
+    TimeSpan target2 = new TimeSpan();
+    if (!serialization.TryCustomCopy<TimeSpan>(this.NextVentMoveTime, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<TimeSpan>(this.NextVentMoveTime, hookCtx, context);
+    target.NextVentMoveTime = target2;
+    Direction? target3 = new Direction?();
+    if (!serialization.TryCustomCopy<Direction?>(this.TravelDirection, ref target3, hookCtx, false, context))
+      target3 = this.TravelDirection;
+    target.TravelDirection = target3;
+    TimeSpan target4 = new TimeSpan();
+    if (!serialization.TryCustomCopy<TimeSpan>(this.NextVentCrawlSound, ref target4, hookCtx, false, context))
+      target4 = serialization.CreateCopy<TimeSpan>(this.NextVentCrawlSound, hookCtx, context);
+    target.NextVentCrawlSound = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref VentCrawlingComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    VentCrawlingComponent target1 = (VentCrawlingComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    VentCrawlingComponent target1 = (VentCrawlingComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    VentCrawlingComponent target1 = (VentCrawlingComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual VentCrawlingComponent Component.Instantiate() => new VentCrawlingComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class VentCrawlingComponent_AutoState : IComponentState
+  {
+    public TimeSpan NextVentMoveTime;
+    public Direction? TravelDirection;
+    public TimeSpan NextVentCrawlSound;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class VentCrawlingComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<VentCrawlingComponent, ComponentGetState>(new ComponentEventRefHandler<VentCrawlingComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<VentCrawlingComponent, ComponentHandleState>(new ComponentEventRefHandler<VentCrawlingComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      VentCrawlingComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new VentCrawlingComponent.VentCrawlingComponent_AutoState()
+      {
+        NextVentMoveTime = component.NextVentMoveTime,
+        TravelDirection = component.TravelDirection,
+        NextVentCrawlSound = component.NextVentCrawlSound
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      VentCrawlingComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is VentCrawlingComponent.VentCrawlingComponent_AutoState current))
+        return;
+      component.NextVentMoveTime = current.NextVentMoveTime;
+      component.TravelDirection = current.TravelDirection;
+      component.NextVentCrawlSound = current.NextVentCrawlSound;
+    }
+  }
+}

@@ -1,0 +1,166 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.CartridgeLoader.CartridgeComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Localization;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Utility;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.CartridgeLoader;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class CartridgeComponent : 
+  Component,
+  ISerializationGenerated<CartridgeComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  public EntityUid? LoaderUid;
+  [DataField(null, false, 1, true, false, null)]
+  public LocId ProgramName = LocId.op_Implicit("default-program-name");
+  [DataField(null, false, 1, false, false, null)]
+  public SpriteSpecifier? Icon;
+  [AutoNetworkedField]
+  public InstallationStatus InstallationStatus;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref CartridgeComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component component = (Component) target;
+    this.InternalCopy(ref component, serialization, hookCtx, context);
+    target = (CartridgeComponent) component;
+    if (serialization.TryCustomCopy<CartridgeComponent>(this, ref target, hookCtx, false, context))
+      return;
+    EntityUid? nullable = new EntityUid?();
+    if (!serialization.TryCustomCopy<EntityUid?>(this.LoaderUid, ref nullable, hookCtx, false, context))
+      nullable = serialization.CreateCopy<EntityUid?>(this.LoaderUid, hookCtx, context, false);
+    target.LoaderUid = nullable;
+    LocId locId = new LocId();
+    if (!serialization.TryCustomCopy<LocId>(this.ProgramName, ref locId, hookCtx, false, context))
+      locId = serialization.CreateCopy<LocId>(this.ProgramName, hookCtx, context, false);
+    target.ProgramName = locId;
+    SpriteSpecifier spriteSpecifier = (SpriteSpecifier) null;
+    if (!serialization.TryCustomCopy<SpriteSpecifier>(this.Icon, ref spriteSpecifier, hookCtx, true, context))
+      spriteSpecifier = serialization.CreateCopy<SpriteSpecifier>(this.Icon, hookCtx, context, false);
+    target.Icon = spriteSpecifier;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref CartridgeComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    CartridgeComponent target1 = (CartridgeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    CartridgeComponent target1 = (CartridgeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    CartridgeComponent target1 = (CartridgeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    base.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual CartridgeComponent Component.Instantiate() => new CartridgeComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class CartridgeComponent_AutoState : IComponentState
+  {
+    public InstallationStatus InstallationStatus;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class CartridgeComponent_AutoNetworkSystem : EntitySystem
+  {
+    public virtual void Initialize()
+    {
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<CartridgeComponent, ComponentGetState>(new ComponentEventRefHandler<CartridgeComponent, ComponentGetState>((object) this, __methodptr(OnGetState)), (Type[]) null, (Type[]) null);
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<CartridgeComponent, ComponentHandleState>(new ComponentEventRefHandler<CartridgeComponent, ComponentHandleState>((object) this, __methodptr(OnHandleState)), (Type[]) null, (Type[]) null);
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      CartridgeComponent component,
+      ref ComponentGetState args)
+    {
+      ((ComponentGetState) ref args).State = (IComponentState) new CartridgeComponent.CartridgeComponent_AutoState()
+      {
+        InstallationStatus = component.InstallationStatus
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      CartridgeComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(((ComponentHandleState) ref args).Current is CartridgeComponent.CartridgeComponent_AutoState current))
+        return;
+      component.InstallationStatus = current.InstallationStatus;
+    }
+  }
+}

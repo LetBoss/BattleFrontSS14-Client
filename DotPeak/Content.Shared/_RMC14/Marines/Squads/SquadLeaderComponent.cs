@@ -1,0 +1,169 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Marines.Squads.SquadLeaderComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using Robust.Shared.Utility;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Marines.Squads;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (SquadSystem)})]
+public sealed class SquadLeaderComponent : 
+  Component,
+  ISerializationGenerated<SquadLeaderComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public SpriteSpecifier.Rsi Icon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/cm_job_icons.rsi"), "hudsquad_leader_a");
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public EntityUid? Headset;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref SquadLeaderComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (SquadLeaderComponent) target1;
+    if (serialization.TryCustomCopy<SquadLeaderComponent>(this, ref target, hookCtx, false, context))
+      return;
+    SpriteSpecifier.Rsi target2 = (SpriteSpecifier.Rsi) null;
+    if (this.Icon == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<SpriteSpecifier.Rsi>(this.Icon, ref target2, hookCtx, false, context))
+    {
+      if (this.Icon == null)
+        target2 = (SpriteSpecifier.Rsi) null;
+      else
+        serialization.CopyTo<SpriteSpecifier.Rsi>(this.Icon, ref target2, hookCtx, context, true);
+    }
+    target.Icon = target2;
+    EntityUid? target3 = new EntityUid?();
+    if (!serialization.TryCustomCopy<EntityUid?>(this.Headset, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<EntityUid?>(this.Headset, hookCtx, context);
+    target.Headset = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref SquadLeaderComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SquadLeaderComponent target1 = (SquadLeaderComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SquadLeaderComponent target1 = (SquadLeaderComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    SquadLeaderComponent target1 = (SquadLeaderComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual SquadLeaderComponent Component.Instantiate() => new SquadLeaderComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class SquadLeaderComponent_AutoState : IComponentState
+  {
+    public SpriteSpecifier.Rsi Icon;
+    public NetEntity? Headset;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class SquadLeaderComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<SquadLeaderComponent, ComponentGetState>(new ComponentEventRefHandler<SquadLeaderComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<SquadLeaderComponent, ComponentHandleState>(new ComponentEventRefHandler<SquadLeaderComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      SquadLeaderComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new SquadLeaderComponent.SquadLeaderComponent_AutoState()
+      {
+        Icon = component.Icon,
+        Headset = this.GetNetEntity(component.Headset)
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      SquadLeaderComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is SquadLeaderComponent.SquadLeaderComponent_AutoState current))
+        return;
+      component.Icon = current.Icon;
+      component.Headset = this.EnsureEntity<SquadLeaderComponent>(current.Headset, uid);
+    }
+  }
+}

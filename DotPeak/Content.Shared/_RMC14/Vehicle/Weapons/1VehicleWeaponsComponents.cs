@@ -1,0 +1,168 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Vehicle.VehicleWeaponsOperatorComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Vehicle;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (VehicleWeaponsSystem)})]
+public sealed class VehicleWeaponsOperatorComponent : 
+  Component,
+  ISerializationGenerated<VehicleWeaponsOperatorComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public EntityUid? Vehicle;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public EntityUid? SelectedWeapon;
+  [NonSerialized]
+  public Dictionary<EntityUid, EntityUid> HardpointActions = new Dictionary<EntityUid, EntityUid>();
+  [NonSerialized]
+  public TimeSpan NextCooldownFeedbackAt = TimeSpan.Zero;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref VehicleWeaponsOperatorComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (VehicleWeaponsOperatorComponent) target1;
+    if (serialization.TryCustomCopy<VehicleWeaponsOperatorComponent>(this, ref target, hookCtx, false, context))
+      return;
+    EntityUid? target2 = new EntityUid?();
+    if (!serialization.TryCustomCopy<EntityUid?>(this.Vehicle, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<EntityUid?>(this.Vehicle, hookCtx, context);
+    target.Vehicle = target2;
+    EntityUid? target3 = new EntityUid?();
+    if (!serialization.TryCustomCopy<EntityUid?>(this.SelectedWeapon, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<EntityUid?>(this.SelectedWeapon, hookCtx, context);
+    target.SelectedWeapon = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref VehicleWeaponsOperatorComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    VehicleWeaponsOperatorComponent target1 = (VehicleWeaponsOperatorComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    VehicleWeaponsOperatorComponent target1 = (VehicleWeaponsOperatorComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    VehicleWeaponsOperatorComponent target1 = (VehicleWeaponsOperatorComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual VehicleWeaponsOperatorComponent Component.Instantiate()
+  {
+    return new VehicleWeaponsOperatorComponent();
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class VehicleWeaponsOperatorComponent_AutoState : IComponentState
+  {
+    public NetEntity? Vehicle;
+    public NetEntity? SelectedWeapon;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class VehicleWeaponsOperatorComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<VehicleWeaponsOperatorComponent, ComponentGetState>(new ComponentEventRefHandler<VehicleWeaponsOperatorComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<VehicleWeaponsOperatorComponent, ComponentHandleState>(new ComponentEventRefHandler<VehicleWeaponsOperatorComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      VehicleWeaponsOperatorComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new VehicleWeaponsOperatorComponent.VehicleWeaponsOperatorComponent_AutoState()
+      {
+        Vehicle = this.GetNetEntity(component.Vehicle),
+        SelectedWeapon = this.GetNetEntity(component.SelectedWeapon)
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      VehicleWeaponsOperatorComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is VehicleWeaponsOperatorComponent.VehicleWeaponsOperatorComponent_AutoState current))
+        return;
+      component.Vehicle = this.EnsureEntity<VehicleWeaponsOperatorComponent>(current.Vehicle, uid);
+      component.SelectedWeapon = this.EnsureEntity<VehicleWeaponsOperatorComponent>(current.SelectedWeapon, uid);
+    }
+  }
+}

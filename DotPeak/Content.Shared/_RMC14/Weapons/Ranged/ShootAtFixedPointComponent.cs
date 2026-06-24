@@ -1,0 +1,170 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Weapons.Ranged.ShootAtFixedPointComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Weapons.Ranged;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (CMGunSystem)})]
+public sealed class ShootAtFixedPointComponent : 
+  Component,
+  ISerializationGenerated<ShootAtFixedPointComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public float? MaxFixedRange;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool ShootArcProj;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool AutoAimClosestObstacle;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref ShootAtFixedPointComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (ShootAtFixedPointComponent) target1;
+    if (serialization.TryCustomCopy<ShootAtFixedPointComponent>(this, ref target, hookCtx, false, context))
+      return;
+    float? target2 = new float?();
+    if (!serialization.TryCustomCopy<float?>(this.MaxFixedRange, ref target2, hookCtx, false, context))
+      target2 = this.MaxFixedRange;
+    target.MaxFixedRange = target2;
+    bool target3 = false;
+    if (!serialization.TryCustomCopy<bool>(this.ShootArcProj, ref target3, hookCtx, false, context))
+      target3 = this.ShootArcProj;
+    target.ShootArcProj = target3;
+    bool target4 = false;
+    if (!serialization.TryCustomCopy<bool>(this.AutoAimClosestObstacle, ref target4, hookCtx, false, context))
+      target4 = this.AutoAimClosestObstacle;
+    target.AutoAimClosestObstacle = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref ShootAtFixedPointComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ShootAtFixedPointComponent target1 = (ShootAtFixedPointComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ShootAtFixedPointComponent target1 = (ShootAtFixedPointComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ShootAtFixedPointComponent target1 = (ShootAtFixedPointComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual ShootAtFixedPointComponent Component.Instantiate() => new ShootAtFixedPointComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class ShootAtFixedPointComponent_AutoState : IComponentState
+  {
+    public float? MaxFixedRange;
+    public bool ShootArcProj;
+    public bool AutoAimClosestObstacle;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class ShootAtFixedPointComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<ShootAtFixedPointComponent, ComponentGetState>(new ComponentEventRefHandler<ShootAtFixedPointComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<ShootAtFixedPointComponent, ComponentHandleState>(new ComponentEventRefHandler<ShootAtFixedPointComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      ShootAtFixedPointComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new ShootAtFixedPointComponent.ShootAtFixedPointComponent_AutoState()
+      {
+        MaxFixedRange = component.MaxFixedRange,
+        ShootArcProj = component.ShootArcProj,
+        AutoAimClosestObstacle = component.AutoAimClosestObstacle
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      ShootAtFixedPointComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is ShootAtFixedPointComponent.ShootAtFixedPointComponent_AutoState current))
+        return;
+      component.MaxFixedRange = current.MaxFixedRange;
+      component.ShootArcProj = current.ShootArcProj;
+      component.AutoAimClosestObstacle = current.AutoAimClosestObstacle;
+    }
+  }
+}

@@ -1,0 +1,170 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.DeviceNetwork.Components.DeviceNetworkJammerComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared.DeviceNetwork.Systems;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.DeviceNetwork.Components;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (SharedDeviceNetworkJammerSystem)})]
+public sealed class DeviceNetworkJammerComponent : 
+  Component,
+  ISerializationGenerated<DeviceNetworkJammerComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public float Range = 5f;
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public HashSet<string> JammableNetworks = new HashSet<string>();
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref DeviceNetworkJammerComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component component = (Component) target;
+    this.InternalCopy(ref component, serialization, hookCtx, context);
+    target = (DeviceNetworkJammerComponent) component;
+    if (serialization.TryCustomCopy<DeviceNetworkJammerComponent>(this, ref target, hookCtx, false, context))
+      return;
+    float num = 0.0f;
+    if (!serialization.TryCustomCopy<float>(this.Range, ref num, hookCtx, false, context))
+      num = this.Range;
+    target.Range = num;
+    HashSet<string> stringSet = (HashSet<string>) null;
+    if (this.JammableNetworks == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<HashSet<string>>(this.JammableNetworks, ref stringSet, hookCtx, true, context))
+      stringSet = serialization.CreateCopy<HashSet<string>>(this.JammableNetworks, hookCtx, context, false);
+    target.JammableNetworks = stringSet;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref DeviceNetworkJammerComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DeviceNetworkJammerComponent target1 = (DeviceNetworkJammerComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DeviceNetworkJammerComponent target1 = (DeviceNetworkJammerComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DeviceNetworkJammerComponent target1 = (DeviceNetworkJammerComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    base.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual DeviceNetworkJammerComponent Component.Instantiate()
+  {
+    return new DeviceNetworkJammerComponent();
+  }
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class DeviceNetworkJammerComponent_AutoState : IComponentState
+  {
+    public float Range;
+    public HashSet<string> JammableNetworks;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class DeviceNetworkJammerComponent_AutoNetworkSystem : EntitySystem
+  {
+    public virtual void Initialize()
+    {
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<DeviceNetworkJammerComponent, ComponentGetState>(new ComponentEventRefHandler<DeviceNetworkJammerComponent, ComponentGetState>((object) this, __methodptr(OnGetState)), (Type[]) null, (Type[]) null);
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<DeviceNetworkJammerComponent, ComponentHandleState>(new ComponentEventRefHandler<DeviceNetworkJammerComponent, ComponentHandleState>((object) this, __methodptr(OnHandleState)), (Type[]) null, (Type[]) null);
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      DeviceNetworkJammerComponent component,
+      ref ComponentGetState args)
+    {
+      ((ComponentGetState) ref args).State = (IComponentState) new DeviceNetworkJammerComponent.DeviceNetworkJammerComponent_AutoState()
+      {
+        Range = component.Range,
+        JammableNetworks = component.JammableNetworks
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      DeviceNetworkJammerComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(((ComponentHandleState) ref args).Current is DeviceNetworkJammerComponent.DeviceNetworkJammerComponent_AutoState current))
+        return;
+      component.Range = current.Range;
+      component.JammableNetworks = current.JammableNetworks == null ? (HashSet<string>) null : new HashSet<string>((IEnumerable<string>) current.JammableNetworks);
+    }
+  }
+}

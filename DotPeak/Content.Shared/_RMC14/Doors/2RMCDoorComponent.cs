@@ -1,0 +1,34 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Doors.Components.RMCBeforePryEvent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.GameObjects;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+#nullable disable
+namespace Content.Shared.Doors.Components;
+
+[ByRefEvent]
+public record struct RMCBeforePryEvent(EntityUid User)
+{
+  public readonly EntityUid User = User;
+  public bool Cancelled = false;
+
+  [CompilerGenerated]
+  public override readonly int GetHashCode()
+  {
+    return EqualityComparer<EntityUid>.Default.GetHashCode(this.User) * -1521134295 + EqualityComparer<bool>.Default.GetHashCode(this.Cancelled);
+  }
+
+  [CompilerGenerated]
+  public readonly bool Equals(RMCBeforePryEvent other)
+  {
+    return EqualityComparer<EntityUid>.Default.Equals(this.User, other.User) && EqualityComparer<bool>.Default.Equals(this.Cancelled, other.Cancelled);
+  }
+
+  [CompilerGenerated]
+  public readonly void Deconstruct(out EntityUid User) => User = this.User;
+}

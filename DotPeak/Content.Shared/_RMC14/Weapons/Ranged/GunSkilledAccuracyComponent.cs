@@ -1,0 +1,163 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Weapons.Ranged.GunSkilledAccuracyComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.FixedPoint;
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Weapons.Ranged;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (SkillsSystem)})]
+public sealed class GunSkilledAccuracyComponent : 
+  Component,
+  ISerializationGenerated<GunSkilledAccuracyComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public EntProtoId<SkillDefinitionComponent> Skill = (EntProtoId<SkillDefinitionComponent>) "RMCSkillFirearms";
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public FixedPoint2 AccuracyAddMult = (FixedPoint2) 0.15;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref GunSkilledAccuracyComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (GunSkilledAccuracyComponent) target1;
+    if (serialization.TryCustomCopy<GunSkilledAccuracyComponent>(this, ref target, hookCtx, false, context))
+      return;
+    EntProtoId<SkillDefinitionComponent> target2 = new EntProtoId<SkillDefinitionComponent>();
+    if (!serialization.TryCustomCopy<EntProtoId<SkillDefinitionComponent>>(this.Skill, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<EntProtoId<SkillDefinitionComponent>>(this.Skill, hookCtx, context);
+    target.Skill = target2;
+    FixedPoint2 target3 = new FixedPoint2();
+    if (!serialization.TryCustomCopy<FixedPoint2>(this.AccuracyAddMult, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<FixedPoint2>(this.AccuracyAddMult, hookCtx, context);
+    target.AccuracyAddMult = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref GunSkilledAccuracyComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    GunSkilledAccuracyComponent target1 = (GunSkilledAccuracyComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    GunSkilledAccuracyComponent target1 = (GunSkilledAccuracyComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    GunSkilledAccuracyComponent target1 = (GunSkilledAccuracyComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual GunSkilledAccuracyComponent Component.Instantiate() => new GunSkilledAccuracyComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class GunSkilledAccuracyComponent_AutoState : IComponentState
+  {
+    public EntProtoId<SkillDefinitionComponent> Skill;
+    public FixedPoint2 AccuracyAddMult;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class GunSkilledAccuracyComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<GunSkilledAccuracyComponent, ComponentGetState>(new ComponentEventRefHandler<GunSkilledAccuracyComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<GunSkilledAccuracyComponent, ComponentHandleState>(new ComponentEventRefHandler<GunSkilledAccuracyComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      GunSkilledAccuracyComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new GunSkilledAccuracyComponent.GunSkilledAccuracyComponent_AutoState()
+      {
+        Skill = component.Skill,
+        AccuracyAddMult = component.AccuracyAddMult
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      GunSkilledAccuracyComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is GunSkilledAccuracyComponent.GunSkilledAccuracyComponent_AutoState current))
+        return;
+      component.Skill = current.Skill;
+      component.AccuracyAddMult = current.AccuracyAddMult;
+    }
+  }
+}

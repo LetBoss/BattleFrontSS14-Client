@@ -1,0 +1,145 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Drowsiness.DrowsinessStatusEffectComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using System;
+using System.ComponentModel;
+using System.Numerics;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Drowsiness;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentPause]
+public sealed class DrowsinessStatusEffectComponent : 
+  Component,
+  ISerializationGenerated<DrowsinessStatusEffectComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  public Vector2 TimeBetweenIncidents = new Vector2(5f, 60f);
+  [DataField(null, false, 1, false, false, null)]
+  public Vector2 DurationOfIncident = new Vector2(2f, 5f);
+  [DataField(null, false, 1, false, false, typeof (TimeOffsetSerializer))]
+  [AutoPausedField]
+  public TimeSpan NextIncidentTime = TimeSpan.Zero;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref DrowsinessStatusEffectComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (DrowsinessStatusEffectComponent) target1;
+    if (serialization.TryCustomCopy<DrowsinessStatusEffectComponent>(this, ref target, hookCtx, false, context))
+      return;
+    Vector2 target2 = new Vector2();
+    if (!serialization.TryCustomCopy<Vector2>(this.TimeBetweenIncidents, ref target2, hookCtx, false, context))
+      target2 = serialization.CreateCopy<Vector2>(this.TimeBetweenIncidents, hookCtx, context);
+    target.TimeBetweenIncidents = target2;
+    Vector2 target3 = new Vector2();
+    if (!serialization.TryCustomCopy<Vector2>(this.DurationOfIncident, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<Vector2>(this.DurationOfIncident, hookCtx, context);
+    target.DurationOfIncident = target3;
+    TimeSpan target4 = new TimeSpan();
+    if (!serialization.TryCustomCopy<TimeSpan>(this.NextIncidentTime, ref target4, hookCtx, false, context))
+      target4 = serialization.CreateCopy<TimeSpan>(this.NextIncidentTime, hookCtx, context);
+    target.NextIncidentTime = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref DrowsinessStatusEffectComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DrowsinessStatusEffectComponent target1 = (DrowsinessStatusEffectComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DrowsinessStatusEffectComponent target1 = (DrowsinessStatusEffectComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    DrowsinessStatusEffectComponent target1 = (DrowsinessStatusEffectComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual DrowsinessStatusEffectComponent Component.Instantiate()
+  {
+    return new DrowsinessStatusEffectComponent();
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class DrowsinessStatusEffectComponent_AutoPauseSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<DrowsinessStatusEffectComponent, EntityUnpausedEvent>(new ComponentEventRefHandler<DrowsinessStatusEffectComponent, EntityUnpausedEvent>(this.OnEntityUnpaused));
+    }
+
+    private void OnEntityUnpaused(
+      EntityUid uid,
+      #nullable disable
+      DrowsinessStatusEffectComponent component,
+      ref EntityUnpausedEvent args)
+    {
+      component.NextIncidentTime += args.PausedTime;
+    }
+  }
+}

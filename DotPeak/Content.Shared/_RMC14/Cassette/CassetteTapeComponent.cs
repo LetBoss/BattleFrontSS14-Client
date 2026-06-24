@@ -1,0 +1,171 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Cassette.CassetteTapeComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.Audio;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Cassette;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (SharedCassetteSystem)})]
+public sealed class CassetteTapeComponent : 
+  Component,
+  ISerializationGenerated<CassetteTapeComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, true, false, null)]
+  [AutoNetworkedField]
+  public List<SoundSpecifier> Songs = new List<SoundSpecifier>();
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public bool Custom;
+  [DataField(null, false, 1, false, false, null)]
+  public object? CustomTrack;
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref CassetteTapeComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (CassetteTapeComponent) target1;
+    if (serialization.TryCustomCopy<CassetteTapeComponent>(this, ref target, hookCtx, false, context))
+      return;
+    List<SoundSpecifier> target2 = (List<SoundSpecifier>) null;
+    if (this.Songs == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<List<SoundSpecifier>>(this.Songs, ref target2, hookCtx, true, context))
+      target2 = serialization.CreateCopy<List<SoundSpecifier>>(this.Songs, hookCtx, context);
+    target.Songs = target2;
+    bool target3 = false;
+    if (!serialization.TryCustomCopy<bool>(this.Custom, ref target3, hookCtx, false, context))
+      target3 = this.Custom;
+    target.Custom = target3;
+    object target4 = (object) null;
+    if (!serialization.TryCustomCopy<object>(this.CustomTrack, ref target4, hookCtx, true, context))
+      target4 = serialization.CreateCopy(this.CustomTrack, hookCtx, context);
+    target.CustomTrack = target4;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref CassetteTapeComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    CassetteTapeComponent target1 = (CassetteTapeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    CassetteTapeComponent target1 = (CassetteTapeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    CassetteTapeComponent target1 = (CassetteTapeComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual CassetteTapeComponent Component.Instantiate() => new CassetteTapeComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class CassetteTapeComponent_AutoState : IComponentState
+  {
+    public List<SoundSpecifier> Songs;
+    public bool Custom;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class CassetteTapeComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<CassetteTapeComponent, ComponentGetState>(new ComponentEventRefHandler<CassetteTapeComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<CassetteTapeComponent, ComponentHandleState>(new ComponentEventRefHandler<CassetteTapeComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      CassetteTapeComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new CassetteTapeComponent.CassetteTapeComponent_AutoState()
+      {
+        Songs = component.Songs,
+        Custom = component.Custom
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      CassetteTapeComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is CassetteTapeComponent.CassetteTapeComponent_AutoState current))
+        return;
+      component.Songs = current.Songs == null ? (List<SoundSpecifier>) null : new List<SoundSpecifier>((IEnumerable<SoundSpecifier>) current.Songs);
+      component.Custom = current.Custom;
+    }
+  }
+}

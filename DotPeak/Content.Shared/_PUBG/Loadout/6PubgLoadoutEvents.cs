@@ -1,0 +1,41 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._PUBG.Loadout.PubgLoadoutActionRequestMessage
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.GameObjects;
+using Robust.Shared.Serialization;
+using System;
+
+#nullable enable
+namespace Content.Shared._PUBG.Loadout;
+
+[NetSerializable]
+[Serializable]
+public sealed class PubgLoadoutActionRequestMessage : EntityEventArgs
+{
+  public PubgLoadoutActionType Action { get; }
+
+  public NetEntity Item { get; }
+
+  public PubgLoadoutSection TargetSection { get; }
+
+  public NetEntity TargetWeapon { get; }
+
+  public string TargetSlotId { get; }
+
+  public PubgLoadoutActionRequestMessage(
+    PubgLoadoutActionType action,
+    NetEntity item,
+    PubgLoadoutSection targetSection = PubgLoadoutSection.Other,
+    NetEntity targetWeapon = default (NetEntity),
+    string targetSlotId = "")
+  {
+    this.Action = action;
+    this.Item = item;
+    this.TargetSection = targetSection;
+    this.TargetWeapon = targetWeapon;
+    this.TargetSlotId = targetSlotId;
+  }
+}

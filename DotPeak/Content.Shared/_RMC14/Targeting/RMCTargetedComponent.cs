@@ -1,0 +1,165 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Targeting.RMCTargetedComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Targeting;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class RMCTargetedComponent : 
+  Component,
+  ISerializationGenerated<RMCTargetedComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public List<EntityUid> TargetedBy = new List<EntityUid>();
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public Dictionary<EntityUid, float> AlphaMultipliers = new Dictionary<EntityUid, float>();
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref RMCTargetedComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (RMCTargetedComponent) target1;
+    if (serialization.TryCustomCopy<RMCTargetedComponent>(this, ref target, hookCtx, false, context))
+      return;
+    List<EntityUid> target2 = (List<EntityUid>) null;
+    if (this.TargetedBy == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<List<EntityUid>>(this.TargetedBy, ref target2, hookCtx, true, context))
+      target2 = serialization.CreateCopy<List<EntityUid>>(this.TargetedBy, hookCtx, context);
+    target.TargetedBy = target2;
+    Dictionary<EntityUid, float> target3 = (Dictionary<EntityUid, float>) null;
+    if (this.AlphaMultipliers == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<Dictionary<EntityUid, float>>(this.AlphaMultipliers, ref target3, hookCtx, true, context))
+      target3 = serialization.CreateCopy<Dictionary<EntityUid, float>>(this.AlphaMultipliers, hookCtx, context);
+    target.AlphaMultipliers = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref RMCTargetedComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCTargetedComponent target1 = (RMCTargetedComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCTargetedComponent target1 = (RMCTargetedComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    RMCTargetedComponent target1 = (RMCTargetedComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual RMCTargetedComponent Component.Instantiate() => new RMCTargetedComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class RMCTargetedComponent_AutoState : IComponentState
+  {
+    public List<NetEntity> TargetedBy;
+    public Dictionary<NetEntity, float> AlphaMultipliers;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class RMCTargetedComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<RMCTargetedComponent, ComponentGetState>(new ComponentEventRefHandler<RMCTargetedComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<RMCTargetedComponent, ComponentHandleState>(new ComponentEventRefHandler<RMCTargetedComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      RMCTargetedComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new RMCTargetedComponent.RMCTargetedComponent_AutoState()
+      {
+        TargetedBy = this.GetNetEntityList(component.TargetedBy),
+        AlphaMultipliers = this.GetNetEntityDictionary<float>(component.AlphaMultipliers)
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      RMCTargetedComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is RMCTargetedComponent.RMCTargetedComponent_AutoState current))
+        return;
+      this.EnsureEntityList<RMCTargetedComponent>(current.TargetedBy, uid, component.TargetedBy);
+      this.EnsureEntityDictionary<RMCTargetedComponent, float>(current.AlphaMultipliers, uid, component.AlphaMultipliers);
+    }
+  }
+}

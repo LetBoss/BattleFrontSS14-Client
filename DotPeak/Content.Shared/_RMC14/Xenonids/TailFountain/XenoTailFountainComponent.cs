@@ -1,0 +1,164 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared._RMC14.Xenonids.TailFountain.XenoTailFountainComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.Audio;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared._RMC14.Xenonids.TailFountain;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+public sealed class XenoTailFountainComponent : 
+  Component,
+  ISerializationGenerated<XenoTailFountainComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public SoundSpecifier ExtinguishSound = (SoundSpecifier) new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public EntProtoId Acid = (EntProtoId) "XenoAcidExtinguishEffect";
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref XenoTailFountainComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component target1 = (Component) target;
+    this.InternalCopy(ref target1, serialization, hookCtx, context);
+    target = (XenoTailFountainComponent) target1;
+    if (serialization.TryCustomCopy<XenoTailFountainComponent>(this, ref target, hookCtx, false, context))
+      return;
+    SoundSpecifier target2 = (SoundSpecifier) null;
+    if (this.ExtinguishSound == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<SoundSpecifier>(this.ExtinguishSound, ref target2, hookCtx, true, context))
+      target2 = serialization.CreateCopy<SoundSpecifier>(this.ExtinguishSound, hookCtx, context);
+    target.ExtinguishSound = target2;
+    EntProtoId target3 = new EntProtoId();
+    if (!serialization.TryCustomCopy<EntProtoId>(this.Acid, ref target3, hookCtx, false, context))
+      target3 = serialization.CreateCopy<EntProtoId>(this.Acid, hookCtx, context);
+    target.Acid = target3;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref XenoTailFountainComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoTailFountainComponent target1 = (XenoTailFountainComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoTailFountainComponent target1 = (XenoTailFountainComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    XenoTailFountainComponent target1 = (XenoTailFountainComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public override void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual XenoTailFountainComponent Component.Instantiate() => new XenoTailFountainComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class XenoTailFountainComponent_AutoState : IComponentState
+  {
+    public SoundSpecifier ExtinguishSound;
+    public EntProtoId Acid;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class XenoTailFountainComponent_AutoNetworkSystem : EntitySystem
+  {
+    public override void Initialize()
+    {
+      this.SubscribeLocalEvent<XenoTailFountainComponent, ComponentGetState>(new ComponentEventRefHandler<XenoTailFountainComponent, ComponentGetState>(this.OnGetState));
+      this.SubscribeLocalEvent<XenoTailFountainComponent, ComponentHandleState>(new ComponentEventRefHandler<XenoTailFountainComponent, ComponentHandleState>(this.OnHandleState));
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      XenoTailFountainComponent component,
+      ref ComponentGetState args)
+    {
+      args.State = (IComponentState) new XenoTailFountainComponent.XenoTailFountainComponent_AutoState()
+      {
+        ExtinguishSound = component.ExtinguishSound,
+        Acid = component.Acid
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      XenoTailFountainComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(args.Current is XenoTailFountainComponent.XenoTailFountainComponent_AutoState current))
+        return;
+      component.ExtinguishSound = current.ExtinguishSound;
+      component.Acid = current.Acid;
+    }
+  }
+}

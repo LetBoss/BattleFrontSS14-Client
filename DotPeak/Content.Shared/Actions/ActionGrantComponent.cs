@@ -1,0 +1,170 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: Content.Shared.Actions.ActionGrantComponent
+// Assembly: Content.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 5417D05E-B3D9-4989-8630-1DD892BD48BB
+// Assembly location: C:\Users\sus\Desktop\SS14_VFS_Dump_20260624_230444\Content.Shared.dll
+
+using Robust.Shared.Analyzers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Serialization.Manager.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+#nullable enable
+namespace Content.Shared.Actions;
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState(false, false)]
+[Access(new Type[] {typeof (ActionGrantSystem)})]
+public sealed class ActionGrantComponent : 
+  Component,
+  ISerializationGenerated<ActionGrantComponent>,
+  ISerializationGenerated
+{
+  [DataField(null, false, 1, true, false, null)]
+  [AutoNetworkedField]
+  [AlwaysPushInheritance]
+  public List<EntProtoId> Actions = new List<EntProtoId>();
+  [DataField(null, false, 1, false, false, null)]
+  [AutoNetworkedField]
+  public List<EntityUid> ActionEntities = new List<EntityUid>();
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void InternalCopy(
+    ref ActionGrantComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    Component component = (Component) target;
+    this.InternalCopy(ref component, serialization, hookCtx, context);
+    target = (ActionGrantComponent) component;
+    if (serialization.TryCustomCopy<ActionGrantComponent>(this, ref target, hookCtx, false, context))
+      return;
+    List<EntProtoId> entProtoIdList = (List<EntProtoId>) null;
+    if (this.Actions == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<List<EntProtoId>>(this.Actions, ref entProtoIdList, hookCtx, true, context))
+      entProtoIdList = serialization.CreateCopy<List<EntProtoId>>(this.Actions, hookCtx, context, false);
+    target.Actions = entProtoIdList;
+    List<EntityUid> entityUidList = (List<EntityUid>) null;
+    if (this.ActionEntities == null)
+      throw new NullNotAllowedException();
+    if (!serialization.TryCustomCopy<List<EntityUid>>(this.ActionEntities, ref entityUidList, hookCtx, true, context))
+      entityUidList = serialization.CreateCopy<List<EntityUid>>(this.ActionEntities, hookCtx, context, false);
+    target.ActionEntities = entityUidList;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public void Copy(
+    ref ActionGrantComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    this.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref Component target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ActionGrantComponent target1 = (ActionGrantComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (Component) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref object target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ActionGrantComponent target1 = (ActionGrantComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (object) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void InternalCopy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    ActionGrantComponent target1 = (ActionGrantComponent) target;
+    this.Copy(ref target1, serialization, hookCtx, context);
+    target = (IComponent) target1;
+  }
+
+  [Obsolete("Use ISerializationManager.CopyTo instead")]
+  public virtual void Copy(
+    ref IComponent target,
+    ISerializationManager serialization,
+    SerializationHookContext hookCtx,
+    ISerializationContext? context = null)
+  {
+    base.InternalCopy(ref target, serialization, hookCtx, context);
+  }
+
+  [PreserveBaseOverrides]
+  [Obsolete("Use ISerializationManager.CreateCopy instead")]
+  virtual ActionGrantComponent Component.Instantiate() => new ActionGrantComponent();
+
+  [NetSerializable]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [Serializable]
+  public sealed class ActionGrantComponent_AutoState : IComponentState
+  {
+    public List<EntProtoId> Actions;
+    public List<NetEntity> ActionEntities;
+  }
+
+  [RobustAutoGenerated]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  public sealed class ActionGrantComponent_AutoNetworkSystem : EntitySystem
+  {
+    public virtual void Initialize()
+    {
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<ActionGrantComponent, ComponentGetState>(new ComponentEventRefHandler<ActionGrantComponent, ComponentGetState>((object) this, __methodptr(OnGetState)), (Type[]) null, (Type[]) null);
+      // ISSUE: method pointer
+      this.SubscribeLocalEvent<ActionGrantComponent, ComponentHandleState>(new ComponentEventRefHandler<ActionGrantComponent, ComponentHandleState>((object) this, __methodptr(OnHandleState)), (Type[]) null, (Type[]) null);
+    }
+
+    private void OnGetState(
+      EntityUid uid,
+      ActionGrantComponent component,
+      ref ComponentGetState args)
+    {
+      ((ComponentGetState) ref args).State = (IComponentState) new ActionGrantComponent.ActionGrantComponent_AutoState()
+      {
+        Actions = component.Actions,
+        ActionEntities = this.GetNetEntityList(component.ActionEntities)
+      };
+    }
+
+    private void OnHandleState(
+      EntityUid uid,
+      ActionGrantComponent component,
+      ref ComponentHandleState args)
+    {
+      if (!(((ComponentHandleState) ref args).Current is ActionGrantComponent.ActionGrantComponent_AutoState current))
+        return;
+      component.Actions = current.Actions == null ? (List<EntProtoId>) null : new List<EntProtoId>((IEnumerable<EntProtoId>) current.Actions);
+      this.EnsureEntityList<ActionGrantComponent>(current.ActionEntities, uid, component.ActionEntities);
+    }
+  }
+}
